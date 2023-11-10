@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,28 +15,15 @@ function Member() {
         setFormData({ ...formData, [name]: value });
     };
     const handleSubmit = (e) => {
+        const url = 'http://localhost:8080/members/new';
         e.preventDefault();
-        fetch('members/new', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'X-XSRF-TOKEN': ''
-            },
-            body: JSON.stringify(formData),
-        })
+        axios
+            .post(url, formData)
             .then((res) => {
-                console.log(res);
-                return res.text();
-                //if (res.ok === true) {
-                //  return res.text();
-                //}
-                //   throw new Error("에러 발생!");
+                console.log(res.data);
             })
             .catch((error) => {
                 alert(error);
-            })
-            .then((data) => {
-                console.log(data);
             });
     };
 
@@ -52,6 +40,7 @@ function Member() {
                         name='email'
                         value={formData.email}
                         onChange={handleChange}
+                        autoFocus
                     />
                 </div>
                 <div>
