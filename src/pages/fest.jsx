@@ -1,12 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
+import styled from 'styled-components';
 
-function fest() {
-  return (
-    <div className='container'>
-        <h1> 🎉 이 달의 축제 🎉</h1>
+const FestBlock = styled.div`
+      h1 {
+    font-size: 12pt;
+    }
 
-    </div>
-  )
-}
+  article {
+    align-content:center;
+  }
+`
 
-export default fest
+function fest({article}) {
+    const API_KEU = "";
+    const[location, setLocation] = useState('');
+    
+    // name : 축제이름, date : 날짜, location : 장소 
+    const { name, date, location } = article;
+    return (
+    
+      <FestBlock>
+       
+          <div className='article'>
+          <h1>{ name && name.slice(0,10)+'...'}</h1>
+          <p>{ location && location.slice(0,10)+'...'}</p>
+          </div>
+      </FestBlock>
+      
+      )
+    };
+
+export default fest;
