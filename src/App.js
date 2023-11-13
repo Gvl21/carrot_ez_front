@@ -6,15 +6,6 @@ import Header from './components/Header';
 import './App.css';
 
 function App() {
-    const [msg, setMsg] = useState('');
-    const [newMember, setNewMember] = useState('');
-
-    // const getNewMember = () => {
-    //     fetch('/member')
-    //         .then((res) => res.text())
-    //         .then((txt) => setNewMember(txt));
-    // };
-
     return (
         <div className='App'>
             <header className='App-header'>
