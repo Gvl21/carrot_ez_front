@@ -8,19 +8,10 @@ import './App.css';
 
 function App() {
     return (
-        <div className='App'>
-            <header className='App-header'>
-                <Router>
-                    <Routes>
-                        <Route path='/' element={<Main />} />
-                        <Route path='/members' element={<Member />} />
-                    </Routes>
-                </Router>
-            </header>
-            <fest />
-        </div>
-    );
-       <Header/>
+        <div className="App">
+      <Header />
+      </div>
+    )
 }
 
 export default App;
