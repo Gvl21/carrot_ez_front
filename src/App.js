@@ -2,6 +2,8 @@ import { useState, useEffect, React } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Member from './pages/Member';
 import Main from './pages/Main';
+import Header from './components/Header';
+import './App.css';
 
 function App() {
     const [msg, setMsg] = useState('');
@@ -25,6 +27,7 @@ function App() {
             </header>
         </div>
     );
+       <Header/>
 }
 
 export default App;
