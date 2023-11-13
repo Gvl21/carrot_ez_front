@@ -1,1 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Jua&family=Nanum+Myeongjo&family=Orbit&family=Tulpen+One&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+.App {
+  font-family: 'Jua', sans-serif;
+}
