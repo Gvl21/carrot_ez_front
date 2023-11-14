@@ -31,7 +31,13 @@ input {
     
 }
 
-
+/* 입력창, 라벨 묶음 */
+.userinput {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items : center;
+}
 
 /*버튼묶음*/
 .button {
@@ -42,7 +48,7 @@ input {
 /*버튼 따로따로 */ 
 button {
     padding: 10px 20px;
-    background-color: orange;
+    background-color:#ffbf7a;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -56,7 +62,7 @@ button:hover {
 
 /*상단 텍스트 메세지*/
 .text {
-    color: darkslategrey;
+    color:#ffbf7a;
     text-align: center;
 }
 

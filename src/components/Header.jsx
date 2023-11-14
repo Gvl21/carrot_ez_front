@@ -18,13 +18,16 @@ function Header() {
   const goNewMember = () => {
      navigate('/members');
   };
+  const goMain = () => {
+    navigate('/');
+  }
 
  
   return (
     <HeaderBlock>
         <div className='header'>
         <div className='logo'>
-        <h1>당근이지🥕</h1>
+        <h1 onClick={goMain}>당근이지🥕</h1>
         </div>
         <div className='menu'>        
         <h2>친구찾기</h2>

@@ -41,7 +41,8 @@ function Member() {
                     <h2>반가워요! :D</h2>
                     </div>
                    
-                    <div>
+                   
+                    <div className='userinput'>
                     <label>이메일:</label>
                     <input
                         type='email'
@@ -50,8 +51,7 @@ function Member() {
                         onChange={handleChange}
                         autoFocus
                     />
-                    </div>
-                    <div>
+                    
                     <label>비밀번호:</label>
                     <input
                         type='password'
@@ -59,8 +59,7 @@ function Member() {
                         value={formData.password}
                         onChange={handleChange}
                     />
-                    </div>
-                    <div>
+            
                     <label>사용할 닉네임:</label>
                     <input
                         type='text'
