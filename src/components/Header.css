@@ -1,0 +1,29 @@
+.header .logo {
+    color: white;
+    font-size: 25px;
+    display: flex;
+    text-align: left;
+    margin-left: -15%;
+    float: left;
+    align-items: center;
+    
+}
+
+.menu {
+    color: white;
+    font-size: 20px;
+    display: flex;
+    margin-right: -15%;
+    text-align: right;
+    float: right;
+    align-items: center;
+    gap: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    height: 80px;
+}
