@@ -18,6 +18,8 @@
     float: right;
     align-items: center;
     gap: 30px;
+    border: none;
+    cursor: pointer;
 }
 
 .header {

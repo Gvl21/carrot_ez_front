@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
 import './Header.css';
+import { Navigate, useNavigate } from 'react-router-dom';
+import Main from '../pages/Main';
+import Member from '../pages/Member';
 
 
 const HeaderBlock = styled.div`
@@ -13,6 +16,12 @@ const HeaderBlock = styled.div`
 
 
 function Header() {
+  const navigate = useNavigate();
+  const goNewMember = () => {
+     navigate('/members');
+  };
+  
+ 
   return (
     <HeaderBlock>
         <div className='header'>
@@ -23,12 +32,12 @@ function Header() {
         <h2>친구찾기</h2>
         <h2>글쓰기</h2>
         <h2>로그인</h2>
-        <h2>회원가입</h2>
+        <h2 onclick={goNewMember}>회원가입</h2>
         </div>
         </div>
     </HeaderBlock>
 
-    
+
   )
 }
 
