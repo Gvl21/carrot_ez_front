@@ -10,8 +10,6 @@ const HeaderBlock = styled.div`
     background-color: #ffbf7a;
     display: flex;
     flex-direction: column;
-    
-
     `
 
 
@@ -20,7 +18,7 @@ function Header() {
   const goNewMember = () => {
      navigate('/members');
   };
-  
+
  
   return (
     <HeaderBlock>

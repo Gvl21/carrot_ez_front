@@ -21,7 +21,7 @@ function App() {
         <Header />
         <Routes>
           <Route path='/findfriends' element={<FindFriend />} />
-          <Route patt='/login' element={<LogIn />} />
+          <Route path='/login' element={<LogIn />} />
           <Route Path='/write' element={<Write />} />
           <Route path='/' element={<Main />} />
           <Route path='/members' element={<Member />} />
