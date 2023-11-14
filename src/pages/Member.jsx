@@ -63,10 +63,12 @@ function Member() {
                         onChange={handleChange}
                     />
                 </div>
+                <div className='button'>
                 <button type='submit'>가입하기</button>
                 <button onClick={goMain} type='button'>
                     메인으로
                 </button>
+                </div>
             </form>
         </div>
     );
