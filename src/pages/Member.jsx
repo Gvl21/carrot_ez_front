@@ -55,7 +55,7 @@ function Member() {
                     />
                 </div>
                 <div>
-                    <label>사용자 이름:</label>
+                    <label>사용자 닉네임:</label>
                     <input
                         type='text'
                         name='nickname'
