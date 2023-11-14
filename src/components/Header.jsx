@@ -30,7 +30,7 @@ function Header() {
         <h2>친구찾기</h2>
         <h2>글쓰기</h2>
         <h2>로그인</h2>
-        <h2 onclick={goNewMember}>회원가입</h2>
+        <h2 onClick={goNewMember}>회원가입</h2>
         </div>
         </div>
     </HeaderBlock>
