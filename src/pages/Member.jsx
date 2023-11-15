@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import './Member.css';
 
 function Member() {
     const navigate = useNavigate();
@@ -32,9 +33,16 @@ function Member() {
         navigate('/');
     };
     return (
-        <div>
+        <div className='joinform'>
             <form onSubmit={handleSubmit}>
-                <div>
+               
+                    <div className='text'>
+                    <h1>회원가입하기</h1>
+                    <h2>반가워요! :D</h2>
+                    </div>
+                   
+                   
+                    <div className='userinput'>
                     <label>이메일:</label>
                     <input
                         type='email'
@@ -43,8 +51,7 @@ function Member() {
                         onChange={handleChange}
                         autoFocus
                     />
-                </div>
-                <div>
+                    
                     <label>비밀번호:</label>
                     <input
                         type='password'
@@ -52,20 +59,23 @@ function Member() {
                         value={formData.password}
                         onChange={handleChange}
                     />
-                </div>
-                <div>
-                    <label>사용자 이름:</label>
+            
+                    <label>사용할 닉네임:</label>
                     <input
                         type='text'
                         name='nickname'
                         value={formData.nickname}
                         onChange={handleChange}
                     />
-                </div>
+                    </div>
+    
+                
+                <div className='button'>
                 <button type='submit'>가입하기</button>
                 <button onClick={goMain} type='button'>
                     메인으로
                 </button>
+                </div>
             </form>
         </div>
     );
