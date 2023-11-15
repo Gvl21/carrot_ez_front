@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
-
+import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
+import './New.css'
 
 function New() {
+  const navigate = useNavigate();
   const [formData, setFormdata] = useState({
     category: '',
     area: '',
@@ -28,7 +31,9 @@ function New() {
     })
   }
   
-
+  const goMain = () => {
+     navigate('/');
+  };
 
   return (
     <div>
@@ -65,7 +70,32 @@ function New() {
             <option value='etc'>자유주제</option>
           </select>
         
-      
+          <div>
+          <label> 글 제목 </label>
+          <input
+          type='text'
+          name='title'
+          value={formData.title}
+          onChange={handleChange}
+          />
+          </div>
+
+          <div>
+            <label> 글 내용 </label>
+            <textarea
+            type='text'
+            name='body'
+            value={formData.body}
+            onChange={handleChange}
+            > </textarea>
+          </div>
+
+          <div className='button'>
+            <button type='submit'>작성하기</button>
+            <button onClick={goMain} type='button'>
+              취소하기
+            </button>
+          </div>
 
         </div>
       </form>
