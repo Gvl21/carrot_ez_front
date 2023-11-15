@@ -10,6 +10,8 @@ function Member() {
         email: '',
         password: '',
         nickname: '',
+        area:'',
+        category:'',
     });
     const handleChange = (e) => {
         const name = e.target.name;
@@ -41,8 +43,28 @@ function Member() {
                     <h2>반가워요! :D</h2>
                     </div>
                    
-                   
+                  
+                 
+
                     <div className='userinput'>
+
+                    <label>지역:</label>
+                    <select name='area' value={formData.area} onChange={handleChange}>
+                        <option value=''>선택하세요</option>
+                        <option value='seoul'>서울</option>
+                        <option value='busan'>부산</option>
+                        <option value=''></option>
+                        <option value=''></option>
+                        <option value=''></option>
+                        <option value=''></option>
+                        <option value=''></option>
+                        <option value=''></option>
+                        <option value=''></option>
+                        <option value=''></option>
+
+                    </select>
+
+                   
                     <label>이메일:</label>
                     <input
                         type='email'

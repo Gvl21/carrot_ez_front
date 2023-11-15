@@ -62,7 +62,12 @@ button:hover {
 
 /*상단 텍스트 메세지*/
 .text {
+    display: flex;
+    flex-direction: column;
+    line-height: 50%;
     color:#ffbf7a;
     text-align: center;
+    margin-top: -10px;
+
 }
 
