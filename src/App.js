@@ -22,7 +22,7 @@ function App() {
         <Routes>
           <Route path='/findfriend' element={<FindFriend />} />
           <Route path='/login' element={<LogIn />} />
-          <Route Path='/new' element={<New />} />
+          <Route path='/new' element={<New />} />
           <Route path='/' element={<Main />} />
           <Route path='/members' element={<Member />} />
         </Routes>
