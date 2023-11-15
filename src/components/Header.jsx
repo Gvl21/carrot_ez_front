@@ -22,8 +22,8 @@ function Header() {
   const goFindFriend = () => {
     navigate('/findfriend');
   }
-  const goWrite = () => {
-    navigate('/write');
+  const goNew = () => {
+    navigate('/new');
   }
   const goLogin = () => {
     navigate('/login');
@@ -43,7 +43,7 @@ function Header() {
         </div>
         <div className='menu'>        
         <h2 onClick={goFindFriend}>친구찾기</h2>
-        <h2 onClick={goWrite}>글쓰기</h2>
+        <h2 onClick={goNew}>글쓰기</h2>
         <h2 onClick={goLogin}>로그인</h2>
         <h2 onClick={goNewMember}>회원가입</h2>
         </div>
