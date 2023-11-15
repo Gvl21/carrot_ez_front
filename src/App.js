@@ -20,7 +20,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path='/findfriends' element={<FindFriend />} />
+          <Route path='/findfriend' element={<FindFriend />} />
           <Route path='/login' element={<LogIn />} />
           <Route Path='/write' element={<Write />} />
           <Route path='/' element={<Main />} />

@@ -43,8 +43,7 @@ function Member() {
                     <h2>반가워요! :D</h2>
                     </div>
                    
-                  
-                 
+                
 
                     <div className='userinput'>
 
