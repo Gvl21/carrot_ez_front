@@ -47,10 +47,11 @@ select {
 }
 /* 제목창 */
 
+
 .title {
     width: 75vw;
     font-size: 17px;
-    
+    border: none;
  
 }
 /* 내용 입력창 */
@@ -61,7 +62,7 @@ select {
     font-size: 17px;
     background-color: rgb(251,240,225);
     border-radius: 5px;
-
+    border: none;
 }
 
 
@@ -72,7 +73,7 @@ select {
   padding: 8px;
   margin-top: 8px;
   margin-bottom: 8px;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 4px;
   box-sizing: border-box;
 }
