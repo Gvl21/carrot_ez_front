@@ -19,7 +19,7 @@ function Member() {
         setFormData({ ...formData, [name]: value });
     };
     const handleSubmit = (e) => {
-        const url = 'http://localhost:8080/members/new';
+        const url = 'http://localhost/members/new';
         e.preventDefault();
         axios
             .post(url, formData)
@@ -27,7 +27,7 @@ function Member() {
                 console.log(res.data);
             })
             .catch((error) => {
-                alert(error);
+                alert(error.toString());
             });
     };
 
