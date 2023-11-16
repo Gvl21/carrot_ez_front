@@ -94,6 +94,7 @@ button{
     margin-top: 80px;
     justify-content: space-evenly;
     font-family: 'Jua', cursive;
+    width: 200px;
 }
 
 /* 버튼 위에 마우스 올릴 시 효과 */
