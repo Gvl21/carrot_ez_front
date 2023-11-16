@@ -15,12 +15,24 @@ const HeaderBlock = styled.div`
 
 function Header() {
   const navigate = useNavigate();
-  const goNewMember = () => {
-     navigate('/members');
-  };
+
   const goMain = () => {
     navigate('/');
   }
+  const goFindFriend = () => {
+    navigate('/findfriend');
+  }
+  const goNew = () => {
+    navigate('/new');
+  }
+  const goLogin = () => {
+    navigate('/login');
+  }
+  const goNewMember = () => {
+    navigate('/members');
+ };
+
+
 
  
   return (
@@ -30,9 +42,9 @@ function Header() {
         <h1 onClick={goMain}>당근이지🥕</h1>
         </div>
         <div className='menu'>        
-        <h2>친구찾기</h2>
-        <h2>글쓰기</h2>
-        <h2>로그인</h2>
+        <h2 onClick={goFindFriend}>친구찾기</h2>
+        <h2 onClick={goNew}>글쓰기</h2>
+        <h2 onClick={goLogin}>로그인</h2>
         <h2 onClick={goNewMember}>회원가입</h2>
         </div>
         </div>

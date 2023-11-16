@@ -1,0 +1,95 @@
+/* 전체 CSS */
+
+.new {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+    line-height: 150%;
+}
+
+/* 폼 전체를 감싸는 테두리 */
+.newform {
+    display: flex;
+    flex-direction: column;
+    width: 80%; 
+    align-items: stretch;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.option,
+.title,
+.body,
+.button {
+    margin-bottom: 15px;
+}
+
+/* 드롭다운 */
+select {
+    width: 150px;
+}
+
+/* 제목, 내용 입력창*/
+.userwrite input {
+    display: flex;
+    margin-top: 3%;
+    align-items: center;   
+    
+}
+/* 제목창 */
+
+.title {
+    width: 75vw;
+    font-size: 17px;
+ 
+}
+/* 내용 입력창 */
+.body {
+    width: 75vw;
+    height: 300px;
+    resize: none;
+    font-size: 17px;
+}
+
+
+
+.title input,
+.body textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.option select,
+.category select {
+    width: 20%;
+    height: 2vw;
+}
+
+.option {
+    display: flex;
+    justify-content: center;
+}
+
+/* 버튼 */
+.button{
+    margin-top: 80px;
+    justify-content: space-evenly;
+}
+
+/* 버튼 위에 마우스 올릴 시 효과 */
+button:hover {
+    background-color: darkorange;
+}
+
+/* label */
+label {
+    font-size: 25px;
+}
