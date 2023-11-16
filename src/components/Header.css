@@ -6,7 +6,7 @@
     margin-left: -15%;
     float: left;
     align-items: center;
-    
+    cursor: pointer;
 }
 
 .menu {
@@ -26,5 +26,4 @@
     display: flex;
     justify-content: space-around;
     height: 80px;
-    cursor: pointer;
 }
