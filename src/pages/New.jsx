@@ -100,7 +100,7 @@ function New() {
                         />
                     </div>
 
-                    <div className='body'>
+                    <div>
                         <label> 글 내용 </label>
                         <textarea
                             type='text'
