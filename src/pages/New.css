@@ -38,7 +38,7 @@ select {
     
 }
 /* 제목창 */
-.title {
+.title input {
     width: 70vw;
     font-size: 17px;
 }

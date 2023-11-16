@@ -22,7 +22,7 @@ label {
 }
 
 /*입력창*/
-input {
+.userinput input {
     width: 90%;
     padding: 8px;
     margin-bottom: 16px;
