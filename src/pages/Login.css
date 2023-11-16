@@ -1,0 +1,33 @@
+.loginform {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 100px;
+}
+
+.welcometext {
+    text-align: center;
+    margin-bottom: 20px;
+    color:  #ffbf7a;
+}
+
+.email_pw {
+    margin-bottom: 15px;
+}
+
+.email_pw label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.email_pw input {
+    width: 90%;
+    padding: 8px;
+    background-color: rgb(251,240,225);
+    border: none;
+    border-radius: 4px;
+}
+

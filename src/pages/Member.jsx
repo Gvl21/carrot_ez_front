@@ -39,7 +39,7 @@ function Member() {
             <form onSubmit={handleSubmit} >
                
                     <div className='text'>
-                    <h1>회원가입하기</h1>
+                    <h1>🥕회원가입하기🥕</h1>
                     <h2>반가워요! :D</h2>
                     </div>
                    
@@ -48,7 +48,7 @@ function Member() {
                     <div className='userinput'>
 
                     <label>지역:</label>
-                    <select name='area' value={formData.area} onChange={handleChange}>
+                    <select name='area' value={formData.area} onChange={handleChange} className='areaselect'>
                         <option value=''>선택하세요</option>
                         <option value='seoul'>서울특별시</option>
                         <option value='incheon'>인천광역시</option>
@@ -104,5 +104,6 @@ function Member() {
         </div>
     );
 }
+
 
 export default Member;

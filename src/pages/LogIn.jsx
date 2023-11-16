@@ -33,8 +33,8 @@ const Login = ({ onLogin }) => {
   return (
     <form onSubmit={handleSubmit} className='loginform'>
       <div className='welcometext'>
-      <h1>어서오세요!</h1>
-      <h2>로그인을 해 주세요 :D </h2>
+      <h1>🥕로그인🥕</h1>
+      <h2>어서오세요!:D</h2>
       </div>
       
     <div className='email_pw'>

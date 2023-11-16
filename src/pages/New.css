@@ -30,6 +30,12 @@
 /* 드롭다운 */
 select {
     width: 150px;
+    background-color: rgb(251,240,225);
+    border: none;
+    border-radius: 5px;
+    font-family: 'Jua', cursive;
+    cursor: pointer;
+    
 }
 
 /* 제목, 내용 입력창*/
@@ -37,13 +43,16 @@ select {
     display: flex;
     margin-top: 3%;
     align-items: center;   
-    
+    background-color: rgb(251,240,225);
+    border: none;
 }
 /* 제목창 */
+
 
 .title {
     width: 75vw;
     font-size: 17px;
+    border: none;
  
 }
 /* 내용 입력창 */
@@ -52,6 +61,9 @@ select {
     height: 300px;
     resize: none;
     font-size: 17px;
+    background-color: rgb(251,240,225);
+    border-radius: 5px;
+    border: none;
 }
 
 
@@ -62,7 +74,7 @@ select {
   padding: 8px;
   margin-top: 8px;
   margin-bottom: 8px;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -79,9 +91,11 @@ select {
 }
 
 /* 버튼 */
-.button{
+button{
     margin-top: 80px;
     justify-content: space-evenly;
+    font-family: 'Jua', cursive;
+    width: 200px;
 }
 
 /* 버튼 위에 마우스 올릴 시 효과 */
