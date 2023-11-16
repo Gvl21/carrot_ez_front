@@ -48,7 +48,7 @@ function Member() {
                     <div className='userinput'>
 
                     <label>지역:</label>
-                    <select name='area' value={formData.area} onChange={handleChange}>
+                    <select name='area' value={formData.area} onChange={handleChange} className='areaselect'>
                         <option value=''>선택하세요</option>
                         <option value='seoul'>서울특별시</option>
                         <option value='incheon'>인천광역시</option>

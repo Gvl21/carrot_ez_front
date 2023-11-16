@@ -42,6 +42,17 @@ label {
     align-items : center;
 }
 
+/*드롭다운*/
+.areaselect{
+    border:none;
+    margin: 10px;
+    background-color: rgb(251,240,225);
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Jua', cursive;
+}
+
 /*버튼묶음*/
 .button {
     display: flex;
