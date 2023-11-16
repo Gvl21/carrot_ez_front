@@ -19,7 +19,7 @@ function App() {
         <div className="App">
     
       <Router>
-        <Header />
+      <Header />
         <Routes>
           <Route path='/findfriend' element={<FindFriend />} />
           <Route path='/login' element={<LogIn />} />

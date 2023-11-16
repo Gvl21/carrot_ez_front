@@ -3,7 +3,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 90vh
+
+
 }
 
 /*폼 전체를 감싸는 테두리*/
@@ -13,6 +15,7 @@ form{
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 /*이메일, 비밀번호, 사용할 닉네임*/
