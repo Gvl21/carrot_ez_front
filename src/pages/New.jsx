@@ -71,7 +71,7 @@ function New() {
            </select>
         </div>
 
-        <div className='userinput'>
+        <div className='userwrite'>
           <div className='title'>
           <label> 글 제목 </label>
           <input

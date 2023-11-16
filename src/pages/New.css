@@ -14,15 +14,17 @@
     flex-direction: column;
     width: 80%; 
     align-items: stretch;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 드롭다운 묶음 */
-.option {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    
 
+.option,
+.title,
+.body,
+.button {
+    margin-bottom: 15px;
 }
 
 /* 드롭다운 */
@@ -31,24 +33,51 @@ select {
 }
 
 /* 제목, 내용 입력창*/
-.userinput{
+.userwrite input {
     display: flex;
     margin-top: 3%;
     align-items: center;   
     
 }
 /* 제목창 */
-.title input {
-    width: 70vw;
+
+.title {
+    width: 75vw;
     font-size: 17px;
+ 
 }
 /* 내용 입력창 */
 .body {
-    width: 70vw;
+    width: 75vw;
     height: 300px;
     resize: none;
     font-size: 17px;
 }
+
+
+
+.title input,
+.body textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.option select,
+.category select {
+    width: 20%;
+    height: 2vw;
+}
+
+.option {
+    display: flex;
+    justify-content: center;
+}
+
 /* 버튼 */
 .button{
     margin-top: 80px;
