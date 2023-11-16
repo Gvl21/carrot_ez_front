@@ -1,0 +1,66 @@
+/* 전체 CSS */
+
+.new {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+    line-height: 150%;
+}
+
+/* 폼 전체를 감싸는 테두리 */
+.newform {
+    display: flex;
+    flex-direction: column;
+    width: 80%; 
+    align-items: stretch;
+}
+
+/* 드롭다운 묶음 */
+.option {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+
+}
+
+/* 드롭다운 */
+select {
+    width: 150px;
+}
+
+/* 제목, 내용 입력창*/
+.userinput{
+    display: flex;
+    margin-top: 3%;
+    align-items: center;   
+    
+}
+/* 제목창 */
+.title input {
+    width: 70vw;
+    font-size: 17px;
+}
+/* 내용 입력창 */
+.body {
+    width: 70vw;
+    height: 300px;
+    resize: none;
+    font-size: 17px;
+}
+/* 버튼 */
+.button{
+    margin-top: 80px;
+    justify-content: space-evenly;
+}
+
+/* 버튼 위에 마우스 올릴 시 효과 */
+button:hover {
+    background-color: darkorange;
+}
+
+/* label */
+label {
+    font-size: 25px;
+}
