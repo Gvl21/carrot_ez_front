@@ -36,7 +36,7 @@ function Member() {
     };
     return (
         <div className='joinform'>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
                
                     <div className='text'>
                     <h1>회원가입하기</h1>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Login.css'
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -30,17 +31,27 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='loginform'>
+      <div className='welcometext'>
+      <h1>어서오세요!</h1>
+      <h2>로그인을 해 주세요 :D </h2>
+      </div>
+      
+    <div className='email_pw'>
       <label>
         이메일:
         <input type="email" value={email} onChange={handleEmailChange} />
       </label>
+      
       <br />
+      
       <label>
         비밀번호:
         <input type="password" value={password} onChange={handlePasswordChange} />
       </label>
       <br />
+      </div>
+      
       <button type="submit">로그인</button>
     </form>
   );
