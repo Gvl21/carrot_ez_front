@@ -50,7 +50,7 @@ function New() {
         <div className='new'>
             <form onSubmit={handleSubmit} className='newform'>
                 <div className='option'>
-                    <label>지역 :</label>
+                    <label>지역</label>
                     <select
                         name='area'
                         value={formData.area}
@@ -73,7 +73,7 @@ function New() {
                         <option value='jeju'>제주특별시</option>
                     </select>
 
-                    <label>카테고리 :</label>
+                    <label>카테고리</label>
                     <select
                         name='category'
                         value={formData.category}
