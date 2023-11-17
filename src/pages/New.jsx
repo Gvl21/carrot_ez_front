@@ -46,6 +46,13 @@ function New() {
         navigate('/');
     };
 
+    const titleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
+    };
+
+
     return (
         <div className='new'>
             <form onSubmit={handleSubmit} className='newform'>
@@ -97,6 +104,7 @@ function New() {
                             className='title'
                             value={formData.title}
                             onChange={handleChange}
+                            onKeyDown={titleKeyPress}
                         />
                     </div>
 
