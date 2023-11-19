@@ -1,60 +1,119 @@
-import React, { useState } from 'react';
-import './Login.css'
+import React, { useContext, useState } from 'react';
+import './Login.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { StateContext } from '../App';
 
-const Login = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+function Login() {
+    const navigate = useNavigate();
+    // 쿠키 stateContext에 담아 설정하기 --김형수
+    const { cookies, setCookie } = useContext(StateContext);
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+    const handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setFormData({ ...formData, [name]: value });
+    };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+        // 간단한 유효성 검사
+        if (!formData.email || !formData.password) {
+            alert('이메일과 비밀번호를 입력하세요.');
+            return;
+        }
 
-    // 간단한 유효성 검사
-    if (!email || !password) {
-      alert('이메일과 비밀번호를 입력하세요.');
-      return;
-    }
+        // 실제 로그인 처리를 여기에 추가할 수 있습니다.
+        // 여기서는 간단하게 받은 이메일을 콘솔에 출력하는 예시를 사용합니다.
+        // console.log('로그인 시도:', { formData.email, formData.password });
+        const url = 'http://localhost/members/signIn';
 
-    // 실제 로그인 처리를 여기에 추가할 수 있습니다.
-    // 여기서는 간단하게 받은 이메일을 콘솔에 출력하는 예시를 사용합니다.
-    console.log('로그인 시도:', { email, password });
+        const loginResult = await axios
+            .post(url, formData)
+            .then((res) => {
+                alert('로그인 완료');
+                const responseBody = res.data;
+                console.log(responseBody);
+                signInResponse(responseBody);
+                return responseBody;
+            })
+            .catch((err) => {
+                alert('로그인 실패');
+                if (!err.response.data) return null;
+                const responseBody = err.response.data;
+                return responseBody;
+            });
+        /**
+         * 이전에 김형수가 짠 코드
+         */
+        // axios
+        //     .post(url, formData)
+        //     .then((res) => {
+        //         alert('로그인 완료');
+        //         navigate('/');
+        //         console.log(res.data);
+        //     })
+        //     .catch((error) => {
+        //         alert(error.response.data);
+        //     });
 
-    // 로그인이 성공하면 부모 컴포넌트로 성공 여부를 전달할 수 있습니다.
-    onLogin(true);
-  };
+        // 로그인이 성공하면 부모 컴포넌트로 성공 여부를 전달할 수 있습니다. - 이거 추가해서 로그인 중인지 추가여부를 확인할 코드가 필요할거같긴한데 일단 어케써볼지 생각해바야할거같아요 --김형수
+        // onLogin(true);
+        return loginResult;
+    };
+    const signInResponse = (responseBody) => {
+        if (!responseBody) {
+            alert('네트위크 이상입니다.');
+            return;
+        }
+        const { token, expirationTime } = responseBody;
+        const now = new Date().getTime();
+        const expires = new Date(now + expirationTime * 1000);
 
-  return (
-    <form onSubmit={handleSubmit} className='loginform'>
-      <div className='welcometext'>
-      <h1>🥕로그인🥕</h1>
-      <h2>어서오세요!:D</h2>
-      </div>
-      
-    <div className='email_pw'>
-      <label>
-        이메일:
-        <input type="email" value={email} onChange={handleEmailChange} />
-      </label>
-      
-      <br />
-      
-      <label>
-        비밀번호:
-        <input type="password" value={password} onChange={handlePasswordChange} />
-      </label>
-      <br />
-      </div>
-      
-      <button type="submit">로그인</button>
-    </form>
-  );
-};
+        setCookie('accessToken', token, { expires, path: '/' });
+        navigate('/');
+    };
+
+    return (
+        <form onSubmit={handleSubmit} className='loginform'>
+            <div className='welcometext'>
+                <h1>🥕로그인🥕</h1>
+                <h2>어서오세요!:D</h2>
+            </div>
+
+            <div className='email_pw'>
+                <label>
+                    이메일:
+                    <input
+                        type='email'
+                        name='email'
+                        value={formData.email}
+                        onChange={handleChange}
+                    />
+                </label>
+
+                <br />
+
+                <label>
+                    비밀번호:
+                    <input
+                        type='password'
+                        name='password'
+                        value={formData.password}
+                        onChange={handleChange}
+                    />
+                </label>
+                <br />
+            </div>
+
+            <button type='submit'>로그인</button>
+        </form>
+    );
+}
 
 export default Login;

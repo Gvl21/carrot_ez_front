@@ -10,8 +10,8 @@ function Member() {
         email: '',
         password: '',
         nickname: '',
-        area:'',
-        category:'',
+        area: '',
+        category: '',
     });
     const handleChange = (e) => {
         const name = e.target.name;
@@ -36,19 +36,20 @@ function Member() {
     };
     return (
         <div className='joinform'>
-            <form onSubmit={handleSubmit} >
-               
-                    <div className='text'>
+            <form onSubmit={handleSubmit}>
+                <div className='text'>
                     <h1>🥕회원가입하기🥕</h1>
                     <h2>반가워요! :D</h2>
-                    </div>
-                   
-                
+                </div>
 
-                    <div className='userinput'>
-
+                <div className='userinput'>
                     <label>지역:</label>
-                    <select name='area' value={formData.area} onChange={handleChange} className='areaselect'>
+                    <select
+                        name='area'
+                        value={formData.area}
+                        onChange={handleChange}
+                        className='areaselect'
+                    >
                         <option value=''>선택하세요</option>
                         <option value='seoul'>서울특별시</option>
                         <option value='incheon'>인천광역시</option>
@@ -66,7 +67,6 @@ function Member() {
                         <option value='jeju'>제주특별시</option>
                     </select>
 
-                   
                     <label>이메일:</label>
                     <input
                         type='email'
@@ -75,7 +75,7 @@ function Member() {
                         onChange={handleChange}
                         autoFocus
                     />
-                    
+
                     <label>비밀번호:</label>
                     <input
                         type='password'
@@ -83,7 +83,7 @@ function Member() {
                         value={formData.password}
                         onChange={handleChange}
                     />
-            
+
                     <label>사용할 닉네임:</label>
                     <input
                         type='text'
@@ -91,19 +91,17 @@ function Member() {
                         value={formData.nickname}
                         onChange={handleChange}
                     />
-                    </div>
-    
-                
+                </div>
+
                 <div className='button'>
-                <button type='submit'>가입하기</button>
-                <button onClick={goMain} type='button'>
-                    메인으로
-                </button>
+                    <button type='submit'>가입하기</button>
+                    <button onClick={goMain} type='button'>
+                        메인으로
+                    </button>
                 </div>
             </form>
         </div>
     );
 }
-
 
 export default Member;

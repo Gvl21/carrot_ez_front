@@ -23,7 +23,7 @@ function New() {
         e.preventDefault();
         // 여기에 게시글을 서버에 제출하는 로직 추가
         console.log('게시글쓰기:', formData);
-        const url = 'http://localhost:8080/article/new';
+        const url = 'http://localhost/article/new';
         e.preventDefault();
         axios
             .post(url, formData)
