@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import './New.css';
 import axios from 'axios';
+import FindFriend from './FindFriend';
 
 function New() {
     const navigate = useNavigate();
@@ -12,6 +13,9 @@ function New() {
         title: '',
         content: '',
     });
+
+    const [posts, setPosts] = useState([])
+    
 
     const handleChange = (e) => {
         const name = e.target.name;

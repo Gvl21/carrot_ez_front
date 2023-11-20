@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
+import New from './New'
+import { useNavigate } from 'react-router-dom'
 
-function FindFriend() {
+
+
+const FindFriend = ({ posts }) => {
   return (
     <div>
-      <h1> 친구를 찾아봅쉬다!! </h1>
+      <h2>게시글 목록</h2>
+      <ul>
+        {posts.map(post => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
     </div>
   )
 }
 
-export default FindFriend
+export default FindFriend;
