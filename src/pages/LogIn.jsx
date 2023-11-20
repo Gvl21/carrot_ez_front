@@ -44,8 +44,9 @@ function Login() {
             })
             .catch((err) => {
                 alert('로그인 실패');
-                if (!err.response.data) return null;
-                const responseBody = err.response.data;
+                console.log(err.message);
+                if (!err.message) return null;
+                const responseBody = err.message;
                 return responseBody;
             });
         /**
