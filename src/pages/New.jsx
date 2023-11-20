@@ -7,14 +7,17 @@ import FindFriend from './FindFriend';
 
 function New() {
     const navigate = useNavigate();
+
     const [formData, setFormdata] = useState({
+        date: '',
+        nickname: '',
         category: '',
         area: '',
         title: '',
         content: '',
     });
 
-    const [posts, setPosts] = useState([])
+    
     
 
     const handleChange = (e) => {
