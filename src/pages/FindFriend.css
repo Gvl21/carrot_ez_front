@@ -36,3 +36,13 @@
     font-size: 1em;
   }
   
+.searchbutton {
+    width: 65px;
+    margin: 0 auto;
+}
+
+.searchinput {
+    width: 300px;
+    height: 30px;
+    border-radius: 8px;
+}
