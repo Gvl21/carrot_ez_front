@@ -14,16 +14,23 @@ const initialData = [
   {
     id: '1',
     date: '2023-11-20',
-    nickname: 'user1',
+    nickname: '형수',
     title: '첫 번째 글',
-    content: '이것은 첫 번째 글의 내용입니다.',
+    content: '광안리에서 산책 하실분~',
   },
   {
     id: '2',
     date: '2023-11-21',
-    nickname: 'user2',
+    nickname: '가은',
     title: '두 번째 글',
-    content: '이것은 두 번째 글의 내용입니다.',
+    content: '반여동에서 산책 하실분~',
+  },
+  {
+    id: '3',
+    date: '2023-11-21',
+    nickname: '송이',
+    title: '세 번째 글',
+    content: '송정에서 산책 하실분~',
   },
   // 추가적인 목데이터는 필요에 따라 계속해서 추가할 수 있습니다.
 ];
