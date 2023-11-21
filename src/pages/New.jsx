@@ -3,15 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import './New.css';
 import axios from 'axios';
+import FindFriend from './FindFriend';
 
 function New() {
     const navigate = useNavigate();
+
     const [formData, setFormdata] = useState({
+        date: '',
+        nickname: '',
         category: '',
         area: '',
         title: '',
         content: '',
     });
+
+    
+    
 
     const handleChange = (e) => {
         const name = e.target.name;
@@ -46,11 +53,18 @@ function New() {
         navigate('/');
     };
 
+    const titleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
+    };
+
+
     return (
         <div className='new'>
             <form onSubmit={handleSubmit} className='newform'>
                 <div className='option'>
-                    <label>지역 :</label>
+                    <label>지역</label>
                     <select
                         name='area'
                         value={formData.area}
@@ -73,7 +87,7 @@ function New() {
                         <option value='jeju'>제주특별시</option>
                     </select>
 
-                    <label>카테고리 :</label>
+                    <label>카테고리</label>
                     <select
                         name='category'
                         value={formData.category}
@@ -97,6 +111,7 @@ function New() {
                             className='title'
                             value={formData.title}
                             onChange={handleChange}
+                            onKeyDown={titleKeyPress}
                         />
                     </div>
 
