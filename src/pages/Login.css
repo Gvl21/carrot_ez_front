@@ -31,3 +31,16 @@
     border-radius: 4px;
 }
 
+.loginbutton {
+    margin-top: 20px;
+    display: block;
+    margin: 0 auto;
+
+}
+
+.gosignin {
+    color: blue;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
