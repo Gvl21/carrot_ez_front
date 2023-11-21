@@ -36,17 +36,17 @@ const initialData = [
   const [posts, setPosts] = useState(initialData);
 
   return (
-    <div>
-      <h2>게시글 목록</h2>
-      <ul>
+    <div className='find-friend-container'>
+     
+      <ul className='post-list'>
         {posts.map(post => (
-          <li key={post.id}>
-            <strong>{post.title}</strong>
-            <p> 지역 : {post.area} </p>
-            <p> 카테고리 : {post.category}</p>
-            <p> 작성일 : {post.date} </p>
-            <p> 작성자 : {post.nickname} </p>
-            <p> {post.content} </p>
+          <li key={post.id} className='post-item'>
+            <strong className='post-title'>{post.title}</strong>
+            <p className='post-info'> 지역 : {post.area} </p>
+            <p className='post-info'> 카테고리 : {post.category}</p>
+            <p className='post-info'> 작성일 : {post.date} </p>
+            <p className='post-info'> 작성자 : {post.nickname} </p>
+            <p className='post-content'> {post.content} </p>
             </li>
         ))}
       </ul>
