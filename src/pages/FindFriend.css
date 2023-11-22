@@ -1,0 +1,49 @@
+
+/* 전체 컨테이너 스타일 */
+.find-friend-container {
+    margin: 20px;
+  }
+  
+  /* 게시글 목록 스타일 */
+  .post-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* 개별 게시글 스타일 */
+  .post-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px;
+  }
+  
+  /* 게시글 제목 스타일 */
+  .post-title {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+  
+  /* 추가 정보 스타일*/
+  .post-info {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  /* 게시글 내용 스타일 */
+  .post-content {
+    font-size: 1em;
+  }
+  
+.searchbutton {
+    width: 65px;
+    margin: 0 auto;
+    margin-left: 7px;
+}
+
+.searchinput {
+    width: 300px;
+    height: 30px;
+    border-radius: 8px;
+}

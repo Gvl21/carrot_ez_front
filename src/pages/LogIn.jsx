@@ -3,6 +3,8 @@ import './Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { StateContext } from '../App';
+import New from './New';
+
 
 function Login() {
     const navigate = useNavigate();
@@ -80,6 +82,10 @@ function Login() {
         navigate('/');
     };
 
+    const goMember = () => {
+        navigate('/members');
+      }
+
     return (
         <form onSubmit={handleSubmit} className='loginform'>
             <div className='welcometext'>
@@ -112,7 +118,8 @@ function Login() {
                 <br />
             </div>
 
-            <button type='submit'>로그인</button>
+            <button type='submit' className='loginbutton'>로그인</button>
+            <h4 onClick={goMember} className='gosignin'>아직 회원이 아니신가요?</h4>
         </form>
     );
 }

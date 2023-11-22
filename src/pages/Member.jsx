@@ -43,7 +43,7 @@ function Member() {
                 </div>
 
                 <div className='userinput'>
-                    <label>지역:</label>
+                    <label>지역</label>
                     <select
                         name='area'
                         value={formData.area}
@@ -67,7 +67,7 @@ function Member() {
                         <option value='jeju'>제주특별시</option>
                     </select>
 
-                    <label>이메일:</label>
+                    <label>이메일</label>
                     <input
                         type='email'
                         name='email'
@@ -76,7 +76,7 @@ function Member() {
                         autoFocus
                     />
 
-                    <label>비밀번호:</label>
+                    <label>비밀번호</label>
                     <input
                         type='password'
                         name='password'
@@ -84,7 +84,7 @@ function Member() {
                         onChange={handleChange}
                     />
 
-                    <label>사용할 닉네임:</label>
+                    <label>사용할 닉네임</label>
                     <input
                         type='text'
                         name='nickname'
