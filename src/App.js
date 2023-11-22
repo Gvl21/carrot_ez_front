@@ -9,6 +9,7 @@ import LogIn from './pages/LogIn';
 import New from './pages/New';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { AuthProvider, useAuth } from './components/security/AuthContext';
 
 export const StateContext = React.createContext();
 
@@ -19,6 +20,7 @@ function App() {
 
     // 쿠키 상태
     const [cookies, setCookie, removeCookie] = useCookies();
+    // const { setIsLoggedIn, setCurrentMember } = useAuth();
 
     // fnc : 유저가 토큰이 있을 때 받아올 유저의 정보
     const getSignInUserInfo = async (cookie) => {
@@ -66,10 +68,11 @@ function App() {
                 value={{
                     cookies,
                     setCookie,
+                    removeCookie,
                     isLoggedIn,
                     setIsLoggedIn,
-                    removeCookie,
                     currentMember,
+                    setCurrentMember,
                 }}
             >
                 <Router>

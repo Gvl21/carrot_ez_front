@@ -21,13 +21,11 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         // 간단한 유효성 검사
         if (!formData.email || !formData.password) {
             alert('이메일과 비밀번호를 입력하세요.');
             return;
         }
-
         // 실제 로그인 처리를 여기에 추가할 수 있습니다.
         // 여기서는 간단하게 받은 이메일을 콘솔에 출력하는 예시를 사용합니다.
         // console.log('로그인 시도:', { formData.email, formData.password });
