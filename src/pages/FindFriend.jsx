@@ -2,6 +2,8 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import New from './New'
 import { useNavigate } from 'react-router-dom'
 import './FindFriend.css'
+import { SearchProvider } from '../components/Search'
+import SearchBar from '../components/SearchBar'
 
 const FindFriend = () => {
 const initialData = [
@@ -37,6 +39,11 @@ const initialData = [
 
   return (
     <div className='find-friend-container'>
+      <SearchProvider>
+        <div>
+          <SearchBar/>
+        </div>
+      </SearchProvider>
       <ul className='post-list'>
         {posts.map(post => (
           <li key={post.id} className='post-item'>
