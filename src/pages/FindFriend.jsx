@@ -37,8 +37,6 @@ const initialData = [
 
   return (
     <div className='find-friend-container'>
-      <input type='text' className='searchinput' placeholder='검색어를 입력하세요'></input>
-      <button className='searchbutton'>검색</button>
       <ul className='post-list'>
         {posts.map(post => (
           <li key={post.id} className='post-item'>
