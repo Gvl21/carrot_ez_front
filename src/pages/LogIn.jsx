@@ -95,7 +95,7 @@ function Login() {
 
             <div className='email_pw'>
                 <label>
-                    이메일:
+                    이메일
                     <input
                         type='email'
                         name='email'
@@ -107,7 +107,7 @@ function Login() {
                 <br />
 
                 <label>
-                    비밀번호:
+                    비밀번호
                     <input
                         type='password'
                         name='password'
