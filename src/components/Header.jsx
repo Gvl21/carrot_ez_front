@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import Main from '../pages/Main';
 import Member from '../pages/Member';
 import { StateContext } from '../App';
+import { useAuth } from './security/AuthContext';
 
 const HeaderBlock = styled.div`
     background-color: #ffbf7a;
@@ -13,8 +14,10 @@ const HeaderBlock = styled.div`
 `;
 
 function Header() {
-    const { cookies, isLoggedIn, setIsLoggedIn, removeCookie, currentMember } =
+    const { cookies, removeCookie, isLoggedIn, setIsLoggedIn, currentMember } =
         useContext(StateContext);
+
+    // const { isLoggedIn, setIsLoggedIn, currentMember } = useAuth();
     const navigate = useNavigate();
     useEffect(() => {}, [cookies.accessToken]);
 
@@ -40,27 +43,29 @@ function Header() {
         alert('잘가!');
         navigate('/');
     };
-    const LoginHeader = () => {
-        if (isLoggedIn === null) {
-            return (
-                <div className='menu'>
-                    <h2 onClick={goFindFriend}>친구찾기</h2>
-                    <h2 onClick={goNew}>글쓰기</h2>
-                    <h2 onClick={goLogin}>로그인</h2>
-                    <h2 onClick={goNewMember}>회원가입</h2>
-                </div>
-            );
-        } else {
-            return (
-                <div className='menu'>
-                    <h2 onClick={goFindFriend}>친구찾기</h2>
-                    <h2 onClick={goNew}>글쓰기</h2>
-                    <h2 onClick={goLogout}>로그아웃</h2>
-                    <h2>{currentMember}님,어서오세요</h2>
-                </div>
-            );
-        }
-    };
+
+    // 수정 전 코드 -- 김형수
+    // const LoginHeader = () => {
+    //     if (isLoggedIn === null) {
+    //         return (
+    //             <div className='menu'>
+    //                 <h2 onClick={goFindFriend}>친구찾기</h2>
+    //                 <h2 onClick={goNew}>글쓰기</h2>
+    //                 <h2 onClick={goLogin}>로그인</h2>
+    //                 <h2 onClick={goNewMember}>회원가입</h2>
+    //             </div>
+    //         );
+    //     } else {
+    //         return (
+    //             <div className='menu'>
+    //                 <h2 onClick={goFindFriend}>친구찾기</h2>
+    //                 <h2 onClick={goNew}>글쓰기</h2>
+    //                 <h2 onClick={goLogout}>로그아웃</h2>
+    //                 <h2>{currentMember}님,어서오세요</h2>
+    //             </div>
+    //         );
+    //     }
+    // };
 
     useEffect(() => {}, [isLoggedIn]);
 
@@ -70,7 +75,20 @@ function Header() {
                 <div className='logo'>
                     <h1 onClick={goMain}>당근이지🥕</h1>
                 </div>
-                <LoginHeader />
+                <div className='menu'>
+                    <h2 onClick={goFindFriend}>친구찾기</h2>
+                    {!(isLoggedIn === null) && <h2 onClick={goNew}>글쓰기</h2>}
+                    {isLoggedIn === null && <h2 onClick={goLogin}>로그인</h2>}
+                    {isLoggedIn === null && (
+                        <h2 onClick={goNewMember}>회원가입</h2>
+                    )}
+                    {!(isLoggedIn === null) && (
+                        <h2 onClick={goLogout}>로그아웃</h2>
+                    )}
+                    {!(isLoggedIn === null) && (
+                        <h2>{currentMember}님,어서오세요</h2>
+                    )}
+                </div>
             </div>
         </HeaderBlock>
     );
