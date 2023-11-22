@@ -86,7 +86,10 @@ function Header() {
                         <h2 onClick={goLogout}>로그아웃</h2>
                     )}
                     {!(isLoggedIn === null) && (
-                        <h2>{currentMember}님,어서오세요</h2>
+                        <h2>
+                            <img src={currentMember.imgUrl} alt='프로필' />
+                            {currentMember.nickname}님,어서오세요
+                        </h2>
                     )}
                 </div>
             </div>

@@ -16,7 +16,10 @@ export const StateContext = React.createContext();
 function App() {
     // 로그인 유저 상태 => null : 로그인 멤버가 없음
     const [isLoggedIn, setIsLoggedIn] = useState(null);
-    const [currentMember, setCurrentMember] = useState('');
+    const [currentMember, setCurrentMember] = useState({
+        nickname: '',
+        imgUrl: '',
+    });
 
     // 쿠키 상태
     const [cookies, setCookie, removeCookie] = useCookies();
@@ -37,7 +40,11 @@ function App() {
             .then((res) => {
                 const responseBody = res.data;
                 console.log(responseBody);
-                setCurrentMember(responseBody.nickname);
+                setCurrentMember({
+                    nickname: responseBody.nickname,
+                    imgUrl: responseBody.memberImageUrl,
+                });
+
                 return responseBody;
             })
             .catch((err) => {
