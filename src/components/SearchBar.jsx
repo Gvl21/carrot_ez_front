@@ -8,6 +8,11 @@ const SearchBar = () => {
         updateSearchQuery(e.target.value);
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('검색어: ${searchQuery}');
+    }
+
     return (
         <div>
             <input
@@ -16,6 +21,7 @@ const SearchBar = () => {
             value={searchQuery}
             onChange={handleInputChange}
             />
+            <button type="submit">검색</button>
         </div>
     )
 }
