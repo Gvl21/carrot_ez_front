@@ -14,6 +14,8 @@ const HeaderBlock = styled.div`
 
 
 function Header() {
+  // context에서 인증 정보를 받아와서 인증 여부에 따라 렌더링을 다르게 함.
+
   const navigate = useNavigate();
 
   const goMain = () => {

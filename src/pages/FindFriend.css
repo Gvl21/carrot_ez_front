@@ -39,6 +39,7 @@
 .searchbutton {
     width: 65px;
     margin: 0 auto;
+    margin-left: 7px;
 }
 
 .searchinput {
