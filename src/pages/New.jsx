@@ -124,10 +124,10 @@ function New() {
                             {' '}
                         </textarea>
                     </div>
+             
                 </div>
-                <div className='inputImage'>
-                    <ImageUploader/>
-                </div>
+                <ImageUploader/>
+              
                 <div className='button'>
                     <button type='submit'>작성하기</button>
                     <button onClick={goMain} type='button'>
