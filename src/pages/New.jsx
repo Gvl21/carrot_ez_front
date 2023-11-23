@@ -58,6 +58,8 @@ function New() {
         }
     };
 
+    
+
     return (
         <div className='new'>
             <form onSubmit={handleSubmit} className='newform'>
@@ -125,10 +127,12 @@ function New() {
                             {' '}
                         </textarea>
                     </div>
-             
                 </div>
-               
-           <ImageUploader></ImageUploader>
+
+                <div className='image'>
+                    <ImageUploader/>
+                </div>
+
               
                 <div className='button'>
                     <button type='submit'>작성하기</button>
