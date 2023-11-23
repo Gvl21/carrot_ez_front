@@ -17,9 +17,6 @@ function New() {
         content: '',
     });
 
-    
-    
-
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -58,7 +55,6 @@ function New() {
             e.preventDefault();
         }
     };
-
 
     return (
         <div className='new'>

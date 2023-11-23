@@ -10,6 +10,7 @@ import New from './pages/New';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { AuthProvider, useAuth } from './components/security/AuthContext';
+import { apiClient } from './components/security/apiClient';
 
 export const StateContext = React.createContext();
 
@@ -35,7 +36,7 @@ function App() {
 
         const getInfo = await axios
             .get(url, {
-                headers: { Authorization: `Bearer ${cookie}` },
+                headers: { Authorization: cookie },
             })
             .then((res) => {
                 const responseBody = res.data;
@@ -61,14 +62,19 @@ function App() {
     useEffect(() => {
         if (!cookies.accessToken) {
             setIsLoggedIn(null);
+            apiClient.interceptors.request.clear();
             return;
         }
         getSignInUserInfo(cookies.accessToken);
+        // axios 인터셉터 설정 등록 : 모든 API요청에 사용된다.
+        apiClient.interceptors.request.use((config) => {
+            console.log('인터셉터하여 헤더에 토큰 정보 추가');
+            config.headers.Authorization = cookies.accessToken;
+            return config;
+        });
         setIsLoggedIn(true);
     }, [cookies.accessToken]);
 
-    const [msg, setMsg] = useState('');
-    const [newMember, setNewMember] = useState('');
     return (
         <div className='App'>
             <StateContext.Provider
