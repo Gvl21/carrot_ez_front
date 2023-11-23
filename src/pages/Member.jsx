@@ -12,18 +12,43 @@ function Member() {
         nickname: '',
         area: '',
         category: '',
+        profileImage: null,
     });
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        setFormData({ ...formData, [name]: value });
+        if (name === 'profileImage') {
+            // 파일을 선택했을 때
+            setFormData({ ...formData, [name]: e.target.files[0] });
+        } else {
+            // 파일 이외의 입력 값은
+            setFormData({ ...formData, [name]: value });
+        }
+        console.log(formData);
     };
+
     const handleSubmit = (e) => {
-        const url = 'http://localhost/members/new';
         e.preventDefault();
+        const url = 'http://10.100.203.39/members/new';
+
+        // 새 폼 데이터를 전송하기 위한 폼
+        const data = new FormData();
+
+        Object.keys(formData).forEach((key) => {
+            data.append(key, formData[key]);
+        });
+
+        // 수정사항 기존의 formData에서 data로 body를 교체
+
         axios
-            .post(url, formData)
+            .post(url, data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
             .then((res) => {
+                alert(`${formData.nickname}님 환영합니다!`);
+                navigate('/login');
                 console.log(res.data);
             })
             .catch((error) => {
@@ -89,6 +114,13 @@ function Member() {
                         type='text'
                         name='nickname'
                         value={formData.nickname}
+                        onChange={handleChange}
+                    />
+                    <label>프로필 업로드</label>
+                    <input
+                        type='file'
+                        name='profileImage'
+                        accept='image/jpg, image/png, image/jpeg, image/gif'
                         onChange={handleChange}
                     />
                 </div>

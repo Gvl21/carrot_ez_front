@@ -10,13 +10,17 @@ import New from './pages/New';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { AuthProvider, useAuth } from './components/security/AuthContext';
+import { apiClient } from './components/security/apiClient';
 
 export const StateContext = React.createContext();
 
 function App() {
     // 로그인 유저 상태 => null : 로그인 멤버가 없음
     const [isLoggedIn, setIsLoggedIn] = useState(null);
-    const [currentMember, setCurrentMember] = useState('');
+    const [currentMember, setCurrentMember] = useState({
+        nickname: '',
+        imgUrl: '',
+    });
 
     // 쿠키 상태
     const [cookies, setCookie, removeCookie] = useCookies();
@@ -28,16 +32,20 @@ function App() {
             console.log('유저정보 없음');
             return;
         }
-        const url = 'http://localhost/members/info';
+        const url = 'http://10.100.203.39/members/info';
 
         const getInfo = await axios
             .get(url, {
-                headers: { Authorization: `Bearer ${cookie}` },
+                headers: { Authorization: cookie },
             })
             .then((res) => {
                 const responseBody = res.data;
                 console.log(responseBody);
-                setCurrentMember(responseBody.nickname);
+                setCurrentMember({
+                    nickname: responseBody.nickname,
+                    imgUrl: responseBody.memberImageUrl,
+                });
+
                 return responseBody;
             })
             .catch((err) => {
@@ -54,14 +62,19 @@ function App() {
     useEffect(() => {
         if (!cookies.accessToken) {
             setIsLoggedIn(null);
+            apiClient.interceptors.request.clear();
             return;
         }
         getSignInUserInfo(cookies.accessToken);
+        // axios 인터셉터 설정 등록 : 모든 API요청에 사용된다.
+        apiClient.interceptors.request.use((config) => {
+            console.log('인터셉터하여 헤더에 토큰 정보 추가');
+            config.headers.Authorization = cookies.accessToken;
+            return config;
+        });
         setIsLoggedIn(true);
     }, [cookies.accessToken]);
 
-    const [msg, setMsg] = useState('');
-    const [newMember, setNewMember] = useState('');
     return (
         <div className='App'>
             <StateContext.Provider

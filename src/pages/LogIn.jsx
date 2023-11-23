@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { StateContext } from '../App';
 import New from './New';
-
+import { signInApi } from '../components/security/apiClient';
 
 function Login() {
     const navigate = useNavigate();
@@ -28,27 +28,23 @@ function Login() {
             alert('이메일과 비밀번호를 입력하세요.');
             return;
         }
-        // 실제 로그인 처리를 여기에 추가할 수 있습니다.
-        // 여기서는 간단하게 받은 이메일을 콘솔에 출력하는 예시를 사용합니다.
-        // console.log('로그인 시도:', { formData.email, formData.password });
-        const url = 'http://localhost/members/signIn';
 
-        const loginResult = await axios
-            .post(url, formData)
-            .then((res) => {
-                alert('로그인 완료');
-                const responseBody = res.data;
-                console.log(responseBody);
-                signInResponse(responseBody);
-                return responseBody;
-            })
-            .catch((err) => {
-                alert('로그인 실패');
-                console.log(err.message);
-                if (!err.message) return null;
-                const responseBody = err.message;
-                return responseBody;
-            });
+        // 로그인 처리하ㄱㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
+        const response = await signInApi(formData);
+        console.log(response);
+        const loginResult = response.data;
+        if (loginResult.message === 'Success.') {
+            alert('로그인 완료');
+            signInResponse(loginResult);
+            return loginResult;
+        } else {
+            alert('로그인 실패');
+            console.log(loginResult);
+            if (!loginResult) return null;
+            const responseBody = loginResult;
+            return responseBody;
+        }
+
         /**
          * 이전에 김형수가 짠 코드
          */
@@ -76,13 +72,15 @@ function Login() {
         const now = new Date().getTime();
         const expires = new Date(now + expirationTime * 1000);
 
-        setCookie('accessToken', token, { expires, path: '/' });
+        // setCookie('accessToken', token, { expires, path: '/' });
+        setCookie('accessToken', 'Bearer ' + token, { expires, path: '/' });
+
         navigate('/');
     };
 
     const goMember = () => {
         navigate('/members');
-      }
+    };
 
     return (
         <form onSubmit={handleSubmit} className='loginform'>
@@ -116,8 +114,12 @@ function Login() {
                 <br />
             </div>
 
-            <button type='submit' className='loginbutton'>로그인</button>
-            <h4 onClick={goMember} className='gosignin'>아직 회원이 아니신가요?</h4>
+            <button type='submit' className='loginbutton'>
+                로그인
+            </button>
+            <h4 onClick={goMember} className='gosignin'>
+                아직 회원이 아니신가요?
+            </h4>
         </form>
     );
 }

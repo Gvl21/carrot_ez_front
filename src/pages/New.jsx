@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import './New.css';
 import axios from 'axios';
 import FindFriend from './FindFriend';
+import ImageUploader from '../components/ImageUploader';
 
 function New() {
     const navigate = useNavigate();
@@ -17,9 +18,6 @@ function New() {
         content: '',
     });
 
-    
-    
-
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -30,7 +28,7 @@ function New() {
         e.preventDefault();
         // 여기에 게시글을 서버에 제출하는 로직 추가
         console.log('게시글쓰기:', formData);
-        const url = 'http://localhost/article/new';
+        const url = 'http://10.100.203.39/article/new';
         e.preventDefault();
         axios
             .post(url, formData)
@@ -58,7 +56,6 @@ function New() {
             e.preventDefault();
         }
     };
-
 
     return (
         <div className='new'>
@@ -128,7 +125,9 @@ function New() {
                         </textarea>
                     </div>
                 </div>
-
+                <div className='inputImage'>
+                    <ImageUploader/>
+                </div>
                 <div className='button'>
                     <button type='submit'>작성하기</button>
                     <button onClick={goMain} type='button'>

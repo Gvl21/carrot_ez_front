@@ -77,7 +77,8 @@ function Header() {
                 </div>
                 <div className='menu'>
                     <h2 onClick={goFindFriend}>친구찾기</h2>
-                    {!(isLoggedIn === null) && <h2 onClick={goNew}>글쓰기</h2>}
+                    {/* {!(isLoggedIn === null) && <h2 onClick={goNew}>글쓰기</h2>} */}
+                    <h2 onClick={goNew}>글쓰기</h2>
                     {isLoggedIn === null && <h2 onClick={goLogin}>로그인</h2>}
                     {isLoggedIn === null && (
                         <h2 onClick={goNewMember}>회원가입</h2>
@@ -86,7 +87,10 @@ function Header() {
                         <h2 onClick={goLogout}>로그아웃</h2>
                     )}
                     {!(isLoggedIn === null) && (
-                        <h2>{currentMember}님,어서오세요</h2>
+                        <h2>
+                            <img src={currentMember.imgUrl} alt='프로필' />
+                            {currentMember.nickname}님,어서오세요
+                        </h2>
                     )}
                 </div>
             </div>
