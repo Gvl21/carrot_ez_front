@@ -36,9 +36,7 @@ const ImageUploader = () => {
                     alt='Preview'
                     style={{ maxWidth: '100%', maxHeight: '200px'}}
                 />
-                <p>File Name: {selectedImage.file.name}</p>
-                <p>File Type: {selectedImage.file.type}</p>
-                <p>File Size: {selectedImage.file.size /1024} KB</p>
+                <p>파일명: {selectedImage.file.name}</p>
                 </div>
             )}
         </div>
