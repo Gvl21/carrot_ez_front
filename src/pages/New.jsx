@@ -29,7 +29,7 @@ function New() {
         e.preventDefault();
         // 여기에 게시글을 서버에 제출하는 로직 추가
         console.log('게시글쓰기:', formData);
-        const url = 'http://10.100.203.39/article/new';
+        const url = '/article/new';
         e.preventDefault();
         apiClient
             .post(url, formData)
@@ -125,10 +125,9 @@ function New() {
                             {' '}
                         </textarea>
                     </div>
-             
                 </div>
-                <ImageUploader/>
-              
+                <ImageUploader />
+
                 <div className='button'>
                     <button type='submit'>작성하기</button>
                     <button onClick={goMain} type='button'>

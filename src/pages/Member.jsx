@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import './Member.css';
+import { apiClient } from '../components/security/apiClient';
 
 function Member() {
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ function Member() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const url = 'http://10.100.203.39/members/new';
+        const url = '/members/new';
 
         // 새 폼 데이터를 전송하기 위한 폼
         const data = new FormData();
@@ -40,7 +41,7 @@ function Member() {
 
         // 수정사항 기존의 formData에서 data로 body를 교체
 
-        axios
+        apiClient
             .post(url, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
