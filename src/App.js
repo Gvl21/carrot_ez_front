@@ -9,7 +9,7 @@ import LogIn from './pages/LogIn';
 import New from './pages/New';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import { AuthProvider, useAuth } from './components/security/AuthContext';
+
 
 export const StateContext = React.createContext();
 
