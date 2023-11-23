@@ -26,7 +26,7 @@ const ImageUploader = () => {
     <div>
       <input
         type="file"
-        accept="image/*"
+        accept="image/jpg, image/png, image/jpeg, image/gif"
         onChange={handleImageChange}
       />
       {selectedImage && (

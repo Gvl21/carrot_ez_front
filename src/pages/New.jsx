@@ -127,7 +127,8 @@ function New() {
                     </div>
              
                 </div>
-                <ImageUploader/>
+               
+           <ImageUploader></ImageUploader>
               
                 <div className='button'>
                     <button type='submit'>작성하기</button>
