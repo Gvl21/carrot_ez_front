@@ -32,12 +32,10 @@ function App() {
             console.log('유저정보 없음');
             return;
         }
-        const url = 'http://localhost/members/info';
+        // const url = `/members/info`;
 
-        const getInfo = await axios
-            .get(url, {
-                headers: { Authorization: cookie },
-            })
+        const getInfo = await apiClient
+            .get(`members/info`)
             .then((res) => {
                 const responseBody = res.data;
                 console.log(responseBody);
@@ -65,13 +63,14 @@ function App() {
             apiClient.interceptors.request.clear();
             return;
         }
-        getSignInUserInfo(cookies.accessToken);
+
         // axios 인터셉터 설정 등록 : 모든 API요청에 사용된다.
         apiClient.interceptors.request.use((config) => {
             console.log('인터셉터하여 헤더에 토큰 정보 추가');
             config.headers.Authorization = cookies.accessToken;
             return config;
         });
+        getSignInUserInfo(cookies.accessToken);
         setIsLoggedIn(true);
     }, [cookies.accessToken]);
 
