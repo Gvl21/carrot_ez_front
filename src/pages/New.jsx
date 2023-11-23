@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import './New.css';
 import axios from 'axios';
 import FindFriend from './FindFriend';
+import { apiClient } from '../components/security/apiClient';
 
 function New() {
     const navigate = useNavigate();
@@ -27,9 +28,9 @@ function New() {
         e.preventDefault();
         // 여기에 게시글을 서버에 제출하는 로직 추가
         console.log('게시글쓰기:', formData);
-        const url = 'http://localhost/article/new';
+        const url = '/article/new';
         e.preventDefault();
-        axios
+        apiClient
             .post(url, formData)
             .then((res) => {
                 console.log(res.data);
