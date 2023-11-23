@@ -18,8 +18,12 @@ function Member() {
         const name = e.target.name;
         const value = e.target.value;
         if (name === 'profileImage') {
+
+            const file = e.target.files[0];
+
             // 파일을 선택했을 때
-            setFormData({ ...formData, [name]: e.target.files[0] });
+            setFormData({ ...formData, [name]: file,
+            profileImagePreview: URL.createObjectURL(file), });
         } else {
             // 파일 이외의 입력 값은
             setFormData({ ...formData, [name]: value });
@@ -123,6 +127,13 @@ function Member() {
                         accept='image/jpg, image/png, image/jpeg, image/gif'
                         onChange={handleChange}
                     />
+                    {formData.profileImage && (
+                        <img
+                        src={formData.profileImagePreview}
+                        alt='프로필 미리보기'
+                        style={{ maxWidth: '100%', maxHeight:'200px', marginTop: '10px'}}
+                        />
+                    )}
                 </div>
 
                 <div className='button'>
