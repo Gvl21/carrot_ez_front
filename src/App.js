@@ -32,7 +32,7 @@ function App() {
             console.log('유저정보 없음');
             return;
         }
-        const url = 'http://10.100.203.39/members/info';
+        const url = 'http://localhost/members/info';
 
         const getInfo = await axios
             .get(url, {
