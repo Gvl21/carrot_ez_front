@@ -29,7 +29,7 @@ function Member() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const url = 'http://localhost/members/new';
+        const url = 'http://10.100.203.39/members/new';
 
         // 새 폼 데이터를 전송하기 위한 폼
         const data = new FormData();
