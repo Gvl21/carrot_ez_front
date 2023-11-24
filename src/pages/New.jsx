@@ -36,6 +36,9 @@ function New() {
             .then((res) => {
                 console.log(res.data);
                 alert('게시글이 성공적으로 작성되었습니다!')
+                // navigate <- 이거로 게시글 상세보기 페이지만들면 거기로 보내면 될듯
+
+                navigate('/')
             })
             .catch((error) => {
                 alert('게시글 작성에 실패하였습니다.');
