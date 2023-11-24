@@ -35,11 +35,12 @@ function New() {
             .post(url, formData)
             .then((res) => {
                 console.log(res.data);
+                alert('게시글이 성공적으로 작성되었습니다!')
             })
             .catch((error) => {
-                alert(error);
-            });
-        // 제출 후 폼 초기화
+                alert('게시글 작성에 실패하였습니다.');
+            }); 
+            // 제출 후 폼 초기화
         setFormdata({
             category: '',
             area: '',
