@@ -4,13 +4,14 @@ import Member from './pages/Member';
 import Main from './pages/Main';
 import Header from './components/Header';
 import './App.css';
-import FindFriend from './pages/FindFriend';
+import WriteList from './pages/WriteList';
 import LogIn from './pages/LogIn';
 import New from './pages/New';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { AuthProvider, useAuth } from './components/security/AuthContext';
 import { apiClient } from './components/security/apiClient';
+import FindFriend from './pages/FindFriend';
 
 export const StateContext = React.createContext();
 
