@@ -62,6 +62,10 @@ function New() {
         }
     };
 
+    
+
+
+
     return (
         <div className='new'>
             <form onSubmit={handleSubmit} className='newform'>
@@ -143,6 +147,7 @@ function New() {
                 </div>
             </form>
         </div>
+
     );
 }
 
