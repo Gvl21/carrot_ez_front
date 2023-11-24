@@ -2,3 +2,12 @@
     display: flex;
     justify-content: center;
 }
+
+.more {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    color: #ffbf7a;
+    text-decoration: underline;
+   
+}
