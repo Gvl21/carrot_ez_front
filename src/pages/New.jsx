@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import './New.css';
 import axios from 'axios';
-import FindFriend from './FindFriend';
+import WriteList from './WriteList';
 import { apiClient } from '../components/security/apiClient';
 import ImageUploader from '../components/ImageUploader';
 
