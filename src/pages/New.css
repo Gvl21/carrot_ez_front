@@ -92,7 +92,7 @@ select {
 
 /* 버튼 */
 button{
-    margin-top: 80px;
+    margin-top: 30px;
     justify-content: space-evenly;
     font-family: 'Jua', cursive;
     width: 200px;
