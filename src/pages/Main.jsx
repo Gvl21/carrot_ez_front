@@ -17,7 +17,25 @@ function Main() {
     return (
         <div className='main'>
             <div className='fstvlapi'>
-                <h1>축제 API자리</h1>
+                <h1>각 지역 축제</h1>
+
+                <h3>기장 멸치축제</h3>
+                <a>기장군</a>
+                <a>00.00.00~00.00.00</a>
+
+                <h3>기장 멸치축제</h3>
+                <a>기장군</a>
+                <a>00.00.00~00.00.00</a>
+
+                <h3>기장 멸치축제</h3>
+                <a>기장군</a>
+                <a>00.00.00~00.00.00</a>
+
+                <h3>기장 멸치축제</h3>
+                <a>기장군</a>
+                <a>00.00.00~00.00.00</a>
+
+
             </div>
 
             <div className='writelist'>
