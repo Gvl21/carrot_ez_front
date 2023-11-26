@@ -1,0 +1,14 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.more {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    color: #ffbf7a;
+    text-decoration: underline;
+   
+}
