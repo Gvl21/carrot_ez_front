@@ -2,8 +2,8 @@ import axios from 'axios';
 
 // API 요청을 할 Clinet 생성 및 응답해줄 BackEnd url 정의
 export const apiClient = axios.create({
-    baseURL: 'http://10.100.203.39',
-    // baseURL: 'http://localhost',
+    // baseURL: 'http://10.100.203.39',
+    baseURL: 'http://localhost',
 });
 
 export const signInApi = async (formData) => {
@@ -31,6 +31,20 @@ export const postArticle = async (formData) => {
         .catch((error) => {
             // const responseBody = error.response.data;
             // const { code } = responseBody;
+            return error;
+        });
+    return response;
+};
+
+// 게시글 리스트 조회 api 정의
+export const getArticleList = async () => {
+    const response = await apiClient
+        .get(`/article/list`)
+        .then((response) => {
+            const responseBody = response.data;
+            return responseBody;
+        })
+        .catch((error) => {
             return error;
         });
     return response;
