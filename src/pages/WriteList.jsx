@@ -18,12 +18,12 @@ const initialData = [
   },
   {
     id: '2',
-    area: '부산광역시',
+    area: '서울특별시',
     category: '문화생활',
     date: '2023-11-20',
     nickname: '가은',
     title: '원데이클래스 같이하실분~',
-    content: '반여동에서 원데이클래스 같이 하실분~ 선착순 한명',
+    content: '성수에서 원데이클래스 같이 하실분~ 선착순 한명',
   },
   {
     id: '3',
@@ -34,6 +34,22 @@ const initialData = [
     title: '지역상관없이 옵치 그룹 구합니다~',
     content: '티어는 골드구간입니다 같이 플레가실분 구합니다',
   },
+  // { id: '4',
+  //   area: '제주특별시',
+  //   category: '게임',
+  //   date: '2023-11-27',
+  //   nickname: '얀또니',
+  //   title : '같이 크아 하실분',
+  //   content: '같이 크레이지아케이드 하실분~',
+  // },
+  // { id: '5',
+  // area: '대전광역시',
+  // category: '운동',
+  // date: '2023-11-28',
+  // nickname: '또잉이',
+  // title : '같이 헬스장 다니실분',
+  // content: '일주일에 세번 날짜 정해서 같이 하실 분 구합니다',
+  // },
 ];
   const [posts, setPosts] = useState(initialData);
   const [filteredPosts, setFilteredPosts] = useState([]);
