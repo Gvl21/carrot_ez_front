@@ -14,10 +14,15 @@ import { apiClient } from './components/security/apiClient';
 import FindFriend from './pages/FindFriend';
 
 export const StateContext = React.createContext();
+export const ImagesContext = React.createContext();
 
 function App() {
+    // 이미지 컨텍스트용 상태값
+    const [images, setImages] = useState([]);
+
     // 로그인 유저 상태 => null : 로그인 멤버가 없음
     const [isLoggedIn, setIsLoggedIn] = useState(null);
+
     const [currentMember, setCurrentMember] = useState({
         nickname: '',
         imgUrl: '',
@@ -88,16 +93,26 @@ function App() {
                     setCurrentMember,
                 }}
             >
-                <Router>
-                    <Header />
-                    <Routes>
-                        <Route path='/findfriend' element={<FindFriend />} />
-                        <Route path='/login' element={<LogIn />} />
-                        <Route path='/new' element={<New />} />
-                        <Route path='/' element={<Main />} />
-                        <Route path='/members' element={<Member />} />
-                    </Routes>
-                </Router>
+                <ImagesContext.Provider
+                    value={{
+                        images,
+                        setImages,
+                    }}
+                >
+                    <Router>
+                        <Header />
+                        <Routes>
+                            <Route
+                                path='/findfriend'
+                                element={<FindFriend />}
+                            />
+                            <Route path='/login' element={<LogIn />} />
+                            <Route path='/new' element={<New />} />
+                            <Route path='/' element={<Main />} />
+                            <Route path='/members' element={<Member />} />
+                        </Routes>
+                    </Router>
+                </ImagesContext.Provider>
             </StateContext.Provider>
         </div>
     );
