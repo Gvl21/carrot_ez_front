@@ -1,28 +1,29 @@
-import React from 'react'
-import { useSearch } from './Search'
+import React, { useState } from 'react';
+import './SearchBar.css'
 
-const SearchBar = () => {
-    const { searchQuery, updateSearchQuery } = useSearch();
+const SearchBar = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState('');
 
-    const handleInputChange = (e) => {
-        updateSearchQuery(e.target.value);
-    }
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('검색어: ${searchQuery}');
-    }
+  const handleSearch = () => {
+    onSearch(searchTerm);
+  };
 
-    return (
-        <div>
-            <input
-            type = "text"
-            placeholder='검색어를 입력하세요'
-            value={searchQuery}
-            onChange={handleInputChange}
-            />
-            <button type="submit">검색</button>
-        </div>
-    )
-}
-export default SearchBar
+  return (
+    <div className="search-bar-container">
+      <input
+        className='searchbar'
+        type="text"
+        placeholder="검색어를 입력하세요"
+        value={searchTerm}
+        onChange={handleInputChange}
+      />
+      <button onClick={handleSearch} className='searchbutton'>검색</button>
+    </div>
+  );
+};
+
+export default SearchBar;

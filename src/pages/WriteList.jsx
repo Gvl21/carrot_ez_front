@@ -36,12 +36,32 @@ const initialData = [
   },
 ];
   const [posts, setPosts] = useState(initialData);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+
+  const handleSearch = (searchTerm) => {
+    const filtered = posts.filter((post) => 
+    post.title.includes(searchTerm));
+    setFilteredPosts(filtered);
+  }
 
   return (
     <div className='find-friend-container'>
+      <SearchBar onSearch={handleSearch} />
    
       <ul className='post-list'>
-        {posts.map(post => (
+        {filteredPosts.length > 0
+        ? filteredPosts.map((post) => (
+       <li key={post.id} className='post-item'>
+        <strong className='post-title'>{post.title}</strong>
+            <p className='post-info'> 지역 : {post.area} </p>
+            <p className='post-info'> 카테고리 : {post.category}</p>
+            <p className='post-info'> 작성일 : {post.date} </p>
+            <p className='post-info'> 작성자 : {post.nickname} </p>
+            <p className='post-content'> {post.content} </p>
+
+       </li>
+        ))
+        : posts.map((post) => (
           <li key={post.id} className='post-item'>
             <strong className='post-title'>{post.title}</strong>
             <p className='post-info'> 지역 : {post.area} </p>
