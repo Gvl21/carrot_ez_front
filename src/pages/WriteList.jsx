@@ -63,8 +63,10 @@ const WriteList = () => {
     };
 
     const showArticles = async () => {
-        const articleList = await getArticleList();
+        const responseBody = await getArticleList();
+        const articleList = responseBody.articleList;
         console.log(articleList);
+        setPosts(articleList);
     };
 
     useEffect(() => {
@@ -78,7 +80,7 @@ const WriteList = () => {
             <ul className='post-list'>
                 {filteredPosts.length > 0
                     ? filteredPosts.map((post) => (
-                          <li key={post.id} className='post-item'>
+                          <li key={post.articleId} className='post-item'>
                               <strong className='post-title'>
                                   {post.title}
                               </strong>
@@ -89,17 +91,21 @@ const WriteList = () => {
                               </p>
                               <p className='post-info'>
                                   {' '}
-                                  작성일 : {post.date}{' '}
+                                  작성일 : {post.regTime}{' '}
                               </p>
                               <p className='post-info'>
                                   {' '}
-                                  작성자 : {post.nickname}{' '}
+                                  작성자 : {post.nickname}
+                                  <img
+                                      src={post.profileImage}
+                                      alt='프로필'
+                                  />{' '}
                               </p>
                               <p className='post-content'> {post.content} </p>
                           </li>
                       ))
                     : posts.map((post) => (
-                          <li key={post.id} className='post-item'>
+                          <li key={post.articleId} className='post-item'>
                               <strong className='post-title'>
                                   {post.title}
                               </strong>
@@ -110,11 +116,15 @@ const WriteList = () => {
                               </p>
                               <p className='post-info'>
                                   {' '}
-                                  작성일 : {post.date}{' '}
+                                  작성일 : {post.regTime}{' '}
                               </p>
                               <p className='post-info'>
                                   {' '}
-                                  작성자 : {post.nickname}{' '}
+                                  작성자 : {post.nickname}
+                                  <img
+                                      src={post.profileImage}
+                                      alt='프로필'
+                                  />{' '}
                               </p>
                               <p className='post-content'> {post.content} </p>
                           </li>
