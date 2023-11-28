@@ -23,7 +23,7 @@ const initialData = [
     date: '2023-11-20',
     nickname: '가은',
     title: '원데이클래스 같이하실분~',
-    content: '반여동에서 원데이클래스 같이 하실분~ 선착순 한명',
+    content: '기타 같이 배워볼 분 구합니다.',
   },
   {
     id: '3',

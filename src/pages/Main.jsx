@@ -4,7 +4,6 @@ import WriteList from './WriteList';
 import './Main.css'
 
 
-
 function Main() {
 
     const navigate = useNavigate();
@@ -34,7 +33,6 @@ function Main() {
                 <h3>기장 멸치축제</h3>
                 <a>기장군</a>
                 <a>00.00.00~00.00.00</a>
-
 
             </div>
 
