@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import WriteList from './WriteList';
-<<<<<<< HEAD
 import './Main.css'
-
-=======
-import './Main.css';
-import { apiClient } from '../components/security/apiClient';
 import axios from 'axios';
->>>>>>> f28c65a5c0ea47422185b33bbbf01cba3b2546a0
+
+
 
 function Main() {
     const navigate = useNavigate();
@@ -61,14 +57,11 @@ function Main() {
                 <p>00.00.00~00.00.00</p>
 
                 <h3>기장 멸치축제</h3>
-<<<<<<< HEAD
                 <a>기장군</a>
                 <a>00.00.00~00.00.00</a>
 
-=======
                 <h3>기장군</h3>
                 <p>00.00.00~00.00.00</p>
->>>>>>> f28c65a5c0ea47422185b33bbbf01cba3b2546a0
             </div>
 
             <div className='line'></div>
