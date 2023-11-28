@@ -1,14 +1,14 @@
 
 /* 전체 컨테이너 스타일 */
 .find-friend-container {
-    margin: 20px;
+    display: grid;
    
   }
   
   /* 게시글 목록 스타일 */
   .post-list {
+    display: flex;
     list-style: none;
-    display: grid;
     gap: 20px 10px;
   }
   
@@ -39,9 +39,4 @@
   /* 게시글 내용 스타일 */
   .post-content {
     font-size: 1em;
-  }
-  
-  .post-list {
-    display: flex;
-  
   }
