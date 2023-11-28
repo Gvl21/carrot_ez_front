@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import './Fstvl.css'
 
 function Fstvl() {
 
@@ -33,19 +34,16 @@ function Fstvl() {
     }, []); // 빈 배열을 전달하여 componentDidMount와 같이 처음 렌더링될 때만 실행되도록 합니다.
   return (
     <div>
-        <h1>축제</h1>
-        <ul>
+        <h1>🎉지역별 축제🎉</h1>
+        <ul className='fstvl'>
             {fstvls.map((fstvl) => (
                 <li key={fstvl.id}>
                     <h3>{fstvl.name}</h3>
-                    <p>{fstvl.location}</p>
-                    <p>{fstvl.startDate}</p>
-                    <p>{fstvl.endDate}</p>
+                    <p>지역: {fstvl.location}</p>
+                    <p>시작일자: {fstvl.startDate}</p>
+                    <p>종료일자: {fstvl.endDate}</p>
                 </li>
             )
-
-            
-            
             )}
         </ul>
     </div>

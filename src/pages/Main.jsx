@@ -48,7 +48,7 @@ function Main() {
                 <h2 className='more' onClick={goFindFriend}>
                     more👉
                 </h2>
-                <WriteList />
+                {/* <WriteList /> */}
             </div>
         </div>
     );
