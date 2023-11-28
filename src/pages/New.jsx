@@ -16,13 +16,10 @@ function New() {
     const { cookies } = useContext(StateContext);
 
     const [formData, setFormdata] = useState({
-        date: '',
-        nickname: '',
         category: '',
         area: '',
         title: '',
         content: '',
-        articleImageList: [],
     });
 
     /**
@@ -84,8 +81,8 @@ function New() {
         const data = new FormData();
 
         // 폼데이터에 이미지 정보를 넣기
-        images.forEach((e, i) => {
-            data.append('articleImageList', e.file);
+        images.forEach((e) => {
+            data.append(`articleImageList`, e.file);
         });
 
         // 나머지 폼 데이터 넣기
@@ -138,13 +135,10 @@ function New() {
         //     });
         // 제출 후 폼 초기화
         setFormdata({
-            date: '',
-            nickname: '',
             category: '',
             area: '',
             title: '',
             content: '',
-            articleImageList: [],
         });
         setImages([]);
     };
