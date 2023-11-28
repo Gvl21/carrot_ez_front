@@ -10,4 +10,5 @@ function FindFriend() {
     );
 }
 
+
 export default FindFriend;
