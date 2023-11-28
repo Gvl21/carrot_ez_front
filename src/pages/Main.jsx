@@ -34,6 +34,7 @@ function Main() {
                 // 오류 처리
                 console.error('Error fetching festival list:', error);
             }
+            
         };
 
         fetchData(); // fetchData 함수를 호출하여 데이터를 가져옵니다.

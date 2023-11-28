@@ -93,6 +93,7 @@ function New() {
             data.append(key, formData[key]);
         });
         console.log('게시글쓰기:', data);
+        
 
         // 데이터 처리
         try {
@@ -103,6 +104,7 @@ function New() {
         } catch {
             alert('게시글 작성에 실패하였습니다.');
         }
+        
 
         /**
          * response 가공 로직 <- 추후 알맞게 수정하기
