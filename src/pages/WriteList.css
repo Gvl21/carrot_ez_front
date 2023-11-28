@@ -9,7 +9,7 @@
   .post-list {
     display: flex;
     list-style: none;
-    gap: 20px 10px;
+    padding: 0;
   }
   
   /* 개별 게시글 스타일 */
@@ -39,4 +39,9 @@
   /* 게시글 내용 스타일 */
   .post-content {
     font-size: 1em;
+  }
+  
+  .post-list {
+    display: flex;
+  
   }

@@ -42,7 +42,11 @@ function Main() {
 
     return (
         <div className='main'>
-          <Fstvl />
+            
+            <div className='mainfstvl'>
+                <Fstvl />
+             </div>
+           
             <div className='line'></div>
 
             <div className='writelist'>
@@ -51,6 +55,7 @@ function Main() {
                 </h2>
                 <WriteList />
             </div>
+       
         </div>
     );
 }
