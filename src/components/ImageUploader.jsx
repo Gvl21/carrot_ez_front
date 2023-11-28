@@ -40,6 +40,11 @@ const ImageUploader = () => {
             setImages([]);
         }
     };
+    const deleteImage = (i) => {
+        const updatedImages = [...images];
+        updatedImages.splice(i, 1);
+        setImages(updatedImages);
+    };
 
     return (
         <div>
@@ -58,7 +63,12 @@ const ImageUploader = () => {
                                 alt={`이미지 파일 ${i}`}
                                 style={{ maxWidth: '100%', maxHeight: '200px' }}
                             />
-                            <p>파일명 : {e.file.name}</p>
+                            <p>
+                                파일명 : {e.file.name}
+                                <button onClick={() => deleteImage(i)}>
+                                    X
+                                </button>
+                            </p>
                         </div>
                     ))}
                 </div>
