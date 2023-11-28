@@ -33,7 +33,7 @@ function Fstvl() {
         fetchData(); // fetchData 함수를 호출하여 데이터를 가져옵니다.
     }, []); // 빈 배열을 전달하여 componentDidMount와 같이 처음 렌더링될 때만 실행되도록 합니다.
   return (
-    <div>
+    <div className='fstvls'>
         <h1>🎉지역별 축제🎉</h1>
         <ul className='fstvl'>
             {fstvls.map((fstvl) => (
