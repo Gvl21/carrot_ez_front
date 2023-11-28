@@ -45,6 +45,7 @@ function Member() {
             data.append(key, formData[key]);
         });
 
+        console.log(data);
         // 수정사항 기존의 formData에서 data로 body를 교체
 
         apiClient

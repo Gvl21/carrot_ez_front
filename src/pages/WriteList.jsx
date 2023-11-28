@@ -1,9 +1,10 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
-import New from './New'
-import { useNavigate } from 'react-router-dom'
-import './WriteList.css'
-import { SearchProvider } from '../components/Search'
-import SearchBar from '../components/SearchBar'
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import New from './New';
+import { useNavigate } from 'react-router-dom';
+import './WriteList.css';
+import { SearchProvider } from '../components/Search';
+import SearchBar from '../components/SearchBar';
+import { getArticleList } from '../components/security/apiClient';
 
 const WriteList = () => {
 const initialData = [
@@ -37,23 +38,83 @@ const initialData = [
 ];
   const [posts, setPosts] = useState(initialData);
 
-  return (
-    <div className='find-friend-container'>
-   
-      <ul className='post-list'>
-        {posts.map(post => (
-          <li key={post.id} className='post-item'>
-            <strong className='post-title'>{post.title}</strong>
-            <p className='post-info'> 지역 : {post.area} </p>
-            <p className='post-info'> 카테고리 : {post.category}</p>
-            <p className='post-info'> 작성일 : {post.date} </p>
-            <p className='post-info'> 작성자 : {post.nickname} </p>
-            <p className='post-content'> {post.content} </p>
-            </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
+    const handleSearch = (searchTerm) => {
+        const filtered = posts.filter((post) =>
+            post.title.includes(searchTerm)
+        );
+        setFilteredPosts(filtered);
+    };
+
+    const showArticles = async () => {
+        const responseBody = await getArticleList();
+        const articleList = responseBody.articleList;
+        console.log(articleList);
+        setPosts(articleList);
+    };
+
+    useEffect(() => {
+        showArticles();
+    }, []);
+
+    return (
+        <div className='find-friend-container'>
+            <SearchBar onSearch={handleSearch} />
+
+            <ul className='post-list'>
+                {filteredPosts.length > 0
+                    ? filteredPosts.map((post) => (
+                          <li key={post.articleId} className='post-item'>
+                              <strong className='post-title'>
+                                  {post.title}
+                              </strong>
+                              <p className='post-info'> 지역 : {post.area} </p>
+                              <p className='post-info'>
+                                  {' '}
+                                  카테고리 : {post.category}
+                              </p>
+                              <p className='post-info'>
+                                  {' '}
+                                  작성일 : {post.regTime}{' '}
+                              </p>
+                              <p className='post-info'>
+                                  {' '}
+                                  작성자 : {post.nickname}
+                                  <img
+                                      src={post.profileImage}
+                                      alt='프로필'
+                                  />{' '}
+                              </p>
+                              <p className='post-content'> {post.content} </p>
+                          </li>
+                      ))
+                    : posts.map((post) => (
+                          <li key={post.articleId} className='post-item'>
+                              <strong className='post-title'>
+                                  {post.title}
+                              </strong>
+                              <p className='post-info'> 지역 : {post.area} </p>
+                              <p className='post-info'>
+                                  {' '}
+                                  카테고리 : {post.category}
+                              </p>
+                              <p className='post-info'>
+                                  {' '}
+                                  작성일 : {post.regTime}{' '}
+                              </p>
+                              <p className='post-info'>
+                                  {' '}
+                                  작성자 : {post.nickname}
+                                  <img
+                                      src={post.profileImage}
+                                      alt='프로필'
+                                  />{' '}
+                              </p>
+                              <p className='post-content'> {post.content} </p>
+                          </li>
+                      ))}
+            </ul>
+        </div>
+    );
+};
 
 export default WriteList;

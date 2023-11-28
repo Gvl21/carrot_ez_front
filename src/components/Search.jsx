@@ -1,25 +1,21 @@
-import React, { createContext, useContext, useState } from 'react'
-import { useLocation } from 'react-router'
-import { useSearchParams } from 'react-router-dom'
+// import React from 'react';
 
+// const Search = ({ value, onChange }) => {
+//   return (
+//     <div className="search-container">
+//       <label htmlFor="searchInput" className="visually-hidden">
+//         검색
+//       </label>
+//       <input
+//         type="text"
+//         id="searchInput"
+//         placeholder="제목 검색..."
+//         value={value}
+//         onChange={onChange}
+//         className="search-input"
+//       />
+//     </div>
+//   );
+// };
 
-const Search = createContext();
-
-export const SearchProvider = ({ children }) => {
-    const [searchQuery, setSearchQuery] = useState('');
-
-    const updateSearchQuery = (query) => {
-        setSearchQuery(query);
-    };
-
-    return (
-        <Search.Provider value={{ searchQuery, updateSearchQuery}}>
-            {children}
-        </Search.Provider>
-    )
-
-}
-
-export const useSearch = () => {
-    return useContext(Search);
-}
+// export default Search;

@@ -1,19 +1,13 @@
-import React from 'react'
-import WriteList from './WriteList'
-import { SearchProvider } from '../components/Search'
-import SearchBar from '../components/SearchBar'
+import React from 'react';
+import WriteList from './WriteList';
+import SearchBar from '../components/SearchBar';
 
 function FindFriend() {
-  return (
-    <div>
-           <SearchProvider>
+    return (
         <div>
-          <SearchBar/>
+            <WriteList />
         </div>
-      </SearchProvider>
-        <WriteList />
-    </div>
-  )
+    );
 }
 
-export default FindFriend
+export default FindFriend;
