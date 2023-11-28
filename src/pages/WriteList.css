@@ -8,6 +8,8 @@
   .post-list {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
   }
   
   /* 개별 게시글 스타일 */
@@ -40,7 +42,3 @@
     font-size: 1em;
   }
   
-  .post-list {
-    display: flex;
-  
-  }
