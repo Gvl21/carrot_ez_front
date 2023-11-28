@@ -51,6 +51,14 @@ const WriteList = () => {
         // title : '같이 헬스장 다니실분',
         // content: '일주일에 세번 날짜 정해서 같이 하실 분 구합니다',
         // },
+        // { id: '6',
+        //   area: '경기도',
+        //   category: '문화생활',
+        //   date: '2023-11-27',
+        //   nickname: '얀또니',
+        //   title : '같이 크아 하실분',
+        //   content: '이번주 수요일에 4D로 영화보실 분 구합니다 ~',
+        // }
     ];
     const [posts, setPosts] = useState(initialData);
     const [filteredPosts, setFilteredPosts] = useState([]);
