@@ -4,6 +4,7 @@ import WriteList from './WriteList';
 import './Main.css';
 import { apiClient } from '../components/security/apiClient';
 import axios from 'axios';
+import Fstvl from '../components/Fstvl';
 
 function Main() {
     const navigate = useNavigate();
@@ -40,26 +41,11 @@ function Main() {
 
     return (
         <div className='main'>
-            <div className='fstvlapi'>
-                <h1>각 지역 축제</h1>
-
-                <h3>기장 멸치축제</h3>
-                <h3>기장군</h3>
-                <p>00.00.00~00.00.00</p>
-
-                <h3>기장 멸치축제</h3>
-                <h3>기장군</h3>
-                <p>00.00.00~00.00.00</p>
-
-                <h3>기장 멸치축제</h3>
-                <h3>기장군</h3>
-                <p>00.00.00~00.00.00</p>
-
-                <h3>기장 멸치축제</h3>
-                <h3>기장군</h3>
-                <p>00.00.00~00.00.00</p>
-            </div>
-
+            
+            <div className='mainfstvl'>
+                <Fstvl />
+             </div>
+           
             <div className='line'></div>
 
             <div className='writelist'>
@@ -68,6 +54,7 @@ function Main() {
                 </h2>
                 <WriteList />
             </div>
+       
         </div>
     );
 }
