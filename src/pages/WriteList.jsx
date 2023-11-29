@@ -111,7 +111,7 @@ const WriteList = () => {
                           <li key={post.articleId} className='post-item'>
                             {/* 얀또니 추가한 코드 */}
                             <Link to={`/detail/${post.articleId}`} className='post-title'>
-                                {post.title}
+                                {post.title.slice(0,10)+'...'}
                             </Link>
                             
                               <p className='post-info'> 지역 : {post.area} </p>
@@ -123,15 +123,16 @@ const WriteList = () => {
                                   {' '}
                                   작성일 : {post.regTime}{' '}
                               </p>
+                              <img
+                                src={post.profileImage}
+                                alt='프로필'
+                                  />{' '}
                               <p className='post-info'>
                                   {' '}
                                   작성자 : {post.nickname}
-                                  <img
-                                      src={post.profileImage}
-                                      alt='프로필'
-                                  />{' '}
+                               
                               </p>
-                              <p className='post-content'> {post.content} </p>
+                              <p className='post-content'> {post.content.slice(0,5)+'...'} </p>
                           </li>
                       ))}
             </ul>
