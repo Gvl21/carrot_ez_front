@@ -11,8 +11,7 @@ const DetailPage = () => {
             try {
                 // 상세 정보 가져오기 
                 const responseBody = await getArticleDetails(id);
-                const articleDetails = responseBody.articleDetails;
-                setPostDetails(articleDetails);
+                setPostDetails(responseBody);
             } catch (error) {
                 console.error('Error fetching details:', error);
             }
