@@ -49,3 +49,16 @@ export const getArticleList = async () => {
         });
     return response;
 };
+
+export const getArticleDetails = async (articleId) => {
+    const response = await apiClient
+        .get(`/article/${articleId}`)
+        .then((response) => {
+            const responseBody = response.data;
+            return responseBody;
+        })
+        .catch((error) => {
+            return error;
+        });
+    return response;
+};

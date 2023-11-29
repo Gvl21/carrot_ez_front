@@ -12,7 +12,7 @@ import axios from 'axios';
 import { AuthProvider, useAuth } from './components/security/AuthContext';
 import { apiClient } from './components/security/apiClient';
 import FindFriend from './pages/FindFriend';
-import ImagesContext from './'
+import DetailPage from './pages/DetailPage';
 
 function reducer(state, action) {
     switch (action.type) {
@@ -63,7 +63,7 @@ function App() {
     const [images, setImages] = useState([]);
 
     // 로그인 유저 상태 => null : 로그인 멤버가 없음
-    const [isLoggedIn, setIsLoggedIn] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const [currentMember, setCurrentMember] = useState({
         nickname: '',
@@ -154,6 +154,10 @@ function App() {
                             <Route path='/new' element={<New />} />
                             <Route path='/' element={<Main />} />
                             <Route path='/members' element={<Member />} />
+                            <Route
+                                path='/detail/:id'
+                                element={<DetailPage />}
+                            />
                         </Routes>
                     </Router>
                 </ImagesContext.Provider>

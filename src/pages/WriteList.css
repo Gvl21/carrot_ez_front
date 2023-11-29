@@ -2,6 +2,8 @@
 /* 전체 컨테이너 스타일 */
 .find-friend-container {
     margin: 20px;
+    display: flex;
+    justify-content: space-evenly;
   }
   
   /* 게시글 목록 스타일 */
@@ -10,6 +12,7 @@
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
   }
   
   /* 개별 게시글 스타일 */
@@ -20,7 +23,7 @@
     padding: 15px;
     margin-left: 20px;
     box-sizing: border-box;
-    width: 300px;
+    width: 250px;
     height: 300px;
   }
   
@@ -41,4 +44,6 @@
   .post-content {
     font-size: 1em;
   }
+
+
   
