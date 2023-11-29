@@ -240,7 +240,7 @@ function New() {
                 </div>
                 <div className='button'>
                     <button type='submit'>작성하기</button>
-                    <button onClick={goEdit}>수정하기</button>
+                    {/* <button onClick={goEdit}>수정하기</button> */}
                     <button onClick={goMain} type='button'>
                         취소하기
                     </button>
