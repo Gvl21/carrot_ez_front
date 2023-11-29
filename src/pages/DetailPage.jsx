@@ -40,7 +40,7 @@ const DetailPage = () => {
             <p>작성일: {postDetails.regTime}</p>
             </div>
             <div className='detail-nickname'>
-            <img src={postDetails.memberImageUrl} alt='프로필' />
+            <img className='profile-img' src={postDetails.memberImageUrl} alt='프로필' />
             <p>작성자: {postDetails.nickname}</p>
             </div>
 

@@ -124,6 +124,7 @@ const WriteList = () => {
                                   작성일 : {post.regTime}{' '}
                               </p>
                               <img
+                              className='profile-img'
                                 src={post.profileImage}
                                 alt='프로필'
                                   />{' '}

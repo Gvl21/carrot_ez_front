@@ -87,7 +87,7 @@ function Header() {
                     )}
                     {!(isLoggedIn === null) && (
                         <>
-                             <img src={currentMember.imgUrl} alt='프로필' />
+                             <img className='profile-img' src={currentMember.imgUrl} alt='프로필' />
                             <h2>
                             {currentMember.nickname}
                              </h2>

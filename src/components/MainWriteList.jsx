@@ -67,7 +67,7 @@ const MainWriteList = () => {
                             카테고리 : {post.category}{' '}
                         </p>
                         <p className='post-info'> 작성일 : {post.date} </p>
-                            <img src={post.profileImage} alt='프로필' />
+                            <img className='profile-img' src={post.profileImage} alt='프로필' />
                         <p className='post-info'>
                             작성자 : {post.nickname}
                         </p>
