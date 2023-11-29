@@ -35,6 +35,10 @@ const DetailPage = () => {
             <p>작성자: {postDetails.nickname}</p>
             <img src={postDetails.profileImage} alt='프로필' />
             <p>{postDetails.content}</p>
+            {postDetails.articleImageList.length > 0 &&
+                postDetails.articleImageList.map((e) => (
+                    <img src={e.image} alt='업로드 된 사진' />
+                ))}
         </div>
     );
 };
