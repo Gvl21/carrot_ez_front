@@ -5,6 +5,7 @@ import './Main.css';
 import { apiClient } from '../components/security/apiClient';
 import axios from 'axios';
 import Fstvl from '../components/Fstvl';
+import MainWriteList from '../components/MainWriteList';
 
 function Main() {
     const navigate = useNavigate();
@@ -52,7 +53,7 @@ function Main() {
                 <h2 className='more' onClick={goFindFriend}>
                     more👉
                 </h2>
-                <WriteList />
+                <MainWriteList />
             </div>
        
         </div>

@@ -48,4 +48,6 @@ export const getArticleList = async () => {
             return error;
         });
     return response;
+
 };
+

@@ -13,3 +13,9 @@
     cursor: pointer;
     width: 80px;
   }
+
+  .search-bar-container{
+    display: flex;
+    justify-content: space-around;
+  }
+  

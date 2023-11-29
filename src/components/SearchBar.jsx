@@ -14,6 +14,7 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     <div className="search-bar-container">
+      <div className='search-input'>
       <input
         className='searchbar'
         type="text"
@@ -22,6 +23,7 @@ const SearchBar = ({ onSearch }) => {
         onChange={handleInputChange}
       />
       <button onClick={handleSearch} className='searchbutton'>검색</button>
+      </div>
     </div>
   );
 };

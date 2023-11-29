@@ -1,10 +1,11 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import New from './New';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './WriteList.css';
 import { SearchProvider } from '../components/Search';
 import SearchBar from '../components/SearchBar';
 import { getArticleList } from '../components/security/apiClient';
+
 
 const WriteList = () => {
     const initialData = [
@@ -74,16 +75,18 @@ const WriteList = () => {
     }, []);
 
     return (
-        <div className='find-friend-container'>
+        <div>
             <SearchBar onSearch={handleSearch} />
-
+            <div className='find-friend-container'>
             <ul className='post-list'>
                 {filteredPosts.length > 0
                     ? filteredPosts.map((post) => (
                           <li key={post.articleId} className='post-item'>
-                              <strong className='post-title'>
-                                  {post.title}
-                              </strong>
+                            {/* 얀또니 추가한 코드  */}
+                            <Link to={`/detail/${post.articleId}`} className='post-title'>
+                                {post.title}
+                            </Link>
+                             
                               <p className='post-info'> 지역 : {post.area} </p>
                               <p className='post-info'>
                                   {' '}
@@ -106,9 +109,11 @@ const WriteList = () => {
                       ))
                     : posts.map((post) => (
                           <li key={post.articleId} className='post-item'>
-                              <strong className='post-title'>
-                                  {post.title}
-                              </strong>
+                            {/* 얀또니 추가한 코드 */}
+                            <Link to={`/detail/${post.articleId}`} className='post-title'>
+                                {post.title}
+                            </Link>
+                            
                               <p className='post-info'> 지역 : {post.area} </p>
                               <p className='post-info'>
                                   {' '}
@@ -130,6 +135,7 @@ const WriteList = () => {
                           </li>
                       ))}
             </ul>
+            </div>
         </div>
     );
 };
