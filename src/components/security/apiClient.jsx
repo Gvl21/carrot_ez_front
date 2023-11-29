@@ -48,10 +48,9 @@ export const getArticleList = async () => {
             return error;
         });
     return response;
-
 };
 
-export const getArticleDetail = async (articleId) => {
+export const getArticleDetails = async (articleId) => {
     const response = await apiClient
         .get(`/article/${articleId}`)
         .then((response) => {
@@ -62,6 +61,4 @@ export const getArticleDetail = async (articleId) => {
             return error;
         });
     return response;
-
 };
-

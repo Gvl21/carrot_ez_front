@@ -7,10 +7,12 @@ const DetailPage = () => {
     const [postDetails, setPostDetails] = useState(null);
 
     useEffect(() => {
+        console.log('이펙트');
         const fetchDetails = async () => {
             try {
-                // 상세 정보 가져오기 
+                // 상세 정보 가져오기
                 const responseBody = await getArticleDetails(id);
+                console.log(responseBody);
                 setPostDetails(responseBody);
             } catch (error) {
                 console.error('Error fetching details:', error);
@@ -18,7 +20,7 @@ const DetailPage = () => {
         };
 
         fetchDetails();
-    }, [id]);
+    }, []);
 
     if (!postDetails) {
         return <div>로딩 중입니다...</div>;
@@ -33,7 +35,6 @@ const DetailPage = () => {
             <p>작성자: {postDetails.nickname}</p>
             <img src={postDetails.profileImage} alt='프로필' />
             <p>{postDetails.content}</p>
-
         </div>
     );
 };

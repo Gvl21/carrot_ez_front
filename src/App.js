@@ -12,6 +12,7 @@ import axios from 'axios';
 import { AuthProvider, useAuth } from './components/security/AuthContext';
 import { apiClient } from './components/security/apiClient';
 import FindFriend from './pages/FindFriend';
+import DetailPage from './pages/DetailPage';
 
 export const StateContext = React.createContext();
 export const ImagesContext = React.createContext();
@@ -110,6 +111,10 @@ function App() {
                             <Route path='/new' element={<New />} />
                             <Route path='/' element={<Main />} />
                             <Route path='/members' element={<Member />} />
+                            <Route
+                                path='/detail/:id'
+                                element={<DetailPage />}
+                            />
                         </Routes>
                     </Router>
                 </ImagesContext.Provider>
