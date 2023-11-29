@@ -73,11 +73,11 @@ function New() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // // 이미지가 선택되었는지 확인하기 
-        // if (images.length === 0) {
-        //     alert('이미지를 선택하세요');
-        //     return 
-        // }
+        // 이미지가 선택되었는지 확인하기 
+        if (images.length === 0) {
+            alert('이미지를 선택하세요');
+            return 
+        }
 
         // 카테고리가 선택되었는지 확인하기
         if (!formData.category) {
