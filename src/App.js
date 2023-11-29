@@ -13,6 +13,7 @@ import { AuthProvider, useAuth } from './components/security/AuthContext';
 import { apiClient } from './components/security/apiClient';
 import FindFriend from './pages/FindFriend';
 import DetailPage from './pages/DetailPage';
+import UpdatePage from './pages/UpdatePage';
 
 export const StateContext = React.createContext();
 export const ImagesContext = React.createContext();
@@ -114,6 +115,10 @@ function App() {
                             <Route
                                 path='/detail/:id'
                                 element={<DetailPage />}
+                            />
+                            <Route
+                                path='/update/:id'
+                                element={<UpdatePage />}
                             />
                         </Routes>
                     </Router>

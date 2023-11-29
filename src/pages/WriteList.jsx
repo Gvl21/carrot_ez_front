@@ -6,7 +6,6 @@ import { SearchProvider } from '../components/Search';
 import SearchBar from '../components/SearchBar';
 import { getArticleList } from '../components/security/apiClient';
 
-
 const WriteList = () => {
     const initialData = [
         {
@@ -78,65 +77,83 @@ const WriteList = () => {
         <div>
             <SearchBar onSearch={handleSearch} />
             <div className='find-friend-container'>
-            <ul className='post-list'>
-                {filteredPosts.length > 0
-                    ? filteredPosts.map((post) => (
-                          <li key={post.articleId} className='post-item'>
-                            {/* 얀또니 추가한 코드  */}
-                            <Link to={`/detail/${post.articleId}`} className='post-title'>
-                                {post.title}
-                            </Link>
-                             
-                              <p className='post-info'> 지역 : {post.area} </p>
-                              <p className='post-info'>
-                                  {' '}
-                                  카테고리 : {post.category}
-                              </p>
-                              <p className='post-info'>
-                                  {' '}
-                                  작성일 : {post.regTime}{' '}
-                              </p>
-                              <p className='post-info'>
-                                  {' '}
-                                  작성자 : {post.nickname}
+                <ul className='post-list'>
+                    {filteredPosts.length > 0
+                        ? filteredPosts.map((post) => (
+                              <li key={post.articleId} className='post-item'>
+                                  {/* 얀또니 추가한 코드  */}
+                                  <Link
+                                      to={`/detail/${post.articleId}`}
+                                      className='post-title'
+                                  >
+                                      {post.title}
+                                      {`[${post.replyCount}]`}
+                                  </Link>
+
+                                  <p className='post-info'>
+                                      {' '}
+                                      지역 : {post.area}{' '}
+                                  </p>
+                                  <p className='post-info'>
+                                      {' '}
+                                      카테고리 : {post.category}
+                                  </p>
+                                  <p className='post-info'>
+                                      {' '}
+                                      작성일 : {post.regTime}{' '}
+                                  </p>
+                                  <p className='post-info'>
+                                      {' '}
+                                      작성자 : {post.nickname}
+                                      <img
+                                          src={post.profileImage}
+                                          alt='프로필'
+                                      />{' '}
+                                  </p>
+                                  <p className='post-content'>
+                                      {' '}
+                                      {post.content}{' '}
+                                  </p>
+                              </li>
+                          ))
+                        : posts.map((post) => (
+                              <li key={post.articleId} className='post-item'>
+                                  {/* 얀또니 추가한 코드 */}
+                                  <Link
+                                      to={`/detail/${post.articleId}`}
+                                      className='post-title'
+                                  >
+                                      {post.title.slice(0, 10) + '...'}
+                                      {`[${post.replyCount}]`}
+                                  </Link>
+                                  <p className='post-info'>
+                                      {' '}
+                                      지역 : {post.area}{' '}
+                                  </p>
+                                  <p className='post-info'>
+                                      {' '}
+                                      카테고리 : {post.category}
+                                  </p>
+                                  <p className='post-info'>
+                                      {' '}
+                                      작성일 : {post.regTime}{' '}
+                                  </p>
                                   <img
+                                      className='profile-img'
                                       src={post.profileImage}
                                       alt='프로필'
                                   />{' '}
-                              </p>
-                              <p className='post-content'> {post.content} </p>
-                          </li>
-                      ))
-                    : posts.map((post) => (
-                          <li key={post.articleId} className='post-item'>
-                            {/* 얀또니 추가한 코드 */}
-                            <Link to={`/detail/${post.articleId}`} className='post-title'>
-                                {post.title.slice(0,10)+'...'}
-                            </Link>
-                            
-                              <p className='post-info'> 지역 : {post.area} </p>
-                              <p className='post-info'>
-                                  {' '}
-                                  카테고리 : {post.category}
-                              </p>
-                              <p className='post-info'>
-                                  {' '}
-                                  작성일 : {post.regTime}{' '}
-                              </p>
-                              <img
-                              className='profile-img'
-                                src={post.profileImage}
-                                alt='프로필'
-                                  />{' '}
-                              <p className='post-info'>
-                                  {' '}
-                                  작성자 : {post.nickname}
-                               
-                              </p>
-                              <p className='post-content'> {post.content.slice(0,5)+'...'} </p>
-                          </li>
-                      ))}
-            </ul>
+                                  <p className='post-info'>
+                                      {' '}
+                                      작성자 : {post.nickname}
+                                  </p>
+                                  <p className='post-content'>
+                                      {' '}
+                                      {post.content.slice(0, 5) + '...'}{' '}
+                                  </p>
+                              </li>
+                          ))}
+                </ul>
             </div>
         </div>
     );
