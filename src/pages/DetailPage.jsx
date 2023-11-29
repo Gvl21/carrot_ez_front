@@ -33,7 +33,8 @@ const DetailPage = () => {
             <p>카테고리: {postDetails.category}</p>
             <p>작성일: {postDetails.regTime}</p>
             <p>작성자: {postDetails.nickname}</p>
-            <img src={postDetails.profileImage} alt='프로필' />
+            <img src={postDetails.memberImageUrl} alt='프로필' />
+            {/* 게시글 업로드 이미지 넣을 곳  */}
             <p>{postDetails.content}</p>
         </div>
     );

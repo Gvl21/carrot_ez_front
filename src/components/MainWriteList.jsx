@@ -71,7 +71,7 @@ const MainWriteList = () => {
                             작성자 : {post.nickname}
                             <img src={post.profileImage} alt='프로필' />
                         </p>
-                        <p className='post-content'> {post.content} </p>
+                        <p className='post-content'> {post.content.slice(0,5)+'...'} </p>
                     </li>
                 ))}
             </ul>

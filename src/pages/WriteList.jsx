@@ -131,7 +131,7 @@ const WriteList = () => {
                                       alt='프로필'
                                   />{' '}
                               </p>
-                              <p className='post-content'> {post.content} </p>
+                              <p className='post-content'> {post.content.slice(0,5)+'...'} </p>
                           </li>
                       ))}
             </ul>
