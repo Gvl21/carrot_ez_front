@@ -67,7 +67,7 @@ function App() {
     // effect : accessToken cookie 값이 변경될 때 마다 실행할 함수
     useEffect(() => {
         if (!cookies.accessToken) {
-            setIsLoggedIn(null);
+            setIsLoggedIn(false);
             apiClient.interceptors.request.clear();
             return;
         }

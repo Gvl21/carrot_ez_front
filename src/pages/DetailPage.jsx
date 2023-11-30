@@ -69,14 +69,42 @@ const DetailPage = () => {
     if (!postDetails) {
         return <div>로딩 중입니다...</div>;
     }
+    const areaOutputMap = {
+        seoul: '서울',
+        incheon: '인천',
+        gyeongi: '경기',
+        gangwon: '강원도',
+        chungcheong: '충청도',
+        sejong: '세종',
+        daejeon: '대전',
+        jeonra: '전라도',
+        daegu: '대구',
+        ulsan: '울산',
+        gyeongsang: '경상',
+        busan: '부산',
+        jeju: '제주',
+    };
+    const categoryOutputMap = {
+        sports: '운동',
+        culture: '문화생활',
+        fstvl: '축제/공연',
+        game: '게임',
+        etc: '자유주제',
+    };
     return (
         <div className='post-details-container'>
             <div className='detail-title'>
                 <h2>{postDetails.title}</h2>
             </div>
             <div className='detail-category'>
-                <p>지역: {postDetails.area}</p>
-                <p>카테고리: {postDetails.category}</p>
+                <p>
+                    지역: {areaOutputMap[postDetails.area] || postDetails.area}{' '}
+                </p>
+                <p>
+                    카테고리:{' '}
+                    {categoryOutputMap[postDetails.category] ||
+                        postDetails.area}
+                </p>
             </div>
             <div className='detail-date'>
                 <p>작성일: {postDetails.regTime}</p>
@@ -115,8 +143,15 @@ const DetailPage = () => {
                         replyList.replyList &&
                         replyList.replyList.map((e) => (
                             <div className='reply-card'>
-                                <img src={e.memberImageUrl} alt='프로필' />
-                                <p>{e.nickname}</p>
+                                <p>
+                                    {' '}
+                                    <img
+                                        src={e.memberImgUrl}
+                                        className='profile-img'
+                                        alt='프로필'
+                                    />{' '}
+                                    {e.nickname}
+                                </p>
                                 <p>{e.content}</p>
                                 <p>{e.regTime}</p>
                             </div>

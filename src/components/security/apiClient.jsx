@@ -37,9 +37,23 @@ export const postArticle = async (formData) => {
 };
 
 // 게시글 리스트 조회 api 정의
-export const getArticleList = async () => {
+export const getArticleListToFindFriend = async () => {
     const response = await apiClient
-        .get(`/article/list`)
+        .get(`/article/findFriend-list`)
+        .then((response) => {
+            const responseBody = response.data;
+            return responseBody;
+        })
+        .catch((error) => {
+            return error;
+        });
+    return response;
+};
+
+// 게시글 리스트 조회 api 정의(메인페이지용 상위 9개)
+export const getArticleListToMain = async () => {
+    const response = await apiClient
+        .get(`/article/main-list`)
         .then((response) => {
             const responseBody = response.data;
             return responseBody;

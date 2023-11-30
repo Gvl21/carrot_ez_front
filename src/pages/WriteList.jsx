@@ -4,7 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import './WriteList.css';
 import { SearchProvider } from '../components/Search';
 import SearchBar from '../components/SearchBar';
-import { getArticleList } from '../components/security/apiClient';
+import { getArticleListToFindFriend } from '../components/security/apiClient';
+import { StateContext } from '../App';
+import { authChecker } from '../components/security/AuthContext';
 
 const WriteList = () => {
     const initialData = [
@@ -55,6 +57,14 @@ const WriteList = () => {
     const [posts, setPosts] = useState(initialData);
     const [filteredPosts, setFilteredPosts] = useState([]);
 
+    const { cookies, isLoggedIn } = useContext(StateContext);
+    const navigate = useNavigate();
+    const handleAuth = (e) => {
+        const checkingAuth = authChecker(cookies.accessToken, isLoggedIn);
+        if (checkingAuth === false) e.preventDefault();
+        navigate('/login');
+    };
+
     const handleSearch = (searchTerm) => {
         const filtered = posts.filter((post) =>
             post.title.includes(searchTerm)
@@ -63,10 +73,33 @@ const WriteList = () => {
     };
 
     const showArticles = async () => {
-        const responseBody = await getArticleList();
+        const responseBody = await getArticleListToFindFriend();
         const articleList = responseBody.articleList;
         console.log(articleList);
         setPosts(articleList);
+    };
+
+    const areaOutputMap = {
+        seoul: '서울',
+        incheon: '인천',
+        gyeongi: '경기',
+        gangwon: '강원도',
+        chungcheong: '충청도',
+        sejong: '세종',
+        daejeon: '대전',
+        jeonra: '전라도',
+        daegu: '대구',
+        ulsan: '울산',
+        gyeongsang: '경상',
+        busan: '부산',
+        jeju: '제주',
+    };
+    const categoryOutputMap = {
+        sports: '운동',
+        culture: '문화생활',
+        fstvl: '축제/공연',
+        game: '게임',
+        etc: '자유주제',
     };
 
     useEffect(() => {
@@ -85,6 +118,7 @@ const WriteList = () => {
                                   <Link
                                       to={`/detail/${post.articleId}`}
                                       className='post-title'
+                                      onClick={handleAuth}
                                   >
                                       {post.title}
                                       {`[${post.replyCount}]`}
@@ -92,11 +126,15 @@ const WriteList = () => {
 
                                   <p className='post-info'>
                                       {' '}
-                                      지역 : {post.area}{' '}
+                                      지역 :{' '}
+                                      {areaOutputMap[post.area] ||
+                                          post.area}{' '}
                                   </p>
                                   <p className='post-info'>
                                       {' '}
-                                      카테고리 : {post.category}
+                                      카테고리 :{' '}
+                                      {categoryOutputMap[post.category] ||
+                                          post.area}
                                   </p>
                                   <p className='post-info'>
                                       {' '}
@@ -122,17 +160,22 @@ const WriteList = () => {
                                   <Link
                                       to={`/detail/${post.articleId}`}
                                       className='post-title'
+                                      onClick={handleAuth}
                                   >
                                       {post.title.slice(0, 10) + '...'}
                                       {`[${post.replyCount}]`}
                                   </Link>
                                   <p className='post-info'>
                                       {' '}
-                                      지역 : {post.area}{' '}
+                                      지역 :{' '}
+                                      {areaOutputMap[post.area] ||
+                                          post.area}{' '}
                                   </p>
                                   <p className='post-info'>
                                       {' '}
-                                      카테고리 : {post.category}
+                                      카테고리 :{' '}
+                                      {categoryOutputMap[post.category] ||
+                                          post.area}
                                   </p>
                                   <p className='post-info'>
                                       {' '}

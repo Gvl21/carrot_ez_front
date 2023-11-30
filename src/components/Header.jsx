@@ -39,7 +39,7 @@ function Header() {
     const test = () => {};
     const goLogout = () => {
         removeCookie('accessToken');
-        setIsLoggedIn(null);
+        setIsLoggedIn(false);
         alert('잘가!');
         navigate('/');
     };
@@ -77,20 +77,22 @@ function Header() {
                 </div>
                 <div className='menu'>
                     <h2 onClick={goFindFriend}>친구찾기</h2>
-                    {!(isLoggedIn === null) && <h2 onClick={goNew}>글쓰기</h2>}
-                    {isLoggedIn === null && <h2 onClick={goLogin}>로그인</h2>}
-                    {isLoggedIn === null && (
+                    {!(isLoggedIn === false) && <h2 onClick={goNew}>글쓰기</h2>}
+                    {isLoggedIn === false && <h2 onClick={goLogin}>로그인</h2>}
+                    {isLoggedIn === false && (
                         <h2 onClick={goNewMember}>회원가입</h2>
                     )}
-                    {!(isLoggedIn === null) && (
+                    {!(isLoggedIn === false) && (
                         <h2 onClick={goLogout}>로그아웃</h2>
                     )}
-                    {!(isLoggedIn === null) && (
+                    {!(isLoggedIn === false) && (
                         <>
-                             <img className='profile-img' src={currentMember.imgUrl} alt='프로필' />
-                            <h2>
-                            {currentMember.nickname}
-                             </h2>
+                            <img
+                                className='profile-img'
+                                src={currentMember.imgUrl}
+                                alt='프로필'
+                            />
+                            <h2>{currentMember.nickname}</h2>
                         </>
                     )}
                 </div>
