@@ -144,7 +144,10 @@ const WriteList = () => {
                                       {' '}
                                       작성자 : {post.nickname}
                                       <img
-                                          src={post.profileImage}
+                                          src={
+                                              post.profileImage ||
+                                              '/images/carrotProfileImage.jpg'
+                                          }
                                           alt='프로필'
                                       />{' '}
                                   </p>
@@ -183,7 +186,10 @@ const WriteList = () => {
                                   </p>
                                   <img
                                       className='profile-img'
-                                      src={post.profileImage}
+                                      src={
+                                          post.profileImage ||
+                                          '/images/carrotProfileImage.jpg'
+                                      }
                                       alt='프로필'
                                   />{' '}
                                   <p className='post-info'>

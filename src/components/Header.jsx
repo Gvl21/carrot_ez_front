@@ -36,6 +36,9 @@ function Header() {
     const goNewMember = () => {
         navigate('/members');
     };
+    const goMemberInfo = () => {
+        navigate('/memberInfo');
+    };
     const test = () => {};
     const goLogout = () => {
         removeCookie('accessToken');
@@ -89,7 +92,10 @@ function Header() {
                         <>
                             <img
                                 className='profile-img'
-                                src={currentMember.imgUrl}
+                                src={
+                                    currentMember.imgUrl ||
+                                    '/images/carrotProfileImage.jpg'
+                                }
                                 alt='프로필'
                             />
                             <h2>{currentMember.nickname}</h2>

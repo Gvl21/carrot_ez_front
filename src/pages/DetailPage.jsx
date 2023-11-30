@@ -112,7 +112,10 @@ const DetailPage = () => {
             <div className='detail-nickname'>
                 <img
                     className='profile-img'
-                    src={postDetails.memberImageUrl}
+                    src={
+                        postDetails.memberImageUrl ||
+                        '/images/carrotProfileImage.jpg'
+                    }
                     alt='프로필'
                 />
                 <p>작성자: {postDetails.nickname}</p>
