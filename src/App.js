@@ -13,6 +13,7 @@ import { AuthProvider, useAuth } from './components/security/AuthContext';
 import { apiClient } from './components/security/apiClient';
 import FindFriend from './pages/FindFriend';
 import DetailPage from './pages/DetailPage';
+import UpdatePage from './pages/UpdatePage';
 
 export const StateContext = React.createContext();
 export const ImagesContext = React.createContext();
@@ -22,7 +23,7 @@ function App() {
     const [images, setImages] = useState([]);
 
     // 로그인 유저 상태 => null : 로그인 멤버가 없음
-    const [isLoggedIn, setIsLoggedIn] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const [currentMember, setCurrentMember] = useState({
         nickname: '',
@@ -66,7 +67,7 @@ function App() {
     // effect : accessToken cookie 값이 변경될 때 마다 실행할 함수
     useEffect(() => {
         if (!cookies.accessToken) {
-            setIsLoggedIn(null);
+            setIsLoggedIn(false);
             apiClient.interceptors.request.clear();
             return;
         }
@@ -114,6 +115,10 @@ function App() {
                             <Route
                                 path='/detail/:id'
                                 element={<DetailPage />}
+                            />
+                            <Route
+                                path='/update/:id'
+                                element={<UpdatePage />}
                             />
                         </Routes>
                     </Router>

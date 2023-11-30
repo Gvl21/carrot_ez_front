@@ -66,7 +66,7 @@ const ImageUploader = () => {
                             <p>
                                 파일명 : {e.file.name}
                                 <button onClick={() => deleteImage(i)}>
-                                    X
+                                    ❌
                                 </button>
                             </p>
                         </div>

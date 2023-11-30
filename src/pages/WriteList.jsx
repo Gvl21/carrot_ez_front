@@ -4,8 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import './WriteList.css';
 import { SearchProvider } from '../components/Search';
 import SearchBar from '../components/SearchBar';
-import { getArticleList } from '../components/security/apiClient';
-
+import { getArticleListToFindFriend } from '../components/security/apiClient';
+import { StateContext } from '../App';
+import { authChecker } from '../components/security/AuthContext';
 
 const WriteList = () => {
     const initialData = [
@@ -53,8 +54,16 @@ const WriteList = () => {
         // content: '일주일에 세번 날짜 정해서 같이 하실 분 구합니다',
         // },
     ];
-    const [posts, setPosts] = useState(initialData);
+    const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]);
+
+    const { cookies, isLoggedIn } = useContext(StateContext);
+    const navigate = useNavigate();
+    const handleAuth = (e) => {
+        const checkingAuth = authChecker(cookies.accessToken, isLoggedIn);
+        if (checkingAuth === false) e.preventDefault();
+        navigate('/login');
+    };
 
     const handleSearch = (searchTerm) => {
         const filtered = posts.filter((post) =>
@@ -64,10 +73,33 @@ const WriteList = () => {
     };
 
     const showArticles = async () => {
-        const responseBody = await getArticleList();
+        const responseBody = await getArticleListToFindFriend();
         const articleList = responseBody.articleList;
         console.log(articleList);
         setPosts(articleList);
+    };
+
+    const areaOutputMap = {
+        seoul: '서울',
+        incheon: '인천',
+        gyeongi: '경기',
+        gangwon: '강원도',
+        chungcheong: '충청도',
+        sejong: '세종',
+        daejeon: '대전',
+        jeonra: '전라도',
+        daegu: '대구',
+        ulsan: '울산',
+        gyeongsang: '경상',
+        busan: '부산',
+        jeju: '제주',
+    };
+    const categoryOutputMap = {
+        sports: '운동',
+        culture: '문화생활',
+        fstvl: '축제/공연',
+        game: '게임',
+        etc: '자유주제',
     };
 
     useEffect(() => {
@@ -78,65 +110,102 @@ const WriteList = () => {
         <div>
             <SearchBar onSearch={handleSearch} />
             <div className='find-friend-container'>
-            <ul className='post-list'>
-                {filteredPosts.length > 0
-                    ? filteredPosts.map((post) => (
-                          <li key={post.articleId} className='post-item'>
-                            {/* 얀또니 추가한 코드  */}
-                            <Link to={`/detail/${post.articleId}`} className='post-title'>
-                                {post.title}
-                            </Link>
-                             
-                              <p className='post-info'> 지역 : {post.area} </p>
-                              <p className='post-info'>
-                                  {' '}
-                                  카테고리 : {post.category}
-                              </p>
-                              <p className='post-info'>
-                                  {' '}
-                                  작성일 : {post.regTime}{' '}
-                              </p>
-                              <p className='post-info'>
-                                  {' '}
-                                  작성자 : {post.nickname}
+                <ul className='post-list'>
+                    {filteredPosts.length > 0
+                        ? posts &&
+                          filteredPosts.map((post) => (
+                              <li key={post.articleId} className='post-item'>
+                                  {/* 얀또니 추가한 코드  */}
+                                  <Link
+                                      to={`/detail/${post.articleId}`}
+                                      className='post-title'
+                                      onClick={handleAuth}
+                                  >
+                                      {post.title.slice(0, 10) + '...'}
+                                      {`[${post.replyCount}]`}
+                                  </Link>
+
+                                  <p className='post-info'>
+                                      {' '}
+                                      지역 :{' '}
+                                      {areaOutputMap[post.area] ||
+                                          post.area}{' '}
+                                  </p>
+                                  <p className='post-info'>
+                                      {' '}
+                                      카테고리 :{' '}
+                                      {categoryOutputMap[post.category] ||
+                                          post.area}
+                                  </p>
+                                  <p className='post-info'>
+                                      {' '}
+                                      작성일 : {post.regTime}{' '}
+                                  </p>
+                                  <p className='post-info'>
+                                      {' '}
+                                      작성자 : {post.nickname}
+                                      <img
+                                          className='profile-img'
+                                          src={
+                                              post.profileImage ||
+                                              '/images/carrotProfileImage.jpg'
+                                          }
+                                          alt='프로필'
+                                      />{' '}
+                                  </p>
+                                  <p className='post-content'>
+                                      {' '}
+                                      {post.content.slice(0, 10) + '...'}{' '}
+                                  </p>
+                              </li>
+                          ))
+                        : posts &&
+                          posts.map((post) => (
+                              <li key={post.articleId} className='post-item'>
+                                  {/* 얀또니 추가한 코드 */}
+                                  <Link
+                                      to={`/detail/${post.articleId}`}
+                                      className='post-title'
+                                      onClick={handleAuth}
+                                  >
+                                      {post.title.slice(0, 10) + '...'}
+                                      {`[${post.replyCount}]`}
+                                  </Link>
+                                  <p className='post-info'>
+                                      {' '}
+                                      지역 :{' '}
+                                      {areaOutputMap[post.area] ||
+                                          post.area}{' '}
+                                  </p>
+                                  <p className='post-info'>
+                                      {' '}
+                                      카테고리 :{' '}
+                                      {categoryOutputMap[post.category] ||
+                                          post.area}
+                                  </p>
+                                  <p className='post-info'>
+                                      {' '}
+                                      작성일 : {post.regTime}{' '}
+                                  </p>
                                   <img
-                                      src={post.profileImage}
+                                      className='profile-img'
+                                      src={
+                                          post.profileImage ||
+                                          '/images/carrotProfileImage.jpg'
+                                      }
                                       alt='프로필'
                                   />{' '}
-                              </p>
-                              <p className='post-content'> {post.content} </p>
-                          </li>
-                      ))
-                    : posts.map((post) => (
-                          <li key={post.articleId} className='post-item'>
-                            {/* 얀또니 추가한 코드 */}
-                            <Link to={`/detail/${post.articleId}`} className='post-title'>
-                                {post.title.slice(0,10)+'...'}
-                            </Link>
-                            
-                              <p className='post-info'> 지역 : {post.area} </p>
-                              <p className='post-info'>
-                                  {' '}
-                                  카테고리 : {post.category}
-                              </p>
-                              <p className='post-info'>
-                                  {' '}
-                                  작성일 : {post.regTime}{' '}
-                              </p>
-                              <img
-                              className='profile-img'
-                                src={post.profileImage}
-                                alt='프로필'
-                                  />{' '}
-                              <p className='post-info'>
-                                  {' '}
-                                  작성자 : {post.nickname}
-                               
-                              </p>
-                              <p className='post-content'> {post.content.slice(0,5)+'...'} </p>
-                          </li>
-                      ))}
-            </ul>
+                                  <p className='post-info'>
+                                      {' '}
+                                      작성자 : {post.nickname}
+                                  </p>
+                                  <p className='post-content'>
+                                      {' '}
+                                      {post.content.slice(0, 10) + '...'}{' '}
+                                  </p>
+                              </li>
+                          ))}
+                </ul>
             </div>
         </div>
     );

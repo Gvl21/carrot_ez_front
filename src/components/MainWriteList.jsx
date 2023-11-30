@@ -1,6 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getArticleList } from '../components/security/apiClient';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+    getArticleList,
+    getArticleListToMain,
+} from '../components/security/apiClient';
+import { authChecker } from './security/AuthContext';
+import { StateContext } from '../App';
 
 const MainWriteList = () => {
     // 초기 데이터
@@ -35,15 +40,45 @@ const MainWriteList = () => {
     ];
 
     const [posts, setPosts] = useState([]); // 상태 변수 초기화
+    const { cookies, isLoggedIn } = useContext(StateContext);
+    const navigate = useNavigate();
+    const handleAuth = (e) => {
+        const checkingAuth = authChecker(cookies.accessToken, isLoggedIn);
+        if (checkingAuth === false) e.preventDefault();
+        navigate('/login');
+    };
 
     const showArticles = async () => {
         try {
-            const responseBody = await getArticleList();
+            const responseBody = await getArticleListToMain();
             const articleList = responseBody.articleList;
             setPosts(articleList);
         } catch (error) {
             console.error('Error fetching articles:', error);
         }
+    };
+
+    const areaOutputMap = {
+        seoul: '서울',
+        incheon: '인천',
+        gyeongi: '경기',
+        gangwon: '강원도',
+        chungcheong: '충청도',
+        sejong: '세종',
+        daejeon: '대전',
+        jeonra: '전라도',
+        daegu: '대구',
+        ulsan: '울산',
+        gyeongsang: '경상',
+        busan: '부산',
+        jeju: '제주',
+    };
+    const categoryOutputMap = {
+        sports: '운동',
+        culture: '문화생활',
+        fstvl: '축제/공연',
+        game: '게임',
+        etc: '자유주제',
     };
 
     useEffect(() => {
@@ -53,27 +88,52 @@ const MainWriteList = () => {
     return (
         <div className='find-friend-container'>
             <ul className='post-list'>
-                {posts.map((post) => (
-                    <li key={post.articleId} className='post-item'>
-                        <Link
-                            to={`/detail/${post.articleId}`}
-                            className='post-title'
-                        >
-                            {post.title.slice(0,10)+'...'}
-                        </Link>
-                        <p className='post-info'> 지역 : {post.area} </p>
-                        <p className='post-info'>
-                            {' '}
-                            카테고리 : {post.category}{' '}
-                        </p>
-                        <p className='post-info'> 작성일 : {post.date} </p>
-                            <img className='profile-img' src={post.profileImage} alt='프로필' />
-                        <p className='post-info'>
-                            작성자 : {post.nickname}
-                        </p>
-                        <p className='post-content'> {post.content.slice(0,5)+'...'} </p>
-                    </li>
-                ))}
+                {posts ? (
+                    posts.map((post) => (
+                        <li key={post.articleId} className='post-item'>
+                            <Link
+                                to={`/detail/${post.articleId}`}
+                                className='post-title'
+                                onClick={handleAuth}
+                            >
+                                {post.title.slice(0, 10) + '...'}
+                                {`[${post.replyCount}]`}
+                            </Link>
+                            <p className='post-info'>
+                                {' '}
+                                지역 : {areaOutputMap[post.area] ||
+                                    post.area}{' '}
+                            </p>
+                            <p className='post-info'>
+                                {' '}
+                                카테고리 :{' '}
+                                {categoryOutputMap[post.category] ||
+                                    post.area}{' '}
+                            </p>
+                            <p className='post-info'>
+                                {' '}
+                                작성일 : {post.regTime}{' '}
+                            </p>
+                            <img
+                                className='profile-img'
+                                src={
+                                    post.profileImage ||
+                                    '/images/carrotProfileImage.jpg'
+                                }
+                                alt='프로필'
+                            />
+                            <p className='post-info'>
+                                작성자 : {post.nickname}
+                            </p>
+                            <p className='post-content'>
+                                {' '}
+                                {post.content.slice(0, 5) + '...'}{' '}
+                            </p>
+                        </li>
+                    ))
+                ) : (
+                    <p>게시글이 없어요 ㅠㅠ</p>
+                )}
             </ul>
         </div>
     );
