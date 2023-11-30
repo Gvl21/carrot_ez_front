@@ -54,7 +54,7 @@ const WriteList = () => {
         // content: '일주일에 세번 날짜 정해서 같이 하실 분 구합니다',
         // },
     ];
-    const [posts, setPosts] = useState(initialData);
+    const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]);
 
     const { cookies, isLoggedIn } = useContext(StateContext);
@@ -112,7 +112,8 @@ const WriteList = () => {
             <div className='find-friend-container'>
                 <ul className='post-list'>
                     {filteredPosts.length > 0
-                        ? filteredPosts.map((post) => (
+                        ? posts &&
+                          filteredPosts.map((post) => (
                               <li key={post.articleId} className='post-item'>
                                   {/* 얀또니 추가한 코드  */}
                                   <Link
@@ -120,7 +121,7 @@ const WriteList = () => {
                                       className='post-title'
                                       onClick={handleAuth}
                                   >
-                                      {post.title}
+                                      {post.title.slice(0, 10) + '...'}
                                       {`[${post.replyCount}]`}
                                   </Link>
 
@@ -144,6 +145,7 @@ const WriteList = () => {
                                       {' '}
                                       작성자 : {post.nickname}
                                       <img
+                                          className='profile-img'
                                           src={
                                               post.profileImage ||
                                               '/images/carrotProfileImage.jpg'
@@ -153,11 +155,12 @@ const WriteList = () => {
                                   </p>
                                   <p className='post-content'>
                                       {' '}
-                                      {post.content}{' '}
+                                      {post.content.slice(0, 10) + '...'}{' '}
                                   </p>
                               </li>
                           ))
-                        : posts.map((post) => (
+                        : posts &&
+                          posts.map((post) => (
                               <li key={post.articleId} className='post-item'>
                                   {/* 얀또니 추가한 코드 */}
                                   <Link
@@ -198,7 +201,7 @@ const WriteList = () => {
                                   </p>
                                   <p className='post-content'>
                                       {' '}
-                                      {post.content.slice(0, 5) + '...'}{' '}
+                                      {post.content.slice(0, 10) + '...'}{' '}
                                   </p>
                               </li>
                           ))}
