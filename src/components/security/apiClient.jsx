@@ -37,9 +37,9 @@ export const postArticle = async (formData) => {
 };
 
 // 게시글 리스트 조회 api 정의
-export const getArticleList = async () => {
+export const getArticleListToFindFriend = async () => {
     const response = await apiClient
-        .get(`/article/list`)
+        .get(`/article/findFriend-list`)
         .then((response) => {
             const responseBody = response.data;
             return responseBody;
@@ -50,9 +50,52 @@ export const getArticleList = async () => {
     return response;
 };
 
+// 게시글 리스트 조회 api 정의(메인페이지용 상위 9개)
+export const getArticleListToMain = async () => {
+    const response = await apiClient
+        .get(`/article/main-list`)
+        .then((response) => {
+            const responseBody = response.data;
+            return responseBody;
+        })
+        .catch((error) => {
+            return error;
+        });
+    return response;
+};
+
+// 게시글 상세보기 api 정의
 export const getArticleDetails = async (articleId) => {
     const response = await apiClient
         .get(`/article/${articleId}`)
+        .then((response) => {
+            const responseBody = response.data;
+            return responseBody;
+        })
+        .catch((error) => {
+            return error;
+        });
+    return response;
+};
+
+// 게시글 댓글작성 api 정의
+export const postArticleReply = async (articleId, data) => {
+    const response = await apiClient
+        .post(`/article/${articleId}/reply`, data)
+        .then((response) => {
+            const responseBody = response.data;
+            return responseBody;
+        })
+        .catch((error) => {
+            return error;
+        });
+    return response;
+};
+
+// 게시글 댓글조회 api 정의
+export const getArticleReplyList = async (articleId) => {
+    const response = await apiClient
+        .get(`/article/${articleId}/reply`)
         .then((response) => {
             const responseBody = response.data;
             return responseBody;

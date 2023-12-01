@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { signInApi } from '../components/security/apiClient';
 function Login() {
     const navigate = useNavigate();
     // 쿠키 stateContext에 담아 설정하기 --김형수
-    const { cookies, setCookie } = useContext(StateContext);
+    const { cookies, setCookie, isLoggedIn } = useContext(StateContext);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -81,6 +81,13 @@ function Login() {
     const goMember = () => {
         navigate('/members');
     };
+    useEffect(() => {
+        if (isLoggedIn === true || cookies.accessToken) {
+            alert('이미 로그인하셨습니다.');
+            navigate(-1);
+            return;
+        }
+    });
 
     return (
         <form onSubmit={handleSubmit} className='loginform'>
