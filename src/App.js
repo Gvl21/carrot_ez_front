@@ -18,10 +18,12 @@ import UpdatePage from './pages/UpdatePage';
 
 export const StateContext = React.createContext();
 export const ImagesContext = React.createContext();
+export const ArticleContext = React.createContext();
 
 function App() {
     // 이미지 컨텍스트용 상태값
     const [images, setImages] = useState([]);
+    const [postDetails, setPostDetails] = useState(null);
 
     // 로그인 유저 상태 => null : 로그인 멤버가 없음
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -95,7 +97,15 @@ function App() {
                     currentMember,
                     setCurrentMember,
                 }}
+
             >
+                <ArticleContext.Provider
+                    value={{
+                      postDetails, setPostDetails
+                    }}
+                    >
+
+                   
                 <ImagesContext.Provider
                     value={{
                         images,
@@ -124,6 +134,7 @@ function App() {
                         </Routes>
                     </Router>
                 </ImagesContext.Provider>
+                </ArticleContext.Provider>
             </StateContext.Provider>
         </div>
     );

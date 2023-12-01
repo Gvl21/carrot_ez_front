@@ -1,3 +1,8 @@
+
+
+
+
+
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
@@ -6,11 +11,12 @@ import {
     postArticleReply,
 } from '../components/security/apiClient';
 import './DetailPage.css';
-import { StateContext } from '../App';
+import { ArticleContext, StateContext } from '../App';
 
 const DetailPage = () => {
     const { id } = useParams(); // URL에서 파라미터 추출
-    const [postDetails, setPostDetails] = useState(null);
+   // const [postDetails, setPostDetails] = useState(null);
+   const {postDetails, setPostDetails} = useContext(ArticleContext);
     const { isLoggedIn } = useContext(StateContext);
     const [replyContent, setReplyContent] = useState('');
     const [replyList, setReplyList] = useState({});
@@ -18,6 +24,8 @@ const DetailPage = () => {
     const postReplyContent = async () => {
         if (replyContent.trim() === '') {
             alert('메시지를 입력 후 제출해주세요');
+
+            
             setReplyContent('');
             return;
         }
@@ -103,7 +111,7 @@ const DetailPage = () => {
                 <p>
                     카테고리:{' '}
                     {categoryOutputMap[postDetails.category] ||
-                        postDetails.area}
+                        postDetails.category}
                 </p>
             </div>
             <div className='detail-date'>

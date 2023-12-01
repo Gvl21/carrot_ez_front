@@ -6,18 +6,23 @@ import axios from 'axios';
 import WriteList from './WriteList';
 import { apiClient, postArticle } from '../components/security/apiClient';
 import ImageUploader from '../components/ImageUploader';
-import { ImagesContext, StateContext } from '../App';
+import { ArticleContext, ImagesContext, StateContext } from '../App';
 
 function UpdatePage() {
+    const {postDetails, setPostDetails} = useContext(ArticleContext);
     const navigate = useNavigate();
     const { images, setImages } = useContext(ImagesContext);
     const { cookies } = useContext(StateContext);
 
+    useEffect(()=>{
+        setImages(postDetails.articleImageList)
+    })
+
     const [formData, setFormdata] = useState({
-        category: '',
-        area: '',
-        title: '',
-        content: '',
+        category: postDetails.category,
+        area: postDetails.area,
+        title: postDetails.title,
+        content: postDetails.content
     });
 
     const handleChange = (e) => {
@@ -187,7 +192,33 @@ function UpdatePage() {
                 </div>
 
                 <div className='image'>
-                    <ImageUploader />
+                <div>
+            <input
+                type='file'
+                accept='image/jpg, image/png, image/jpeg, image/gif'
+                onChange={handleImageChange}
+                multiple // <- 다중 파일 선택 허용하기
+            />
+            {images.length > 0 && (
+                <div>
+                    {images.map((e, i) => (
+                        <div key={i}>
+                            <img
+                                src={e.previewURL}
+                                alt={`이미지 파일 ${i}`}
+                                style={{ maxWidth: '100%', maxHeight: '200px' }}
+                            />
+                            <p>
+                                파일명 : {e.file.name}
+                                <button onClick={() => deleteImage(i)}>
+                                    ❌
+                                </button>
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
                 </div>
 
                 <div className='button'>
