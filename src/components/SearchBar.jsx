@@ -4,16 +4,28 @@ import './SearchBar.css'
 const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
+
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
+
 
   const handleSearch = () => {
     onSearch(searchTerm);
   };
 
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  }
+
   return (
     <div className="search-bar-container">
+      <div className='dropdown'>
+      
+      </div>
       <div className='search-input'>
       <input
         className='searchbar'
@@ -21,6 +33,7 @@ const SearchBar = ({ onSearch }) => {
         placeholder="검색어를 입력하세요"
         value={searchTerm}
         onChange={handleInputChange}
+        onKeyDown={handleKeyPress}
       />
       <button onClick={handleSearch} className='searchbutton'>검색</button>
       </div>
