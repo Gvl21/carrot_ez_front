@@ -19,3 +19,7 @@
     justify-content: space-around;
   }
   
+  .dropdown {
+    display: flex;
+    align-items: center;
+  }
