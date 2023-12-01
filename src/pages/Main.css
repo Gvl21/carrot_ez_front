@@ -4,9 +4,11 @@
     justify-content: space-around;
 }
 
-.more {
+.more-container {
     display: flex;
     justify-content: flex-end;
+}
+.more {
     cursor: pointer;
     color: #ffbf7a;
     text-decoration: underline;
