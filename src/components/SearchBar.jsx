@@ -9,7 +9,7 @@ const SearchBar = ({ onSearch }) => {
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
-  };
+    };
 
   /*추가된 코드*/
   const handleAreaChange = (e) => {
@@ -22,7 +22,8 @@ const SearchBar = ({ onSearch }) => {
 
 
   const handleSearch = () => {
-    onSearch(selectedArea, selectedCategory, searchTerm);
+    onSearch(selectedArea);
+    /***/
   };
 
   /* 엔터 키 누르면 검색되는 로직 */ 

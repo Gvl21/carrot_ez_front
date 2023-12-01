@@ -65,9 +65,11 @@ const WriteList = () => {
         navigate('/login');
     };
 
-    const handleSearch = (searchTerm) => {
+    const handleSearch = (searchTerm, selectedArea, selectedCategory) => {
         const filtered = posts.filter((post) =>
-            post.title.includes(searchTerm)
+            post.title.includes(searchTerm) &&
+            post.area.includes(selectedArea) &&
+            post.category.includes(selectedCategory)
         );
         setFilteredPosts(filtered);
     };
