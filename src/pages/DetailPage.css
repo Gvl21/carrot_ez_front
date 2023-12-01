@@ -40,3 +40,17 @@
 .detail-content {
     line-height: 1.6;
 }
+
+/*댓글 작성 버튼 CSS */
+.reply-button {
+    width: 90px;
+    height: 110px;
+}
+
+/*댓글 작성 폼 */
+.reply-input {
+    height: 100px;
+    width: 700px;
+    font-family: 'Jua',cursive;
+    font-size: 15px;
+}
