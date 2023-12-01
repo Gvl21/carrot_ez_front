@@ -22,8 +22,7 @@ const SearchBar = ({ onSearch }) => {
 
 
   const handleSearch = () => {
-    onSearch(selectedArea);
-    /***/
+    onSearch(searchTerm, selectedArea, selectedCategory);
   };
 
   /* 엔터 키 누르면 검색되는 로직 */ 
@@ -36,11 +35,12 @@ const SearchBar = ({ onSearch }) => {
   return (
     <div className="search-bar-container">
       <div className='dropdown'>
-        <label>지역 선택</label>
+        <label>지역</label>
         <select
           id='area'
           onChange={handleAreaChange}
           value={selectedArea}
+          className='search-dropdown'
         >
          <option value=''>선택하세요</option>
                         <option value='seoul'>서울특별시</option>
@@ -58,11 +58,12 @@ const SearchBar = ({ onSearch }) => {
                         <option value='busan'>부산광역시</option>
                         <option value='jeju'>제주특별시</option>
         </select>
-        <label>카테고리 선택</label>
+        <label>카테고리</label>
         <select
           id='category'
           onChange={handleCategoryChange}
           value={selectedCategory}
+          className='search-dropdown'
         >
           <option value=''>선택하세요</option>
           <option value='sports'>운동</option>

@@ -16,10 +16,18 @@
 
   .search-bar-container{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: flex-end;
   }
   
   .dropdown {
     display: flex;
     align-items: center;
+    margin-right: 30px;
+  }
+
+  .search-dropdown {
+    height: 30px;
+    width: 180px;
+    margin-left: 10px;
   }
