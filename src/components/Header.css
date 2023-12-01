@@ -7,7 +7,7 @@
     float: left;
     align-items: center;
     cursor: pointer;
-    cursor: pointer;
+    
 }
 
 .menu {
@@ -28,3 +28,12 @@
     justify-content: space-around;
     height: 80px;
 }
+
+.profile-img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+
+

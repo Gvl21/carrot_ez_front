@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { signInApi } from '../components/security/apiClient';
 function Login() {
     const navigate = useNavigate();
     // 쿠키 stateContext에 담아 설정하기 --김형수
-    const { cookies, setCookie } = useContext(StateContext);
+    const { cookies, setCookie, isLoggedIn } = useContext(StateContext);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -32,19 +32,20 @@ function Login() {
         // 로그인 처리하ㄱㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
         const response = await signInApi(formData);
         console.log(response);
-        const loginResult = response.data;
-        if (loginResult.message === 'Success.') {
-            alert('로그인 완료');
-            signInResponse(loginResult);
-            return loginResult;
-        } else {
+        try {
+            if (response.data.message === 'Success.') {
+                const responseBody = response.data;
+                alert('로그인 완료');
+                signInResponse(responseBody);
+                return responseBody;
+            }
+        } catch (error) {
             alert('로그인 실패');
+            const loginResult = response.response.data.message;
             console.log(loginResult);
             if (!loginResult) return null;
-            const responseBody = loginResult;
-            return responseBody;
+            return loginResult;
         }
-
         /**
          * 이전에 김형수가 짠 코드
          */
@@ -61,11 +62,10 @@ function Login() {
 
         // 로그인이 성공하면 부모 컴포넌트로 성공 여부를 전달할 수 있습니다. - 이거 추가해서 로그인 중인지 추가여부를 확인할 코드가 필요할거같긴한데 일단 어케써볼지 생각해바야할거같아요 --김형수
         // onLogin(true);
-        return loginResult;
     };
     const signInResponse = (responseBody) => {
         if (!responseBody) {
-            alert('네트위크 이상입니다.');
+            alert('네트워크 이상입니다.');
             return;
         }
         const { token, expirationTime } = responseBody;
@@ -81,6 +81,13 @@ function Login() {
     const goMember = () => {
         navigate('/members');
     };
+    useEffect(() => {
+        if (isLoggedIn === true || cookies.accessToken) {
+            alert('이미 로그인하셨습니다.');
+            navigate(-1);
+            return;
+        }
+    });
 
     return (
         <form onSubmit={handleSubmit} className='loginform'>

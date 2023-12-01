@@ -8,10 +8,8 @@ import { apiClient, postArticle } from '../components/security/apiClient';
 import ImageUploader from '../components/ImageUploader';
 import { ImagesContext, StateContext } from '../App';
 
-function New() {
+function UpdatePage() {
     const navigate = useNavigate();
-    const contentRef = useRef(null);
-    const imageInputRef = useRef(null);
     const { images, setImages } = useContext(ImagesContext);
     const { cookies } = useContext(StateContext);
 
@@ -22,14 +20,6 @@ function New() {
         content: '',
     });
 
-    /**
-     * 이전 코드
-     */
-    // const handleChange = (e) => {
-    //     const name = e.target.name;
-    //     const value = e.target.value;
-    //     setFormdata({ ...formData, [name]: value });
-    // };
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -38,42 +28,9 @@ function New() {
         console.log(formData);
     };
 
-    /** 게시글 업로드 핸들러 참고자료
-     *  */
-    // const handleSubmit0 = async () => {
-
-    //     const accessToken = cookies.accessToken;
-    //     if (!accessToken) return;
-
-    //     const articleImageList = [];
-
-    //     for (const image of formData.images) {
-    //       const data = new FormData();
-    //       data.append('file', image);
-
-    //       const url = await fileUploadRequest(data);
-    //       if (url) boardImageList.push(url);
-    //     }
-
-    //     if (isBoardWritePage) {
-    //       const requestBody: PostBoardRequestDto = {
-    //         title, content: contents, boardImageList
-    //       }
-    //       postBoardRequest(requestBody, accessToken).then(postBoardResponse);
-    //     }
-    //     if (isBoardUpdatePage) {
-    //       if (!boardNumber) return;
-    //       const requestBody: PatchBoardRequestDto = {
-    //         title, content: contents, boardImageList
-    //       }
-    //       patchBoardRequest(requestBody, boardNumber, accessToken).then(patchBoardResponse);
-    //     }
-    //   }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-    
         // 카테고리가 선택되었는지 확인하기
         if (!formData.category) {
             alert('카테고리와 지역을 선택하세요');
@@ -244,4 +201,4 @@ function New() {
     );
 }
 
-export default New;
+export default UpdatePage;

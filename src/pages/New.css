@@ -64,6 +64,7 @@ select {
     background-color: rgb(251,240,225);
     border-radius: 5px;
     border: none;
+    font-family: 'Jua', sans-serif;
 }
 
 
@@ -77,6 +78,7 @@ select {
   border: none;
   border-radius: 4px;
   box-sizing: border-box;
+  font-family: 'Jua', sans-serif;
 }
 
 .option select,
@@ -92,7 +94,7 @@ select {
 
 /* 버튼 */
 button{
-    margin-top: 80px;
+    margin-top: 30px;
     justify-content: space-evenly;
     font-family: 'Jua', cursive;
     width: 200px;

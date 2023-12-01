@@ -1,0 +1,25 @@
+  .searchbar {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 8px;
+    width: 200px;
+  }
+  
+  .searchbutton {
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 80px;
+  }
+
+  .search-bar-container{
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .dropdown {
+    display: flex;
+    align-items: center;
+  }

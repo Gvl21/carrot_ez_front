@@ -1,0 +1,34 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.more {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    color: #ffbf7a;
+    text-decoration: underline;
+   
+}
+
+.fstvlapi{
+    display: flex;
+    flex-direction: column;
+    /* margin: 20%; */
+    width: 30%;
+}
+
+.main .line {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #a6a6a6;
+    margin: 10px 10px;
+}
+
+.main .writelist {
+    width: 70%;
+    
+}
+

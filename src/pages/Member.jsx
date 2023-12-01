@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import './Member.css';
+import { apiClient } from '../components/security/apiClient';
 
 function Member() {
     const navigate = useNavigate();
@@ -18,8 +19,14 @@ function Member() {
         const name = e.target.name;
         const value = e.target.value;
         if (name === 'profileImage') {
+            const file = e.target.files[0];
+
             // 파일을 선택했을 때
-            setFormData({ ...formData, [name]: e.target.files[0] });
+            setFormData({
+                ...formData,
+                [name]: file,
+                profileImagePreview: URL.createObjectURL(file),
+            });
         } else {
             // 파일 이외의 입력 값은
             setFormData({ ...formData, [name]: value });
@@ -29,7 +36,7 @@ function Member() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const url = 'http://10.100.203.39/members/new';
+        const url = '/members/new';
 
         // 새 폼 데이터를 전송하기 위한 폼
         const data = new FormData();
@@ -38,9 +45,10 @@ function Member() {
             data.append(key, formData[key]);
         });
 
+        console.log(data);
         // 수정사항 기존의 formData에서 data로 body를 교체
 
-        axios
+        apiClient
             .post(url, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -123,6 +131,17 @@ function Member() {
                         accept='image/jpg, image/png, image/jpeg, image/gif'
                         onChange={handleChange}
                     />
+                    {formData.profileImage && (
+                        <img
+                            src={formData.profileImagePreview}
+                            alt='프로필 미리보기'
+                            style={{
+                                maxWidth: '100%',
+                                maxHeight: '200px',
+                                marginTop: '10px',
+                            }}
+                        />
+                    )}
                 </div>
 
                 <div className='button'>

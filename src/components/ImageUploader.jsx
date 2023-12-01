@@ -1,47 +1,80 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react';
+import { ImagesContext } from '../App';
 
 const ImageUploader = () => {
-    const [selectedImage, setSelectedImage] = useState(null);
+    const { images, setImages } = useContext(ImagesContext);
 
     const handleImageChange = (e) => {
-        const file = e.target.files[0];
+        /**
+         * 이전의 단일 파일 업로드용 핸들러
+         */
+        // const file = e.target.files[0];
 
-        if (file) {
-            const reader = new FileReader();
+        // if (file) {
+        //   const reader = new FileReader();
 
-            reader.onloadend=() => {
-                setSelectedImage({
+        //   reader.onloadend = () => {
+        //     setSelectedImage({
+        //       file: file,
+        //       previewURL: reader.result,
+        //     });
+        //   };
+
+        //   reader.readAsDataURL(file);
+        // } else {
+        //   setSelectedImage(null);
+        // }
+        const files = e.target.files;
+
+        if (files.length > 0) {
+            const newImages = [
+                ...images,
+                ...Array.from(files).map((file) => ({
                     file: file,
-                    previewURL: reader.result,
-                })
-            }
-
-            reader.readAsDataURL(file);
+                    previewURL: URL.createObjectURL(file),
+                })),
+            ];
+            console.log(newImages);
+            setImages(newImages);
         } else {
-            setSelectedImage(null);
+            setImages([]);
         }
+    };
+    const deleteImage = (i) => {
+        const updatedImages = [...images];
+        updatedImages.splice(i, 1);
+        setImages(updatedImages);
     };
 
     return (
         <div>
             <input
-            type="file"
-            accept='image/*'
-            onChange={handleImageChange}
+                type='file'
+                accept='image/jpg, image/png, image/jpeg, image/gif'
+                onChange={handleImageChange}
+                multiple // <- 다중 파일 선택 허용하기
             />
-            {selectedImage && (
+            {images.length > 0 && (
                 <div>
-                    <img
-                    src={selectedImage.previewURL}
-                    alt='Preview'
-                    style={{ maxWidth: '100%', maxHeight: '200px'}}
-                />
-                <p>파일명: {selectedImage.file.name}</p>
+                    {images.map((e, i) => (
+                        <div key={i}>
+                            <img
+                                src={e.previewURL}
+                                alt={`이미지 파일 ${i}`}
+                                style={{ maxWidth: '100%', maxHeight: '200px' }}
+                            />
+                            <p>
+                                파일명 : {e.file.name}
+                                <button onClick={() => deleteImage(i)}>
+                                    ❌
+                                </button>
+                            </p>
+                        </div>
+                    ))}
                 </div>
             )}
         </div>
-    )
+    );
+};
 
-}
-
-export default ImageUploader
+export default ImageUploader;

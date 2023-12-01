@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh
+    height: 110vh
 
 
 }
@@ -58,7 +58,6 @@ label {
 .button {
     display: flex;
     justify-content: space-between;
-    margin-top: -50px;
 }
 
 /*버튼 따로따로 */ 

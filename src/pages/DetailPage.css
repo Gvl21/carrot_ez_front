@@ -1,0 +1,42 @@
+/* 전체를 감싸는 box부분 */
+.post-details-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(251,240,225);
+}
+
+/*제목*/
+.detail-title {
+    margin-bottom: 10px;
+}
+
+/* 카테고리 + 지역 부분 */
+.detail-category {
+    margin-bottom: 10px;
+}
+
+/* 작성일 */
+.detail-date {
+    margin-bottom: 10px;
+}
+
+/*닉네임 */
+.detail-nickname {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* 닉네임 이미지부분 */ 
+.detail-nickname img {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.detail-content {
+    line-height: 1.6;
+}
