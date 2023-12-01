@@ -1,28 +1,30 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import './New.css';
 import axios from 'axios';
 import WriteList from './WriteList';
-import { apiClient, postArticle } from '../components/security/apiClient';
+import {
+    apiClient,
+    patchArticle,
+    postArticle,
+} from '../components/security/apiClient';
 import ImageUploader from '../components/ImageUploader';
 import { ArticleContext, ImagesContext, StateContext } from '../App';
 
 function UpdatePage() {
-    const {postDetails, setPostDetails} = useContext(ArticleContext);
+    const { id } = useParams();
+    const { postDetails, setPostDetails } = useContext(ArticleContext);
     const navigate = useNavigate();
     const { images, setImages } = useContext(ImagesContext);
     const { cookies } = useContext(StateContext);
-
-    useEffect(()=>{
-        setImages(postDetails.articleImageList)
-    })
 
     const [formData, setFormdata] = useState({
         category: postDetails.category,
         area: postDetails.area,
         title: postDetails.title,
-        content: postDetails.content
+        content: postDetails.content,
+        imageUrls: postDetails.articleImageList,
     });
 
     const handleChange = (e) => {
@@ -62,7 +64,7 @@ function UpdatePage() {
 
         // 데이터 처리
         try {
-            const response = await postArticle(data);
+            const response = await patchArticle(data, id);
             console.log(response);
             alert('게시글이 성공적으로 작성되었습니다!');
             navigate('/'); // <- 이거로 게시글 상세보기 페이지만들면 거기로 보내면 될듯
@@ -70,44 +72,13 @@ function UpdatePage() {
             alert('게시글 작성에 실패하였습니다.');
         }
 
-        /**
-         * response 가공 로직 <- 추후 알맞게 수정하기
-         */
-        // try {
-        //     if (response.data.message === 'Success.') {
-        //         const responseBody = response.data;
-        //         alert('로그인 완료');
-        //         return responseBody;
-        //     }
-        // } catch (error) {
-        //     alert('로그인 실패');
-        //     const loginResult = response.response.data.message;
-        //     console.log(loginResult);
-        //     if (!loginResult) return null;
-        //     return loginResult;
-        // }
-
-        /**
-         * 파일업로드 이전의 post 설계
-         */
-        // apiClient
-        //     .post(url, formData)
-        //     .then((res) => {
-        //         console.log(res.data);
-        //         alert('게시글이 성공적으로 작성되었습니다!');
-        //         // navigate <- 이거로 게시글 상세보기 페이지만들면 거기로 보내면 될듯
-
-        //         navigate('/');
-        //     })
-        //     .catch((error) => {
-        //         alert('게시글 작성에 실패하였습니다.');
-        //     });
         // 제출 후 폼 초기화
         setFormdata({
             category: '',
             area: '',
             title: '',
             content: '',
+            imageUrls: [],
         });
         setImages([]);
     };
@@ -120,6 +91,11 @@ function UpdatePage() {
         if (e.key === 'Enter') {
             e.preventDefault();
         }
+    };
+    const deleteImageUrl = (e) => {
+        const updatedUrls = [...formData.imageUrls];
+        updatedUrls.splice(e, 1);
+        setFormdata({ ...formData, imageUrls: updatedUrls });
     };
 
     return (
@@ -190,37 +166,29 @@ function UpdatePage() {
                         </textarea>
                     </div>
                 </div>
-
-                <div className='image'>
-                <div>
-            <input
-                type='file'
-                accept='image/jpg, image/png, image/jpeg, image/gif'
-                onChange={handleImageChange}
-                multiple // <- 다중 파일 선택 허용하기
-            />
-            {images.length > 0 && (
-                <div>
-                    {images.map((e, i) => (
-                        <div key={i}>
-                            <img
-                                src={e.previewURL}
-                                alt={`이미지 파일 ${i}`}
-                                style={{ maxWidth: '100%', maxHeight: '200px' }}
-                            />
-                            <p>
-                                파일명 : {e.file.name}
-                                <button onClick={() => deleteImage(i)}>
+                {formData.imageUrls && formData.imageUrls.length > 0 && (
+                    <div>
+                        {formData.imageUrls.map((e, i) => (
+                            <div key={i}>
+                                <img
+                                    src={e.image}
+                                    alt={`업로드 된 이미지 파일 ${i + 1}`}
+                                    style={{
+                                        maxWidth: '100%',
+                                        maxHeight: '200px',
+                                    }}
+                                />{' '}
+                                <button
+                                    type='button'
+                                    onClick={() => deleteImageUrl(i)}
+                                >
                                     ❌
                                 </button>
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </div>
-                </div>
-
+                            </div>
+                        ))}
+                    </div>
+                )}
+                <ImageUploader />
                 <div className='button'>
                     <button type='submit'>작성하기</button>
                     <button onClick={goMain} type='button'>

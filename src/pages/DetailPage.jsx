@@ -1,8 +1,3 @@
-
-
-
-
-
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
@@ -15,8 +10,8 @@ import { ArticleContext, StateContext } from '../App';
 
 const DetailPage = () => {
     const { id } = useParams(); // URL에서 파라미터 추출
-   // const [postDetails, setPostDetails] = useState(null);
-   const {postDetails, setPostDetails} = useContext(ArticleContext);
+    // const [postDetails, setPostDetails] = useState(null);
+    const { postDetails, setPostDetails } = useContext(ArticleContext);
     const { isLoggedIn } = useContext(StateContext);
     const [replyContent, setReplyContent] = useState('');
     const [replyList, setReplyList] = useState({});
@@ -25,7 +20,6 @@ const DetailPage = () => {
         if (replyContent.trim() === '') {
             alert('메시지를 입력 후 제출해주세요');
 
-            
             setReplyContent('');
             return;
         }
@@ -61,6 +55,7 @@ const DetailPage = () => {
     useEffect(() => {
         const fetchDetails = async () => {
             try {
+                setReplyList({});
                 if (postDetails.replyCount > 0) {
                     const responseBody = await getArticleReplyList(
                         postDetails.articleId

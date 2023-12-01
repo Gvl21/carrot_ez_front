@@ -35,6 +35,26 @@ export const postArticle = async (formData) => {
         });
     return response;
 };
+// 게시글 수정 api 정의
+export const patchArticle = async (formData, articleId) => {
+    const response = await apiClient
+        .post(`/article/${articleId}/update`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // 멀티파트 파일을 보내야해서 따로 헤더 설정을 한 후 보내기
+            },
+        })
+        .then((response) => {
+            // const responseBody = response.data;
+            // const { code } = responseBody;
+            return response;
+        })
+        .catch((error) => {
+            // const responseBody = error.response.data;
+            // const { code } = responseBody;
+            return error;
+        });
+    return response;
+};
 
 // 게시글 리스트 조회 api 정의
 export const getArticleListToFindFriend = async () => {
