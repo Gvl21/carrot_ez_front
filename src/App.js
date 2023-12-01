@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Member from './pages/Member';
 import Main from './pages/Main';
@@ -14,51 +14,11 @@ import { apiClient } from './components/security/apiClient';
 import FindFriend from './pages/FindFriend';
 import DetailPage from './pages/DetailPage';
 
-function reducer(state, action) {
-    switch (action.type) {
-      case 'INIT' : {
-        // localStorage에서 가져온 데이터로 상태를 변경
-        return action.data;
-      }
-      case 'CREATE' : {
-        // 데이터 배열에 새 데이터를 추가 (spread 연산자)
-        const newState = [action.data, ...state];
-        localStorage.setItem('writeList', JSON.stringify(newState));
-        return newState;
-                // 새로운 데이터를   ...기존의 데이터에 추가
-      }
-      case 'UPDATE' : {
-        // 기존 데이터 배열에서 id에 매칭되는 내용 수정 (삼항연산자 사용)
-        const newState =  state.map((item)=> 
-        String(item.id) === String(action.data.id) ?  { ...action.data } : item);
-        localStorage.setItem('writeList', JSON.stringify(newState));
-        return newState;
-        // (item) => (조건식) ? (참일 경우, id가 일치할경우) : item 
-      }
-      case 'DELETE' : {
-        // 기존 데이터에서 id가 일치하지 않는 데이터만 남김 (filter)
-        const newState = state.filter((item) => 
-        String(item.id) !== String(action.id));
-        localStorage.setItem('writeList', JSON.stringify(newState));
-        return newState;
-      }
-        default : {
-        return state
-        }
-      }
-    }
+
 export const StateContext = React.createContext();
-export const DispatchContext = React.createContext();
+export const ImagesContext = React.createContext();
 
 function App() {
-
-    const [data, dispatch] = useReducer(reducer, []);
-    const [isDataLoaded, setIsDataLoaded] = useState(false);
-    const idRef = useRef(1);
-
-    // 컴포넌트가 마운트 될 때, 로컬 저장소에서 데이터 가져오기
-
-
     // 이미지 컨텍스트용 상태값
     const [images, setImages] = useState([]);
 
@@ -121,8 +81,6 @@ function App() {
         getSignInUserInfo(cookies.accessToken);
         setIsLoggedIn(true);
     }, [cookies.accessToken]);
-
-   
 
     return (
         <div className='App'>
