@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import {
     getArticleDetails,
     getArticleReplyList,
+    onErrorImg,
     postArticleReply,
 } from '../components/security/apiClient';
 import './DetailPage.css';
@@ -12,7 +13,7 @@ const DetailPage = () => {
     const { id } = useParams(); // URL에서 파라미터 추출
     // const [postDetails, setPostDetails] = useState(null);
     const { postDetails, setPostDetails } = useContext(ArticleContext);
-    const { isLoggedIn } = useContext(StateContext);
+    const { isLoggedIn, currentMember } = useContext(StateContext);
     const [replyContent, setReplyContent] = useState('');
     const [replyList, setReplyList] = useState({});
 
@@ -120,6 +121,7 @@ const DetailPage = () => {
                         '/images/carrotProfileImage.jpg'
                     }
                     alt='프로필'
+                    onError={onErrorImg}
                 />
                 <p>작성자: {postDetails.nickname}</p>
             </div>
@@ -130,9 +132,11 @@ const DetailPage = () => {
                 postDetails.articleImageList.map((e) => (
                     <img src={e.image} alt='업로드 된 사진' />
                 ))}
-            <Link to={`/update/${postDetails.articleId}`}>
-                <button>수정하기</button>
-            </Link>
+            {postDetails.createdBy === currentMember.email && (
+                <Link to={`/update/${postDetails.articleId}`}>
+                    <button>수정하기</button>
+                </Link>
+            )}
             <div className='reply-section'>
                 <div className='reply-input-section'>
                     <input

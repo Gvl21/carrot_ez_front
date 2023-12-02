@@ -6,6 +6,7 @@ import Main from '../pages/Main';
 import Member from '../pages/Member';
 import { StateContext } from '../App';
 import { useAuth } from './security/AuthContext';
+import { onErrorImg } from './security/apiClient';
 
 const HeaderBlock = styled.div`
     background-color: #ffbf7a;
@@ -68,7 +69,7 @@ function Header() {
     //             </div>
     //         );
     //     }
-    // };
+    // };\
 
     useEffect(() => {}, [isLoggedIn]);
 
@@ -97,6 +98,7 @@ function Header() {
                                     '/images/carrotProfileImage.jpg'
                                 }
                                 alt='프로필'
+                                onError={onErrorImg}
                             />
                             <h2>{currentMember.nickname}</h2>
                         </>

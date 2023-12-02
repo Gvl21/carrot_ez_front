@@ -6,6 +6,7 @@ import axios from 'axios';
 import WriteList from './WriteList';
 import {
     apiClient,
+    deleteArticle,
     patchArticle,
     postArticle,
 } from '../components/security/apiClient';
@@ -18,6 +19,7 @@ function UpdatePage() {
     const navigate = useNavigate();
     const { images, setImages } = useContext(ImagesContext);
     const { cookies } = useContext(StateContext);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const [formData, setFormdata] = useState({
         category: postDetails.category,
@@ -57,9 +59,24 @@ function UpdatePage() {
         });
 
         // 나머지 폼 데이터 넣기
+        // Object.keys(formData).forEach((key) => {
+        //     data.append(key, formData[key]);
+        // });
         Object.keys(formData).forEach((key) => {
-            data.append(key, formData[key]);
+            if (key === 'imageUrls') {
+                formData[key].forEach((image, index) => {
+                    data.append(`imageUrls[${index}].image`, image.image);
+                    data.append(
+                        `imageUrls[${index}].articleId`,
+                        image.articleId
+                    );
+                    data.append(`imageUrls[${index}].id`, image.id);
+                });
+            } else {
+                data.append(key, formData[key]);
+            }
         });
+
         console.log('게시글쓰기:', data);
 
         // 데이터 처리
@@ -78,7 +95,7 @@ function UpdatePage() {
             area: '',
             title: '',
             content: '',
-            imageUrls: [],
+            imageUrls: null,
         });
         setImages([]);
     };
@@ -93,9 +110,29 @@ function UpdatePage() {
         }
     };
     const deleteImageUrl = (e) => {
-        const updatedUrls = [...formData.imageUrls];
+        const updatedUrls = formData.imageUrls;
         updatedUrls.splice(e, 1);
         setFormdata({ ...formData, imageUrls: updatedUrls });
+    };
+
+    const deleteArticleHandler = async () => {
+        if (isDeleting) {
+            return;
+        }
+        const deleteConfirm = window.confirm('정말 삭제하시겠습니까?');
+        if (deleteConfirm) {
+            try {
+                setIsDeleting(true);
+                const response = await deleteArticle(id);
+                console.log(response);
+                alert('게시글이 삭제되었습니다.');
+                navigate('/');
+            } catch {
+                alert('게시글 삭제에 실패하였습니다.');
+            } finally {
+                setIsDeleting(false);
+            }
+        }
     };
 
     return (
@@ -191,6 +228,13 @@ function UpdatePage() {
                 <ImageUploader />
                 <div className='button'>
                     <button type='submit'>작성하기</button>
+                    <button
+                        onClick={deleteArticleHandler}
+                        type='button'
+                        disabled={isDeleting}
+                    >
+                        {isDeleting ? '삭제 중...' : '삭제하기'}
+                    </button>
                     <button onClick={goMain} type='button'>
                         취소하기
                     </button>
