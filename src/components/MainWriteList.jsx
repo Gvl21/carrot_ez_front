@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
     getArticleList,
     getArticleListToMain,
+    onErrorImg,
 } from '../components/security/apiClient';
 import { authChecker } from './security/AuthContext';
 import { StateContext } from '../App';
@@ -56,6 +57,14 @@ const MainWriteList = () => {
         } catch (error) {
             console.error('Error fetching articles:', error);
         }
+    };
+    const goMemberInfo = (email) => {
+        const checkingAuth = authChecker(cookies.accessToken, isLoggedIn);
+        if (checkingAuth === false) {
+            navigate('/login');
+            return;
+        }
+        navigate(`/members/${email}`);
     };
 
     const areaOutputMap = {
@@ -121,8 +130,13 @@ const MainWriteList = () => {
                                     '/images/carrotProfileImage.jpg'
                                 }
                                 alt='프로필'
+                                onClick={() => goMemberInfo(post.createdBy)}
+                                onError={onErrorImg}
                             />
-                            <p className='post-info'>
+                            <p
+                                className='post-info'
+                                onClick={() => goMemberInfo(post.createdBy)}
+                            >
                                 작성자 : {post.nickname}
                             </p>
                             <p className='post-content'>

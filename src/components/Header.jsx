@@ -37,8 +37,8 @@ function Header() {
     const goNewMember = () => {
         navigate('/members');
     };
-    const goMemberInfo = () => {
-        navigate('/memberInfo');
+    const goMemberInfo = (email) => {
+        navigate(`/members/${email}`);
     };
     const test = () => {};
     const goLogout = () => {
@@ -99,8 +99,17 @@ function Header() {
                                 }
                                 alt='프로필'
                                 onError={onErrorImg}
+                                onClick={() =>
+                                    goMemberInfo(currentMember.email)
+                                }
                             />
-                            <h2>{currentMember.nickname}</h2>
+                            <h2
+                                onClick={() =>
+                                    goMemberInfo(currentMember.email)
+                                }
+                            >
+                                {currentMember.nickname}
+                            </h2>
                         </>
                     )}
                 </div>

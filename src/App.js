@@ -14,6 +14,7 @@ import { apiClient } from './components/security/apiClient';
 import FindFriend from './pages/FindFriend';
 import DetailPage from './pages/DetailPage';
 import UpdatePage from './pages/UpdatePage';
+import User from './pages/User';
 
 export const StateContext = React.createContext();
 export const ImagesContext = React.createContext();
@@ -128,6 +129,10 @@ function App() {
                                 <Route
                                     path='/update/:id'
                                     element={<UpdatePage />}
+                                />
+                                <Route
+                                    path='/members/:email'
+                                    element={<User />}
                                 />
                             </Routes>
                         </Router>

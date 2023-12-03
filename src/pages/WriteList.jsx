@@ -4,7 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import './WriteList.css';
 import { SearchProvider } from '../components/Search';
 import SearchBar from '../components/SearchBar';
-import { getArticleListToFindFriend } from '../components/security/apiClient';
+import {
+    getArticleListToFindFriend,
+    onErrorImg,
+} from '../components/security/apiClient';
 import { StateContext } from '../App';
 import { authChecker } from '../components/security/AuthContext';
 
@@ -101,6 +104,14 @@ const WriteList = () => {
         game: '게임',
         etc: '자유주제',
     };
+    const goMemberInfo = (email) => {
+        const checkingAuth = authChecker(cookies.accessToken, isLoggedIn);
+        if (checkingAuth === false) {
+            navigate('/login');
+            return;
+        }
+        navigate(`/members/${email}`);
+    };
 
     useEffect(() => {
         showArticles();
@@ -141,7 +152,12 @@ const WriteList = () => {
                                       {' '}
                                       작성일 : {post.regTime}{' '}
                                   </p>
-                                  <p className='post-info'>
+                                  <p
+                                      className='post-info'
+                                      onClick={() =>
+                                          goMemberInfo(post.createdBy)
+                                      }
+                                  >
                                       {' '}
                                       작성자 : {post.nickname}
                                       <img
@@ -151,6 +167,10 @@ const WriteList = () => {
                                               '/images/carrotProfileImage.jpg'
                                           }
                                           alt='프로필'
+                                          onError={onErrorImg}
+                                          onClick={() =>
+                                              goMemberInfo(post.createdBy)
+                                          }
                                       />{' '}
                                   </p>
                                   <p className='post-content'>
@@ -194,8 +214,17 @@ const WriteList = () => {
                                           '/images/carrotProfileImage.jpg'
                                       }
                                       alt='프로필'
+                                      onError={onErrorImg}
+                                      onClick={() =>
+                                          goMemberInfo(post.createdBy)
+                                      }
                                   />{' '}
-                                  <p className='post-info'>
+                                  <p
+                                      className='post-info'
+                                      onClick={() =>
+                                          goMemberInfo(post.createdBy)
+                                      }
+                                  >
                                       {' '}
                                       작성자 : {post.nickname}
                                   </p>

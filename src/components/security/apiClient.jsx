@@ -28,13 +28,9 @@ export const postArticle = async (formData) => {
             },
         })
         .then((response) => {
-            // const responseBody = response.data;
-            // const { code } = responseBody;
             return response;
         })
         .catch((error) => {
-            // const responseBody = error.response.data;
-            // const { code } = responseBody;
             return error;
         });
     return response;
@@ -48,13 +44,9 @@ export const patchArticle = async (formData, articleId) => {
             },
         })
         .then((response) => {
-            // const responseBody = response.data;
-            // const { code } = responseBody;
             return response;
         })
         .catch((error) => {
-            // const responseBody = error.response.data;
-            // const { code } = responseBody;
             return error;
         });
     return response;
@@ -132,6 +124,20 @@ export const postArticleReply = async (articleId, data) => {
 export const getArticleReplyList = async (articleId) => {
     const response = await apiClient
         .get(`/article/${articleId}/reply`)
+        .then((response) => {
+            const responseBody = response.data;
+            return responseBody;
+        })
+        .catch((error) => {
+            return error;
+        });
+    return response;
+};
+
+//  유저 정보조회 api 정의
+export const getMemberInfo = async (email) => {
+    const response = await apiClient
+        .get(`/members/${email}`)
         .then((response) => {
             const responseBody = response.data;
             return responseBody;

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
     getArticleDetails,
     getArticleReplyList,
@@ -16,6 +16,7 @@ const DetailPage = () => {
     const { isLoggedIn, currentMember } = useContext(StateContext);
     const [replyContent, setReplyContent] = useState('');
     const [replyList, setReplyList] = useState({});
+    const navigate = useNavigate();
 
     const postReplyContent = async () => {
         if (replyContent.trim() === '') {
@@ -95,6 +96,9 @@ const DetailPage = () => {
         game: '게임',
         etc: '자유주제',
     };
+    const goMemberInfo = (email) => {
+        navigate(`/members/${email}`);
+    };
     return (
         <div className='post-details-container'>
             <div className='detail-title'>
@@ -122,8 +126,11 @@ const DetailPage = () => {
                     }
                     alt='프로필'
                     onError={onErrorImg}
+                    onClick={() => goMemberInfo(postDetails.createdBy)}
                 />
-                <p>작성자: {postDetails.nickname}</p>
+                <p onClick={() => goMemberInfo(postDetails.createdBy)}>
+                    작성자: {postDetails.nickname}
+                </p>
             </div>
             <hr />
             {/* 게시글 업로드 이미지 넣을 곳  */}
@@ -156,9 +163,14 @@ const DetailPage = () => {
                                 <p>
                                     {' '}
                                     <img
-                                        src={e.memberImgUrl}
+                                        src={
+                                            e.memberImgUrl ||
+                                            '/images/carrotProfileImage.jpg'
+                                        }
                                         className='profile-img'
                                         alt='프로필'
+                                        onClick={() => goMemberInfo(e.email)}
+                                        onError={onErrorImg}
                                     />{' '}
                                     {e.nickname}
                                 </p>
