@@ -65,9 +65,9 @@ const ImageUploader = () => {
                             />
                             <p>
                                 파일명 : {e.file.name}
-                                <button onClick={() => deleteImage(i)}>
+                                <span style={{cursor : 'pointer'}} onClick={() => deleteImage(i)}>
                                     ❌
-                                </button>
+                                </span>
                             </p>
                         </div>
                     ))}

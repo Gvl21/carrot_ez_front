@@ -4,7 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import './WriteList.css';
 import { SearchProvider } from '../components/Search';
 import SearchBar from '../components/SearchBar';
-import { getArticleListToFindFriend } from '../components/security/apiClient';
+import {
+    getArticleListToFindFriend,
+    onErrorImg,
+} from '../components/security/apiClient';
 import { StateContext } from '../App';
 import { authChecker } from '../components/security/AuthContext';
 
@@ -65,9 +68,11 @@ const WriteList = () => {
         navigate('/login');
     };
 
-    const handleSearch = (searchTerm) => {
+    const handleSearch = (searchTerm, selectedArea, selectedCategory) => {
         const filtered = posts.filter((post) =>
-            post.title.includes(searchTerm)
+            post.title.includes(searchTerm) &&
+            post.area.includes(selectedArea) &&
+            post.category.includes(selectedCategory)
         );
         setFilteredPosts(filtered);
     };
@@ -101,6 +106,14 @@ const WriteList = () => {
         game: '게임',
         etc: '자유주제',
     };
+    const goMemberInfo = (email) => {
+        const checkingAuth = authChecker(cookies.accessToken, isLoggedIn);
+        if (checkingAuth === false) {
+            navigate('/login');
+            return;
+        }
+        navigate(`/members/${email}`);
+    };
 
     useEffect(() => {
         showArticles();
@@ -115,7 +128,6 @@ const WriteList = () => {
                         ? posts &&
                           filteredPosts.map((post) => (
                               <li key={post.articleId} className='post-item'>
-                                  {/* 얀또니 추가한 코드  */}
                                   <Link
                                       to={`/detail/${post.articleId}`}
                                       className='post-title'
@@ -141,7 +153,12 @@ const WriteList = () => {
                                       {' '}
                                       작성일 : {post.regTime}{' '}
                                   </p>
-                                  <p className='post-info'>
+                                  <p
+                                      className='post-info'
+                                      onClick={() =>
+                                          goMemberInfo(post.createdBy)
+                                      }
+                                  >
                                       {' '}
                                       작성자 : {post.nickname}
                                       <img
@@ -151,6 +168,10 @@ const WriteList = () => {
                                               '/images/carrotProfileImage.jpg'
                                           }
                                           alt='프로필'
+                                          onError={onErrorImg}
+                                          onClick={() =>
+                                              goMemberInfo(post.createdBy)
+                                          }
                                       />{' '}
                                   </p>
                                   <p className='post-content'>
@@ -162,7 +183,6 @@ const WriteList = () => {
                         : posts &&
                           posts.map((post) => (
                               <li key={post.articleId} className='post-item'>
-                                  {/* 얀또니 추가한 코드 */}
                                   <Link
                                       to={`/detail/${post.articleId}`}
                                       className='post-title'
@@ -194,8 +214,17 @@ const WriteList = () => {
                                           '/images/carrotProfileImage.jpg'
                                       }
                                       alt='프로필'
+                                      onError={onErrorImg}
+                                      onClick={() =>
+                                          goMemberInfo(post.createdBy)
+                                      }
                                   />{' '}
-                                  <p className='post-info'>
+                                  <p
+                                      className='post-info'
+                                      onClick={() =>
+                                          goMemberInfo(post.createdBy)
+                                      }
+                                  >
                                       {' '}
                                       작성자 : {post.nickname}
                                   </p>

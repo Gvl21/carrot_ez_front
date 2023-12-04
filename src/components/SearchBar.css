@@ -1,10 +1,12 @@
   .searchbar {
     padding: 8px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 4px;
     margin-right: 8px;
     width: 200px;
+    background-color:  rgb(251,240,225);
+    font-family: 'Jua', cursive;
   }
   
   .searchbutton {
@@ -16,6 +18,18 @@
 
   .search-bar-container{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: flex-end;
   }
   
+  .dropdown {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+  }
+
+  .search-dropdown {
+    height: 30px;
+    width: 180px;
+    margin-left: 10px;
+  }

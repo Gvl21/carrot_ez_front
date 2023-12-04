@@ -48,9 +48,12 @@ function Main() {
             <div className='line'></div>
 
             <div className='writelist'>
+                <div className='more-container'>
                 <h2 className='more' onClick={goFindFriend}>
                     more👉
                 </h2>
+                </div>
+
                 <MainWriteList />
             </div>
         </div>

@@ -5,7 +5,7 @@ ul.fstvl {
     list-style-type: none;
     padding: 0;
     overflow: scroll;
-    height: 600px;
+    height: 650px;
 
 }
 
@@ -17,7 +17,7 @@ ul.fstvl li{
 
 ul.fstvl li h3 {
     margin: 0;
-    color: #333;
+    color: #ffbf7a;;
 }
 
 ul.fstvl li p {

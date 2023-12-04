@@ -7,8 +7,8 @@ function Fstvl() {
 
     const getFestivalList = async () => {
         try {
-            const response = await axios.get('http://10.100.203.39/fstvl');
-            // const response = await axios.get('http://localhost/fstvl');
+            // const response = await axios.get('http://10.100.203.39/fstvl');
+            const response = await axios.get('http://localhost/fstvl');
             setFstvls(response.data);
             return response;
         } catch (error) {
