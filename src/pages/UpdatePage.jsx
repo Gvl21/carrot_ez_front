@@ -1,23 +1,32 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import './New.css';
 import axios from 'axios';
 import WriteList from './WriteList';
-import { apiClient, postArticle } from '../components/security/apiClient';
+import {
+    apiClient,
+    deleteArticle,
+    patchArticle,
+    postArticle,
+} from '../components/security/apiClient';
 import ImageUploader from '../components/ImageUploader';
-import { ImagesContext, StateContext } from '../App';
+import { ArticleContext, ImagesContext, StateContext } from '../App';
 
 function UpdatePage() {
+    const { id } = useParams();
+    const { postDetails, setPostDetails } = useContext(ArticleContext);
     const navigate = useNavigate();
     const { images, setImages } = useContext(ImagesContext);
     const { cookies } = useContext(StateContext);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const [formData, setFormdata] = useState({
-        category: '',
-        area: '',
-        title: '',
-        content: '',
+        category: postDetails.category,
+        area: postDetails.area,
+        title: postDetails.title,
+        content: postDetails.content,
+        imageUrls: postDetails.articleImageList,
     });
 
     const handleChange = (e) => {
@@ -50,14 +59,29 @@ function UpdatePage() {
         });
 
         // 나머지 폼 데이터 넣기
+        // Object.keys(formData).forEach((key) => {
+        //     data.append(key, formData[key]);
+        // });
         Object.keys(formData).forEach((key) => {
-            data.append(key, formData[key]);
+            if (key === 'imageUrls') {
+                formData[key].forEach((image, index) => {
+                    data.append(`imageUrls[${index}].image`, image.image);
+                    data.append(
+                        `imageUrls[${index}].articleId`,
+                        image.articleId
+                    );
+                    data.append(`imageUrls[${index}].id`, image.id);
+                });
+            } else {
+                data.append(key, formData[key]);
+            }
         });
+
         console.log('게시글쓰기:', data);
 
         // 데이터 처리
         try {
-            const response = await postArticle(data);
+            const response = await patchArticle(data, id);
             console.log(response);
             alert('게시글이 성공적으로 작성되었습니다!');
             navigate('/'); // <- 이거로 게시글 상세보기 페이지만들면 거기로 보내면 될듯
@@ -65,44 +89,13 @@ function UpdatePage() {
             alert('게시글 작성에 실패하였습니다.');
         }
 
-        /**
-         * response 가공 로직 <- 추후 알맞게 수정하기
-         */
-        // try {
-        //     if (response.data.message === 'Success.') {
-        //         const responseBody = response.data;
-        //         alert('로그인 완료');
-        //         return responseBody;
-        //     }
-        // } catch (error) {
-        //     alert('로그인 실패');
-        //     const loginResult = response.response.data.message;
-        //     console.log(loginResult);
-        //     if (!loginResult) return null;
-        //     return loginResult;
-        // }
-
-        /**
-         * 파일업로드 이전의 post 설계
-         */
-        // apiClient
-        //     .post(url, formData)
-        //     .then((res) => {
-        //         console.log(res.data);
-        //         alert('게시글이 성공적으로 작성되었습니다!');
-        //         // navigate <- 이거로 게시글 상세보기 페이지만들면 거기로 보내면 될듯
-
-        //         navigate('/');
-        //     })
-        //     .catch((error) => {
-        //         alert('게시글 작성에 실패하였습니다.');
-        //     });
         // 제출 후 폼 초기화
         setFormdata({
             category: '',
             area: '',
             title: '',
             content: '',
+            imageUrls: null,
         });
         setImages([]);
     };
@@ -114,6 +107,31 @@ function UpdatePage() {
     const titleKeyPress = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
+        }
+    };
+    const deleteImageUrl = (e) => {
+        const updatedUrls = formData.imageUrls;
+        updatedUrls.splice(e, 1);
+        setFormdata({ ...formData, imageUrls: updatedUrls });
+    };
+
+    const deleteArticleHandler = async () => {
+        if (isDeleting) {
+            return;
+        }
+        const deleteConfirm = window.confirm('정말 삭제하시겠습니까?');
+        if (deleteConfirm) {
+            try {
+                setIsDeleting(true);
+                const response = await deleteArticle(id);
+                console.log(response);
+                alert('게시글이 삭제되었습니다.');
+                navigate('/');
+            } catch {
+                alert('게시글 삭제에 실패하였습니다.');
+            } finally {
+                setIsDeleting(false);
+            }
         }
     };
 
@@ -185,13 +203,38 @@ function UpdatePage() {
                         </textarea>
                     </div>
                 </div>
-
-                <div className='image'>
-                    <ImageUploader />
-                </div>
-
+                {formData.imageUrls && formData.imageUrls.length > 0 && (
+                    <div>
+                        {formData.imageUrls.map((e, i) => (
+                            <div key={i}>
+                                <img
+                                    src={e.image}
+                                    alt={`업로드 된 이미지 파일 ${i + 1}`}
+                                    style={{
+                                        maxWidth: '100%',
+                                        maxHeight: '200px',
+                                    }}
+                                />{' '}
+                                <button
+                                    type='button'
+                                    onClick={() => deleteImageUrl(i)}
+                                >
+                                    ❌
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
+                <ImageUploader />
                 <div className='button'>
                     <button type='submit'>작성하기</button>
+                    <button
+                        onClick={deleteArticleHandler}
+                        type='button'
+                        disabled={isDeleting}
+                    >
+                        {isDeleting ? '삭제 중...' : '삭제하기'}
+                    </button>
                     <button onClick={goMain} type='button'>
                         취소하기
                     </button>

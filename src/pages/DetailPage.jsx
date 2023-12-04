@@ -1,23 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
     getArticleDetails,
     getArticleReplyList,
+    onErrorImg,
     postArticleReply,
 } from '../components/security/apiClient';
 import './DetailPage.css';
-import { StateContext } from '../App';
+import { ArticleContext, StateContext } from '../App';
 
 const DetailPage = () => {
     const { id } = useParams(); // URL에서 파라미터 추출
-    const [postDetails, setPostDetails] = useState(null);
-    const { isLoggedIn } = useContext(StateContext);
+    // const [postDetails, setPostDetails] = useState(null);
+    const { postDetails, setPostDetails } = useContext(ArticleContext);
+    const { isLoggedIn, currentMember } = useContext(StateContext);
     const [replyContent, setReplyContent] = useState('');
     const [replyList, setReplyList] = useState({});
+    const navigate = useNavigate();
 
     const postReplyContent = async () => {
         if (replyContent.trim() === '') {
             alert('메시지를 입력 후 제출해주세요');
+
             setReplyContent('');
             return;
         }
@@ -53,6 +57,7 @@ const DetailPage = () => {
     useEffect(() => {
         const fetchDetails = async () => {
             try {
+                setReplyList({});
                 if (postDetails.replyCount > 0) {
                     const responseBody = await getArticleReplyList(
                         postDetails.articleId
@@ -91,6 +96,9 @@ const DetailPage = () => {
         game: '게임',
         etc: '자유주제',
     };
+    const goMemberInfo = (email) => {
+        navigate(`/members/${email}`);
+    };
     return (
         <div className='post-details-container'>
             <div className='detail-title'>
@@ -103,7 +111,7 @@ const DetailPage = () => {
                 <p>
                     카테고리:{' '}
                     {categoryOutputMap[postDetails.category] ||
-                        postDetails.area}
+                        postDetails.category}
                 </p>
             </div>
             <div className='detail-date'>
@@ -117,8 +125,12 @@ const DetailPage = () => {
                         '/images/carrotProfileImage.jpg'
                     }
                     alt='프로필'
+                    onError={onErrorImg}
+                    onClick={() => goMemberInfo(postDetails.createdBy)}
                 />
-                <p>작성자: {postDetails.nickname}</p>
+                <p onClick={() => goMemberInfo(postDetails.createdBy)}>
+                    작성자: {postDetails.nickname}
+                </p>
             </div>
             <hr />
             {/* 게시글 업로드 이미지 넣을 곳  */}
@@ -127,9 +139,11 @@ const DetailPage = () => {
                 postDetails.articleImageList.map((e) => (
                     <img src={e.image} alt='업로드 된 사진' />
                 ))}
-            <Link to={`/update/${postDetails.articleId}`}>
-                <button>수정하기</button>
-            </Link>
+            {postDetails.createdBy === currentMember.email && (
+                <Link to={`/update/${postDetails.articleId}`}>
+                    <button>수정하기</button>
+                </Link>
+            )}
             <div className='reply-section'>
                 <div className='reply-input-section'>
                     <input
@@ -150,9 +164,14 @@ const DetailPage = () => {
                                 <p>
                                     {' '}
                                     <img
-                                        src={e.memberImgUrl}
+                                        src={
+                                            e.memberImgUrl ||
+                                            '/images/carrotProfileImage.jpg'
+                                        }
                                         className='profile-img'
                                         alt='프로필'
+                                        onClick={() => goMemberInfo(e.email)}
+                                        onError={onErrorImg}
                                     />{' '}
                                     {e.nickname}
                                 </p>

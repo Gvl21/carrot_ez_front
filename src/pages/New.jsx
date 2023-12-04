@@ -73,7 +73,12 @@ function New() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-    
+        // // 이미지가 선택되었는지 확인하기 
+        // if (images.length === 0) {
+        //     alert('이미지를 선택하세요');
+        //     return 
+        // }
+
         // 카테고리가 선택되었는지 확인하기
         if (!formData.category) {
             alert('카테고리와 지역을 선택하세요');
@@ -140,6 +145,7 @@ function New() {
         //     .catch((error) => {
         //         alert('게시글 작성에 실패하였습니다.');
         //     });
+
         // 제출 후 폼 초기화
         setFormdata({
             category: '',
@@ -232,9 +238,10 @@ function New() {
                 <div className='image'>
                     <ImageUploader />
                 </div>
-
                 <div className='button'>
                     <button type='submit'>작성하기</button>
+                    {/* <button onClick={goEdit}>수정하기</button> */}
+
                     <button onClick={goMain} type='button'>
                         취소하기
                     </button>
