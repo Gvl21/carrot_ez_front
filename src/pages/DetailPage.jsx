@@ -147,13 +147,14 @@ const DetailPage = () => {
             <div className='reply-section'>
                 <div className='reply-input-section'>
                     <input
+                        className='reply-input'
                         type='text'
                         name='replyContent'
                         placeholder='댓글을 입력해주세요'
                         value={replyContent}
                         onChange={handleChange}
                     />
-                    <button onClick={postReplyContent}>제출하기</button>
+                    <button className='reply-button' onClick={postReplyContent}>댓글작성</button>
                 </div>
                 <div className='reply-show-section'>
                     {replyList &&
