@@ -7,6 +7,7 @@ import {
 } from '../components/security/apiClient';
 import { authChecker } from './security/AuthContext';
 import { StateContext } from '../App';
+import { baseUrl } from './security/apiClient';
 
 const MainWriteList = () => {
     // 초기 데이터
@@ -126,7 +127,7 @@ const MainWriteList = () => {
                             <img
                                 className='profile-img'
                                 src={
-                                    post.profileImage ||
+                                    baseUrl + post.profileImage ||
                                     '/images/carrotProfileImage.jpg'
                                 }
                                 alt='프로필'

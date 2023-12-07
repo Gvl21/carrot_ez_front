@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getMemberInfo, onErrorImg } from '../components/security/apiClient';
+import {
+    getMemberInfo,
+    onErrorImg,
+    baseUrl,
+} from '../components/security/apiClient';
 import { Link, useParams } from 'react-router-dom';
 
 function User() {
@@ -35,6 +39,7 @@ function User() {
     };
     useEffect(() => {
         getTargetMember();
+        console.log(memberInfo);
     }, []);
 
     return (
@@ -44,7 +49,7 @@ function User() {
                     <img
                         className='profile-img'
                         src={
-                            memberInfo.memberImgUrl ||
+                            baseUrl + memberInfo.memberImageUrl ||
                             '/images/carrotProfileImage.jpg'
                         }
                         alt='프로필'
@@ -92,7 +97,8 @@ function User() {
                                         <img
                                             className='profile-img'
                                             src={
-                                                post.profileImage ||
+                                                baseUrl +
+                                                    memberInfo.memberImageUrl ||
                                                 '/images/carrotProfileImage.jpg'
                                             }
                                             alt='프로필'
