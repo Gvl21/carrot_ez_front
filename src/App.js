@@ -15,6 +15,7 @@ import FindFriend from './pages/FindFriend';
 import DetailPage from './pages/DetailPage';
 import UpdatePage from './pages/UpdatePage';
 import User from './pages/User';
+import ChatRoom from './components/ChatRoom';
 
 export const StateContext = React.createContext();
 export const ImagesContext = React.createContext();
@@ -133,6 +134,10 @@ function App() {
                                 <Route
                                     path='/members/:email'
                                     element={<User />}
+                                />
+                                <Route
+                                    path='/chatroom'
+                                    element={<ChatRoom />}
                                 />
                             </Routes>
                         </Router>
