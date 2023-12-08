@@ -9,7 +9,7 @@ function Fstvl() {
         try {
             // const response = await axios.get('http://10.100.203.39/fstvl');
             const response = await axios.get(
-                'http://ec2-3-34-177-10.ap-northeast-2.compute.amazonaws.com:8080/fstvl'
+                'http://ec2-13-209-42-166.ap-northeast-2.compute.amazonaws.com:8080/fstvl'
             );
             setFstvls(response.data);
             return response;

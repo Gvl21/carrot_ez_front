@@ -8,7 +8,7 @@ import {
     apiClient,
     deleteArticle,
     patchArticle,
-    postArticle,
+    getArticleDetails,
     baseUrl,
 } from '../components/security/apiClient';
 import ImageUploader from '../components/ImageUploader';
@@ -16,19 +16,43 @@ import { ArticleContext, ImagesContext, StateContext } from '../App';
 
 function UpdatePage() {
     const { id } = useParams();
-    const { postDetails } = useContext(ArticleContext);
+    const { postDetails, setPostDetails } = useContext(ArticleContext);
     const navigate = useNavigate();
     const { images, setImages } = useContext(ImagesContext);
     const { cookies } = useContext(StateContext);
     const [isDeleting, setIsDeleting] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const [formData, setFormdata] = useState({
-        category: postDetails && postDetails.category,
-        area: postDetails && postDetails.area,
-        title: postDetails && postDetails.title,
-        content: postDetails && postDetails.content,
-        imageUrls: postDetails && postDetails.articleImageList,
+    // const [formData, setFormdata] = useState({
+    //     category: postDetails && postDetails.category,
+    //     area: postDetails && postDetails.area,
+    //     title: postDetails && postDetails.title,
+    //     content: postDetails && postDetails.content,
+    //     imageUrls: postDetails && postDetails.articleImageList,
+    // });
+    // 로컬 스토리지에서 데이터를 가져오기
+    const getFormDataFromLocalStorage = () => {
+        const storedData = localStorage.getItem('formData');
+        return storedData ? JSON.parse(storedData) : null;
+    };
+
+    // 로컬 스토리지에 데이터 저장
+    const saveFormDataToLocalStorage = (data) => {
+        localStorage.setItem('formData', JSON.stringify(data));
+    };
+
+    const [formData, setFormdata] = useState(() => {
+        // 로컬 스토리지에서 데이터 가져오기
+        const storedFormData = getFormDataFromLocalStorage();
+        return (
+            storedFormData || {
+                category: '',
+                area: '',
+                title: '',
+                content: '',
+                imageUrls: null,
+            }
+        );
     });
 
     const handleChange = (e) => {
@@ -37,6 +61,7 @@ function UpdatePage() {
 
         setFormdata({ ...formData, [name]: value });
         console.log(formData);
+        saveFormDataToLocalStorage(formData);
     };
 
     const handleSubmit = async (e) => {
@@ -100,9 +125,11 @@ function UpdatePage() {
             imageUrls: null,
         });
         setImages([]);
+        clearLocalStorage();
     };
 
     const goMain = () => {
+        clearLocalStorage();
         navigate('/');
     };
 
@@ -128,6 +155,7 @@ function UpdatePage() {
                 const response = await deleteArticle(id);
                 console.log(response);
                 alert('게시글이 삭제되었습니다.');
+                clearLocalStorage();
                 navigate('/');
             } catch {
                 alert('게시글 삭제에 실패하였습니다.');
@@ -136,11 +164,32 @@ function UpdatePage() {
             }
         }
     };
+    const clearLocalStorage = () => {
+        localStorage.removeItem('formData');
+    };
+
     useEffect(() => {
-        if (formData.content) {
+        // 로컬 스토리지에서 데이터 가져와서 설정
+        const storedFormData = getFormDataFromLocalStorage();
+        if (storedFormData) {
+            setFormdata(storedFormData);
+            setIsLoaded(true);
+        } else {
+            setFormdata({
+                category: postDetails && postDetails.category,
+                area: postDetails && postDetails.area,
+                title: postDetails && postDetails.title,
+                content: postDetails && postDetails.content,
+                imageUrls: postDetails && postDetails.articleImageList,
+            });
+            saveFormDataToLocalStorage(formData);
             setIsLoaded(true);
         }
-    }, [formData.content]);
+        return () => {
+            clearLocalStorage();
+        };
+        console.log(postDetails);
+    }, [postDetails]);
 
     return (
         <div className='new'>
