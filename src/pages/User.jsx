@@ -14,7 +14,6 @@ function User() {
     const getTargetMember = async () => {
         const member = await getMemberInfo(email);
         setMemberInfo(member);
-        console.log(member);
     };
     const areaOutputMap = {
         seoul: '서울',
@@ -40,7 +39,6 @@ function User() {
     };
     useEffect(() => {
         getTargetMember();
-        console.log(memberInfo);
     }, []);
 
     return (

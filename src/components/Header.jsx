@@ -1,11 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import './Header.css';
-import { Navigate, useNavigate } from 'react-router-dom';
-import Main from '../pages/Main';
-import Member from '../pages/Member';
+import { useNavigate } from 'react-router-dom';
 import { StateContext } from '../App';
-import { useAuth } from './security/AuthContext';
 import { baseUrl, onErrorImg } from './security/apiClient';
 
 const HeaderBlock = styled.div`

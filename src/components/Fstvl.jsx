@@ -1,16 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import './Fstvl.css';
+import { baseUrl } from './security/apiClient';
+import { useNavigate } from 'react-router-dom';
 
 function Fstvl() {
     const [fstvls, setFstvls] = useState([]);
+    const navigate = useNavigate();
 
+    const goChatRoom = () => {
+        navigate('/chatroom');
+    };
     const getFestivalList = async () => {
         try {
-            // const response = await axios.get('http://10.100.203.39/fstvl');
-            const response = await axios.get(
-                'http://localhost:8080/fstvl'
-            );
+            const response = await axios.get(baseUrl + '/fstvl');
             setFstvls(response.data);
             return response;
         } catch (error) {
@@ -25,7 +28,6 @@ function Fstvl() {
             try {
                 const result = await getFestivalList();
                 // 이제 result를 사용하여 상태를 업데이트하거나 다른 작업을 수행할 수 있습니다.
-                console.log(result);
             } catch (error) {
                 // 오류 처리
                 console.error('Error fetching festival list:', error);
@@ -36,7 +38,7 @@ function Fstvl() {
     }, []); // 빈 배열을 전달하여 componentDidMount와 같이 처음 렌더링될 때만 실행되도록 합니다.
     return (
         <div className='fstvls'>
-            <h1>🎉지역별 축제🎉</h1>
+            <h1 onClick={goChatRoom}>🎉지역별 축제🎉</h1>
             <ul className='fstvl'>
                 {fstvls.map((fstvl) => (
                     <li key={fstvl.id}>
