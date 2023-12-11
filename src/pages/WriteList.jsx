@@ -1,12 +1,11 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import New from './New';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './WriteList.css';
-import { SearchProvider } from '../components/Search';
 import SearchBar from '../components/SearchBar';
 import {
     getArticleListToFindFriend,
     onErrorImg,
+    baseUrl,
 } from '../components/security/apiClient';
 import { StateContext } from '../App';
 import { authChecker } from '../components/security/AuthContext';
@@ -69,10 +68,11 @@ const WriteList = () => {
     };
 
     const handleSearch = (searchTerm, selectedArea, selectedCategory) => {
-        const filtered = posts.filter((post) =>
-            post.title.includes(searchTerm) &&
-            post.area.includes(selectedArea) &&
-            post.category.includes(selectedCategory)
+        const filtered = posts.filter(
+            (post) =>
+                post.title.includes(searchTerm) &&
+                post.area.includes(selectedArea) &&
+                post.category.includes(selectedCategory)
         );
         setFilteredPosts(filtered);
     };
@@ -80,7 +80,6 @@ const WriteList = () => {
     const showArticles = async () => {
         const responseBody = await getArticleListToFindFriend();
         const articleList = responseBody.articleList;
-        console.log(articleList);
         setPosts(articleList);
     };
 
@@ -164,7 +163,7 @@ const WriteList = () => {
                                       <img
                                           className='profile-img'
                                           src={
-                                              post.profileImage ||
+                                              baseUrl + post.profileImage ||
                                               '/images/carrotProfileImage.jpg'
                                           }
                                           alt='프로필'
@@ -210,7 +209,7 @@ const WriteList = () => {
                                   <img
                                       className='profile-img'
                                       src={
-                                          post.profileImage ||
+                                          baseUrl + post.profileImage ||
                                           '/images/carrotProfileImage.jpg'
                                       }
                                       alt='프로필'

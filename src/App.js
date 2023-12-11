@@ -1,20 +1,18 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Member from './pages/Member';
 import Main from './pages/Main';
 import Header from './components/Header';
 import './App.css';
-import WriteList from './pages/WriteList';
 import LogIn from './pages/LogIn';
 import New from './pages/New';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
-import { AuthProvider, useAuth } from './components/security/AuthContext';
 import { apiClient } from './components/security/apiClient';
 import FindFriend from './pages/FindFriend';
 import DetailPage from './pages/DetailPage';
 import UpdatePage from './pages/UpdatePage';
 import User from './pages/User';
+import ChatRoom from './components/ChatRoom';
 
 export const StateContext = React.createContext();
 export const ImagesContext = React.createContext();
@@ -40,7 +38,6 @@ function App() {
     // fnc : 유저가 토큰이 있을 때 받아올 유저의 정보
     const getSignInUserInfo = async (cookie) => {
         if (!cookie) {
-            console.log('유저정보 없음');
             return;
         }
         // const url = `/members/info`;
@@ -49,7 +46,6 @@ function App() {
             .get(`members/info`)
             .then((res) => {
                 const responseBody = res.data;
-                console.log(responseBody);
                 setCurrentMember({
                     email: responseBody.email,
                     nickname: responseBody.nickname,
@@ -59,7 +55,6 @@ function App() {
                 return responseBody;
             })
             .catch((err) => {
-                console.log(err.message);
                 if (!err.message) return null;
                 const responseBody = err.message;
                 return responseBody;
@@ -78,7 +73,6 @@ function App() {
 
         // axios 인터셉터 설정 등록 : 모든 API요청에 사용된다.
         apiClient.interceptors.request.use((config) => {
-            console.log('인터셉터하여 헤더에 토큰 정보 추가');
             config.headers.Authorization = cookies.accessToken;
             return config;
         });
@@ -133,6 +127,10 @@ function App() {
                                 <Route
                                     path='/members/:email'
                                     element={<User />}
+                                />
+                                <Route
+                                    path='/chatroom'
+                                    element={<ChatRoom />}
                                 />
                             </Routes>
                         </Router>

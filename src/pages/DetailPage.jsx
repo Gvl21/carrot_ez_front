@@ -5,6 +5,7 @@ import {
     getArticleReplyList,
     onErrorImg,
     postArticleReply,
+    baseUrl,
 } from '../components/security/apiClient';
 import './DetailPage.css';
 import { ArticleContext, StateContext } from '../App';
@@ -30,7 +31,6 @@ const DetailPage = () => {
             postDetails.articleId,
             requestBody
         );
-        console.log(response);
         alert('댓글을 등록했습니다');
         setReplyContent('');
         window.location.reload();
@@ -45,7 +45,6 @@ const DetailPage = () => {
             try {
                 // 상세 정보 가져오기
                 const responseBody = await getArticleDetails(id);
-                console.log(responseBody);
                 setPostDetails(responseBody);
             } catch (error) {
                 console.error('Error fetching details:', error);
@@ -121,7 +120,7 @@ const DetailPage = () => {
                 <img
                     className='profile-img'
                     src={
-                        postDetails.memberImageUrl ||
+                        baseUrl + postDetails.memberImageUrl ||
                         '/images/carrotProfileImage.jpg'
                     }
                     alt='프로필'
@@ -137,7 +136,7 @@ const DetailPage = () => {
             <p>{postDetails.content}</p>
             {postDetails.articleImageList &&
                 postDetails.articleImageList.map((e) => (
-                    <img src={e.image} alt='업로드 된 사진' />
+                    <img src={baseUrl + e.image} alt='업로드 된 사진' />
                 ))}
             {postDetails.createdBy === currentMember.email && (
                 <Link to={`/update/${postDetails.articleId}`}>
@@ -154,7 +153,9 @@ const DetailPage = () => {
                         value={replyContent}
                         onChange={handleChange}
                     />
-                    <button className='reply-button' onClick={postReplyContent}>댓글작성</button>
+                    <button className='reply-button' onClick={postReplyContent}>
+                        댓글작성
+                    </button>
                 </div>
                 <div className='reply-show-section'>
                     {replyList &&
@@ -165,7 +166,7 @@ const DetailPage = () => {
                                     {' '}
                                     <img
                                         src={
-                                            e.memberImgUrl ||
+                                            baseUrl + e.memberImgUrl ||
                                             '/images/carrotProfileImage.jpg'
                                         }
                                         className='profile-img'

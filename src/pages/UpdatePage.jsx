@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Header from '../components/Header';
 import './New.css';
-import axios from 'axios';
-import WriteList from './WriteList';
 import {
-    apiClient,
     deleteArticle,
     patchArticle,
+<<<<<<< HEAD
     postArticle,
+=======
+>>>>>>> 25c9fa9f79a09be15fe602ffbef2823c0022ec38
     baseUrl,
 } from '../components/security/apiClient';
 import ImageUploader from '../components/ImageUploader';
@@ -23,12 +22,38 @@ function UpdatePage() {
     const [isDeleting, setIsDeleting] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
 
+<<<<<<< HEAD
     const [formData, setFormdata] = useState({
         category: postDetails && postDetails.category,
         area: postDetails && postDetails.area,
         title: postDetails && postDetails.title,
         content: postDetails && postDetails.content,
         imageUrls: postDetails && postDetails.articleImageList,
+=======
+    // 로컬 스토리지에서 데이터를 가져오기
+    const getFormDataFromLocalStorage = () => {
+        const storedData = localStorage.getItem('formData');
+        return storedData ? JSON.parse(storedData) : null;
+    };
+
+    // 로컬 스토리지에 데이터 저장
+    const saveFormDataToLocalStorage = (data) => {
+        localStorage.setItem('formData', JSON.stringify(data));
+    };
+
+    const [formData, setFormdata] = useState(() => {
+        // 로컬 스토리지에서 데이터 가져오기
+        const storedFormData = getFormDataFromLocalStorage();
+        return (
+            storedFormData || {
+                category: '',
+                area: '',
+                title: '',
+                content: '',
+                imageUrls: null,
+            }
+        );
+>>>>>>> 25c9fa9f79a09be15fe602ffbef2823c0022ec38
     });
 
     const handleChange = (e) => {
@@ -36,7 +61,7 @@ function UpdatePage() {
         const value = e.target.value;
 
         setFormdata({ ...formData, [name]: value });
-        console.log(formData);
+        saveFormDataToLocalStorage(formData);
     };
 
     const handleSubmit = async (e) => {
@@ -79,12 +104,13 @@ function UpdatePage() {
             }
         });
 
-        console.log('게시글쓰기:', data);
-
         // 데이터 처리
         try {
             const response = await patchArticle(data, id);
+<<<<<<< HEAD
             console.log(response);
+=======
+>>>>>>> 25c9fa9f79a09be15fe602ffbef2823c0022ec38
             alert('게시글이 성공적으로 수정되었습니다!');
             navigate('/'); // <- 이거로 게시글 상세보기 페이지만들면 거기로 보내면 될듯
         } catch {
@@ -100,9 +126,11 @@ function UpdatePage() {
             imageUrls: null,
         });
         setImages([]);
+        clearLocalStorage();
     };
 
     const goMain = () => {
+        clearLocalStorage();
         navigate('/');
     };
 
@@ -126,8 +154,8 @@ function UpdatePage() {
             try {
                 setIsDeleting(true);
                 const response = await deleteArticle(id);
-                console.log(response);
                 alert('게시글이 삭제되었습니다.');
+                clearLocalStorage();
                 navigate('/');
             } catch {
                 alert('게시글 삭제에 실패하였습니다.');
@@ -136,11 +164,39 @@ function UpdatePage() {
             }
         }
     };
+<<<<<<< HEAD
     useEffect(() => {
         if (formData.content) {
             setIsLoaded(true);
         }
     }, [formData.content]);
+=======
+    const clearLocalStorage = () => {
+        localStorage.removeItem('formData');
+    };
+
+    useEffect(() => {
+        // 로컬 스토리지에서 데이터 가져와서 설정
+        const storedFormData = getFormDataFromLocalStorage();
+        if (storedFormData) {
+            setFormdata(storedFormData);
+            setIsLoaded(true);
+        } else {
+            setFormdata({
+                category: postDetails && postDetails.category,
+                area: postDetails && postDetails.area,
+                title: postDetails && postDetails.title,
+                content: postDetails && postDetails.content,
+                imageUrls: postDetails && postDetails.articleImageList,
+            });
+            saveFormDataToLocalStorage(formData);
+            setIsLoaded(true);
+        }
+        return () => {
+            clearLocalStorage();
+        };
+    }, [postDetails]);
+>>>>>>> 25c9fa9f79a09be15fe602ffbef2823c0022ec38
 
     return (
         <div className='new'>

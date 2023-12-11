@@ -1,9 +1,10 @@
 import axios from 'axios';
-
+export const baseUrl =
+    // 'http://ec2-13-209-42-166.ap-northeast-2.compute.amazonaws.com:8080';
+    'http://localhost';
 // API 요청을 할 Clinet 생성 및 응답해줄 BackEnd url 정의
 export const apiClient = axios.create({
-    // baseURL: 'http://10.100.203.39',
-    baseURL: 'http://localhost',
+    baseURL: baseUrl,
 });
 
 export const onErrorImg = (e) => {

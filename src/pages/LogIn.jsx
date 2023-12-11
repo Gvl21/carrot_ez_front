@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Login.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { StateContext } from '../App';
-import New from './New';
 import { signInApi } from '../components/security/apiClient';
 
 function Login() {
@@ -31,7 +29,6 @@ function Login() {
 
         // 로그인 처리하ㄱㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
         const response = await signInApi(formData);
-        console.log(response);
         try {
             if (response.data.message === 'Success.') {
                 const responseBody = response.data;
@@ -42,7 +39,6 @@ function Login() {
         } catch (error) {
             alert('로그인 실패');
             const loginResult = response.response.data.message;
-            console.log(loginResult);
             if (!loginResult) return null;
             return loginResult;
         }
@@ -104,6 +100,7 @@ function Login() {
                         name='email'
                         value={formData.email}
                         onChange={handleChange}
+                        autoFocus
                     />
                 </label>
 
