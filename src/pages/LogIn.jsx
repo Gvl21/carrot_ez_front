@@ -100,6 +100,7 @@ function Login() {
                         name='email'
                         value={formData.email}
                         onChange={handleChange}
+                        autoFocus
                     />
                 </label>
 
