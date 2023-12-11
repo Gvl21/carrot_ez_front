@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { getMemberInfo, onErrorImg } from '../components/security/apiClient';
+import {
+    getMemberInfo,
+    onErrorImg,
+    baseUrl,
+} from '../components/security/apiClient';
 import { Link, useParams } from 'react-router-dom';
+import './User.css'
 
 function User() {
     const { email } = useParams();
@@ -35,29 +40,32 @@ function User() {
     };
     useEffect(() => {
         getTargetMember();
+        console.log(memberInfo);
     }, []);
 
     return (
         <div>
             {memberInfo && (
-                <div>
+                <div className='user'>
+                    <div className='userinfo'>
                     <img
                         className='profile-img'
                         src={
-                            memberInfo.memberImgUrl ||
+                            baseUrl + memberInfo.memberImageUrl ||
                             '/images/carrotProfileImage.jpg'
                         }
                         alt='프로필'
                         onError={onErrorImg}
                     />
-                    <h2>이메일 : {memberInfo.email}</h2>
-                    <h2>닉네임 : {memberInfo.nickname}</h2>
+                    <h2>⭐이메일 : {memberInfo.email}</h2>
+                    <h2>⭐닉네임 : {memberInfo.nickname}</h2>
                     <h2>
-                        지역 :{' '}
+                    ⭐지역 :{' '}
                         {areaOutputMap[memberInfo.area] || memberInfo.area}
                     </h2>
+                    </div>
 
-                    <h2>작성한 게시글</h2>
+                    <h2>🥕작성한 게시글🥕</h2>
                     <div className='find-friend-container'>
                         <ul className='post-list'>
                             {memberInfo && memberInfo.createdArticleList ? (
@@ -92,7 +100,8 @@ function User() {
                                         <img
                                             className='profile-img'
                                             src={
-                                                post.profileImage ||
+                                                baseUrl +
+                                                    memberInfo.memberImageUrl ||
                                                 '/images/carrotProfileImage.jpg'
                                             }
                                             alt='프로필'
