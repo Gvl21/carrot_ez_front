@@ -33,6 +33,7 @@ const ChatRoom = () => {
     useEffect(() => {
         scrollToBottom();
     }, [publicChats, privateChats]);
+    useEffect(() => {}, [tabNotifications]);
 
     const connect = () => {
         let Sock = new SockJS(baseUrl + '/ws');
@@ -163,10 +164,6 @@ const ChatRoom = () => {
         }
     };
 
-    const handleUsername = (event) => {
-        const { value } = event.target;
-        setUserData({ ...userData, username: value });
-    };
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             sendValue();
@@ -206,7 +203,7 @@ const ChatRoom = () => {
                             >
                                 Chatroom
                                 {tabNotifications['CHATROOM'] && (
-                                    <span className='notification-dot'></span>
+                                    <span className='notification-dot' />
                                 )}
                             </li>
                             {[...privateChats.keys()].map((name, index) => (
@@ -221,7 +218,7 @@ const ChatRoom = () => {
                                 >
                                     {name}
                                     {tabNotifications[name] && (
-                                        <span className='notification-dot'></span>
+                                        <span className='notification-dot' />
                                     )}
                                 </li>
                             ))}

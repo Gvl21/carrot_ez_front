@@ -36,6 +36,15 @@ function Member() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (formData.password.length < 4 || formData.password.length > 16) {
+            alert('비밀번호는 최소 4자, 최대 16자로 입력해주세요');
+            setFormData({ ...formData, password: '' });
+            return;
+        }
+        if (formData.area === '') {
+            alert('거주 지역을 선택해주세요');
+            return;
+        }
         const url = '/members/new';
 
         // 새 폼 데이터를 전송하기 위한 폼
@@ -60,7 +69,7 @@ function Member() {
                 console.log(res.data);
             })
             .catch((error) => {
-                alert(error.toString());
+                alert('중복된 이메일입니다.');
             });
     };
 

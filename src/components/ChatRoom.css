@@ -114,11 +114,12 @@ ul {
 }
 
 .notification-dot {
-    position: absolute;
-    top: 5px;
-    left: 5px;
+    position: relative;
+    top: 0px;
+    left: 0px;
     width: 10px;
     height: 10px;
-    background-color: rgb(251, 240, 225);
+    background-color: red;
     border-radius: 50%;
+    z-index: 99;
 }
