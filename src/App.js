@@ -41,7 +41,6 @@ function App() {
     // fnc : 유저가 토큰이 있을 때 받아올 유저의 정보
     const getSignInUserInfo = async (cookie) => {
         if (!cookie) {
-            console.log('유저정보 없음');
             return;
         }
         // const url = `/members/info`;
@@ -50,7 +49,6 @@ function App() {
             .get(`members/info`)
             .then((res) => {
                 const responseBody = res.data;
-                console.log(responseBody);
                 setCurrentMember({
                     email: responseBody.email,
                     nickname: responseBody.nickname,
@@ -60,7 +58,6 @@ function App() {
                 return responseBody;
             })
             .catch((err) => {
-                console.log(err.message);
                 if (!err.message) return null;
                 const responseBody = err.message;
                 return responseBody;
@@ -79,7 +76,6 @@ function App() {
 
         // axios 인터셉터 설정 등록 : 모든 API요청에 사용된다.
         apiClient.interceptors.request.use((config) => {
-            console.log('인터셉터하여 헤더에 토큰 정보 추가');
             config.headers.Authorization = cookies.accessToken;
             return config;
         });

@@ -31,7 +31,6 @@ const DetailPage = () => {
             postDetails.articleId,
             requestBody
         );
-        console.log(response);
         alert('댓글을 등록했습니다');
         setReplyContent('');
         window.location.reload();
@@ -46,7 +45,6 @@ const DetailPage = () => {
             try {
                 // 상세 정보 가져오기
                 const responseBody = await getArticleDetails(id);
-                console.log(responseBody);
                 setPostDetails(responseBody);
             } catch (error) {
                 console.error('Error fetching details:', error);

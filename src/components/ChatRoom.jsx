@@ -87,7 +87,6 @@ const ChatRoom = () => {
     };
 
     const onPrivateMessage = (payload) => {
-        console.log(payload);
         let payloadData = JSON.parse(payload.body);
         if (privateChats.get(payloadData.senderName)) {
             privateChats.get(payloadData.senderName).push(payloadData);
@@ -113,9 +112,7 @@ const ChatRoom = () => {
         setTab(tabName);
     };
 
-    const onError = (err) => {
-        console.log(err);
-    };
+    const onError = (err) => {};
 
     const handleMessage = (event) => {
         const { value } = event.target;
@@ -132,7 +129,6 @@ const ChatRoom = () => {
                 setUserData({ ...userData, message: '' });
                 return;
             }
-            console.log(chatMessage);
             stompClient.send('/app/message', {}, JSON.stringify(chatMessage));
             setUserData({ ...userData, message: '' });
         }

@@ -35,7 +35,6 @@ function New() {
         const value = e.target.value;
 
         setFormdata({ ...formData, [name]: value });
-        console.log(formData);
     };
 
     /** 게시글 업로드 핸들러 참고자료
@@ -73,10 +72,10 @@ function New() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // // 이미지가 선택되었는지 확인하기 
+        // // 이미지가 선택되었는지 확인하기
         // if (images.length === 0) {
         //     alert('이미지를 선택하세요');
-        //     return 
+        //     return
         // }
 
         // 카테고리가 선택되었는지 확인하기
@@ -101,12 +100,10 @@ function New() {
         Object.keys(formData).forEach((key) => {
             data.append(key, formData[key]);
         });
-        console.log('게시글쓰기:', data);
 
         // 데이터 처리
         try {
             const response = await postArticle(data);
-            console.log(response);
             alert('게시글이 성공적으로 작성되었습니다!');
             navigate('/'); // <- 이거로 게시글 상세보기 페이지만들면 거기로 보내면 될듯
         } catch {

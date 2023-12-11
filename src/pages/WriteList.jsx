@@ -82,7 +82,6 @@ const WriteList = () => {
     const showArticles = async () => {
         const responseBody = await getArticleListToFindFriend();
         const articleList = responseBody.articleList;
-        console.log(articleList);
         setPosts(articleList);
     };
 

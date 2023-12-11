@@ -29,7 +29,6 @@ function Fstvl() {
             try {
                 const result = await getFestivalList();
                 // 이제 result를 사용하여 상태를 업데이트하거나 다른 작업을 수행할 수 있습니다.
-                console.log(result);
             } catch (error) {
                 // 오류 처리
                 console.error('Error fetching festival list:', error);

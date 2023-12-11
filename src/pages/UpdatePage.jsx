@@ -60,7 +60,6 @@ function UpdatePage() {
         const value = e.target.value;
 
         setFormdata({ ...formData, [name]: value });
-        console.log(formData);
         saveFormDataToLocalStorage(formData);
     };
 
@@ -104,12 +103,9 @@ function UpdatePage() {
             }
         });
 
-        console.log('게시글쓰기:', data);
-
         // 데이터 처리
         try {
             const response = await patchArticle(data, id);
-            console.log(response);
             alert('게시글이 성공적으로 수정되었습니다!');
             navigate('/'); // <- 이거로 게시글 상세보기 페이지만들면 거기로 보내면 될듯
         } catch {
@@ -153,7 +149,6 @@ function UpdatePage() {
             try {
                 setIsDeleting(true);
                 const response = await deleteArticle(id);
-                console.log(response);
                 alert('게시글이 삭제되었습니다.');
                 clearLocalStorage();
                 navigate('/');
@@ -188,7 +183,6 @@ function UpdatePage() {
         return () => {
             clearLocalStorage();
         };
-        console.log(postDetails);
     }, [postDetails]);
 
     return (

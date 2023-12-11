@@ -31,7 +31,6 @@ function Member() {
             // 파일 이외의 입력 값은
             setFormData({ ...formData, [name]: value });
         }
-        console.log(formData);
     };
 
     const handleSubmit = (e) => {
@@ -54,7 +53,6 @@ function Member() {
             data.append(key, formData[key]);
         });
 
-        console.log(data);
         // 수정사항 기존의 formData에서 data로 body를 교체
 
         apiClient
@@ -66,7 +64,6 @@ function Member() {
             .then((res) => {
                 alert(`${formData.nickname}님 환영합니다!`);
                 navigate('/login');
-                console.log(res.data);
             })
             .catch((error) => {
                 alert('중복된 이메일입니다.');
