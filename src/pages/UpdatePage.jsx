@@ -1,14 +1,9 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Header from '../components/Header';
 import './New.css';
-import axios from 'axios';
-import WriteList from './WriteList';
 import {
-    apiClient,
     deleteArticle,
     patchArticle,
-    getArticleDetails,
     baseUrl,
 } from '../components/security/apiClient';
 import ImageUploader from '../components/ImageUploader';
@@ -16,20 +11,13 @@ import { ArticleContext, ImagesContext, StateContext } from '../App';
 
 function UpdatePage() {
     const { id } = useParams();
-    const { postDetails, setPostDetails } = useContext(ArticleContext);
+    const { postDetails } = useContext(ArticleContext);
     const navigate = useNavigate();
     const { images, setImages } = useContext(ImagesContext);
     const { cookies } = useContext(StateContext);
     const [isDeleting, setIsDeleting] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    // const [formData, setFormdata] = useState({
-    //     category: postDetails && postDetails.category,
-    //     area: postDetails && postDetails.area,
-    //     title: postDetails && postDetails.title,
-    //     content: postDetails && postDetails.content,
-    //     imageUrls: postDetails && postDetails.articleImageList,
-    // });
     // 로컬 스토리지에서 데이터를 가져오기
     const getFormDataFromLocalStorage = () => {
         const storedData = localStorage.getItem('formData');

@@ -13,7 +13,6 @@ function Fstvl() {
     };
     const getFestivalList = async () => {
         try {
-            // const response = await axios.get('http://10.100.203.39/fstvl');
             const response = await axios.get(baseUrl + '/fstvl');
             setFstvls(response.data);
             return response;

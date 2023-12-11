@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Login.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { StateContext } from '../App';
-import New from './New';
 import { signInApi } from '../components/security/apiClient';
 
 function Login() {

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { over } from 'stompjs';
 import SockJS from 'sockjs-client';
 import './ChatRoom.css';
-import { apiClient, baseUrl } from './security/apiClient';
+import { baseUrl } from './security/apiClient';
 import { StateContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 

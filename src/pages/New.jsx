@@ -1,17 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
 import './New.css';
-import axios from 'axios';
-import WriteList from './WriteList';
-import { apiClient, postArticle } from '../components/security/apiClient';
+import { postArticle } from '../components/security/apiClient';
 import ImageUploader from '../components/ImageUploader';
 import { ImagesContext, StateContext } from '../App';
 
 function New() {
     const navigate = useNavigate();
-    const contentRef = useRef(null);
-    const imageInputRef = useRef(null);
     const { images, setImages } = useContext(ImagesContext);
     const { cookies } = useContext(StateContext);
 

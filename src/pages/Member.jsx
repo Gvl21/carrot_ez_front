@@ -1,7 +1,5 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
 import './Member.css';
 import { apiClient } from '../components/security/apiClient';
 

@@ -1,8 +1,6 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import New from './New';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './WriteList.css';
-import { SearchProvider } from '../components/Search';
 import SearchBar from '../components/SearchBar';
 import {
     getArticleListToFindFriend,

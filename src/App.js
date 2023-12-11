@@ -1,15 +1,12 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Member from './pages/Member';
 import Main from './pages/Main';
 import Header from './components/Header';
 import './App.css';
-import WriteList from './pages/WriteList';
 import LogIn from './pages/LogIn';
 import New from './pages/New';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
-import { AuthProvider, useAuth } from './components/security/AuthContext';
 import { apiClient } from './components/security/apiClient';
 import FindFriend from './pages/FindFriend';
 import DetailPage from './pages/DetailPage';
