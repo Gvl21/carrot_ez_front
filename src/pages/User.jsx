@@ -5,7 +5,6 @@ import {
     baseUrl,
 } from '../components/security/apiClient';
 import { Link, useParams } from 'react-router-dom';
-import './User.css'
 
 function User() {
     const { email } = useParams();
@@ -14,6 +13,7 @@ function User() {
     const getTargetMember = async () => {
         const member = await getMemberInfo(email);
         setMemberInfo(member);
+        console.log(member);
     };
     const areaOutputMap = {
         seoul: '서울',
@@ -45,26 +45,24 @@ function User() {
     return (
         <div>
             {memberInfo && (
-                <div className='user'>
-                    <div className='userinfo'>
+                <div>
                     <img
                         className='profile-img'
                         src={
-                            baseUrl + memberInfo.memberImageUrl ||
+                            baseUrl + memberInfo.memberImgUrl ||
                             '/images/carrotProfileImage.jpg'
                         }
                         alt='프로필'
                         onError={onErrorImg}
                     />
-                    <h2>⭐이메일 : {memberInfo.email}</h2>
-                    <h2>⭐닉네임 : {memberInfo.nickname}</h2>
+                    <h2>이메일 : {memberInfo.email}</h2>
+                    <h2>닉네임 : {memberInfo.nickname}</h2>
                     <h2>
-                    ⭐지역 :{' '}
+                        지역 :{' '}
                         {areaOutputMap[memberInfo.area] || memberInfo.area}
                     </h2>
-                    </div>
 
-                    <h2>🥕작성한 게시글🥕</h2>
+                    <h2>작성한 게시글</h2>
                     <div className='find-friend-container'>
                         <ul className='post-list'>
                             {memberInfo && memberInfo.createdArticleList ? (

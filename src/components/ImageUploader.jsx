@@ -34,6 +34,7 @@ const ImageUploader = () => {
                     previewURL: URL.createObjectURL(file),
                 })),
             ];
+            console.log(newImages);
             setImages(newImages);
         } else {
             setImages([]);
@@ -64,10 +65,7 @@ const ImageUploader = () => {
                             />
                             <p>
                                 파일명 : {e.file.name}
-                                <span
-                                    style={{ cursor: 'pointer' }}
-                                    onClick={() => deleteImage(i)}
-                                >
+                                <span style={{cursor : 'pointer'}} onClick={() => deleteImage(i)}>
                                     ❌
                                 </span>
                             </p>

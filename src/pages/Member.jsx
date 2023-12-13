@@ -1,5 +1,7 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
 import './Member.css';
 import { apiClient } from '../components/security/apiClient';
 
@@ -29,19 +31,11 @@ function Member() {
             // 파일 이외의 입력 값은
             setFormData({ ...formData, [name]: value });
         }
+        console.log(formData);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (formData.password.length < 4 || formData.password.length > 16) {
-            alert('비밀번호는 최소 4자, 최대 16자로 입력해주세요');
-            setFormData({ ...formData, password: '' });
-            return;
-        }
-        if (formData.area === '') {
-            alert('거주 지역을 선택해주세요');
-            return;
-        }
         const url = '/members/new';
 
         // 새 폼 데이터를 전송하기 위한 폼
@@ -51,6 +45,7 @@ function Member() {
             data.append(key, formData[key]);
         });
 
+        console.log(data);
         // 수정사항 기존의 formData에서 data로 body를 교체
 
         apiClient
@@ -62,9 +57,10 @@ function Member() {
             .then((res) => {
                 alert(`${formData.nickname}님 환영합니다!`);
                 navigate('/login');
+                console.log(res.data);
             })
             .catch((error) => {
-                alert('중복된 이메일입니다.');
+                alert(error.toString());
             });
     };
 

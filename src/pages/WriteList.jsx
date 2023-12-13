@@ -1,6 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import New from './New';
 import { Link, useNavigate } from 'react-router-dom';
 import './WriteList.css';
+import { SearchProvider } from '../components/Search';
 import SearchBar from '../components/SearchBar';
 import {
     getArticleListToFindFriend,
@@ -80,6 +82,7 @@ const WriteList = () => {
     const showArticles = async () => {
         const responseBody = await getArticleListToFindFriend();
         const articleList = responseBody.articleList;
+        console.log(articleList);
         setPosts(articleList);
     };
 
