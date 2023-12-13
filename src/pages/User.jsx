@@ -5,6 +5,7 @@ import {
     baseUrl,
 } from '../components/security/apiClient';
 import { Link, useParams } from 'react-router-dom';
+import './User.css';
 
 function User() {
     const { email } = useParams();
